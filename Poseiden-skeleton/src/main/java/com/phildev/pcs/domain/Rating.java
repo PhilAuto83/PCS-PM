@@ -9,23 +9,23 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Integer Id;
     private String moodysRating;
-    private String sandRating;
+    private String sandPRating;
     private String fitchRating;
     private int orderNumber;
 
     public Rating() {
     }
 
-    public Rating(String moodysRating, String sandRating, String fitchRating, int orderNumber) {
+    public Rating(String moodysRating, String sandRating, String fitchRating, Integer orderNumber) {
         this.moodysRating = moodysRating;
-        this.sandRating = sandRating;
+        this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;
         this.orderNumber = orderNumber;
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
@@ -38,11 +38,11 @@ public class Rating {
     }
 
     public String getSandPRating() {
-        return sandRating;
+        return sandPRating;
     }
 
     public void setSandPRating(String sandPRating) {
-        this.sandRating = sandPRating;
+        this.sandPRating = sandPRating;
     }
 
     public String getFitchRating() {
@@ -53,11 +53,11 @@ public class Rating {
         this.fitchRating = fitchRating;
     }
 
-    public int getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 }

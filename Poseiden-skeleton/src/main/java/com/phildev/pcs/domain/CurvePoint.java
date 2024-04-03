@@ -11,27 +11,27 @@ public class CurvePoint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    private int CurveId;
+    private Integer Id;
+    private Integer CurveId;
     private Timestamp asOfDate;
-    private double term;
-    private double value;
+    private Double term;
+    private Double value;
     private Timestamp creationDate;
 
     public CurvePoint() {
     }
 
-    public CurvePoint(int curveId, double term, double value) {
+    public CurvePoint(Integer curveId, Double term, Double value) {
         CurveId = curveId;
         this.term = term;
         this.value = value;
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public int getCurveId() {
+    public Integer getCurveId() {
         return CurveId;
     }
 
@@ -47,7 +47,7 @@ public class CurvePoint {
         this.asOfDate = asOfDate;
     }
 
-    public double getTerm() {
+    public Double getTerm() {
         return term;
     }
 
@@ -55,7 +55,7 @@ public class CurvePoint {
         this.term = term;
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 

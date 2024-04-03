@@ -11,13 +11,13 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int TradeId;
+    private Integer TradeId;
     private String account;
     private String type;
-    private double buyQuantity;
-    private double sellQuantity;
-    private double buyPrice;
-    private double sellPrice;
+    private Double buyQuantity;
+    private Double sellQuantity;
+    private Double buyPrice;
+    private Double sellPrice;
     private Timestamp tradeDate;
     private String security;
     private String status;
@@ -38,7 +38,7 @@ public class Trade {
 
     public Trade(){}
 
-    public int getTradeId() {
+    public Integer getTradeId() {
         return TradeId;
     }
 
@@ -58,7 +58,7 @@ public class Trade {
         this.type = type;
     }
 
-    public double getBuyQuantity() {
+    public Double getBuyQuantity() {
         return buyQuantity;
     }
 
@@ -66,7 +66,7 @@ public class Trade {
         this.buyQuantity = buyQuantity;
     }
 
-    public double getSellQuantity() {
+    public Double getSellQuantity() {
         return sellQuantity;
     }
 
@@ -74,7 +74,7 @@ public class Trade {
         this.sellQuantity = sellQuantity;
     }
 
-    public double getBuyPrice() {
+    public Double getBuyPrice() {
         return buyPrice;
     }
 
@@ -82,7 +82,7 @@ public class Trade {
         this.buyPrice = buyPrice;
     }
 
-    public double getSellPrice() {
+    public Double getSellPrice() {
         return sellPrice;
     }
 

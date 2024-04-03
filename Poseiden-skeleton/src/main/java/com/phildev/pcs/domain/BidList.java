@@ -11,13 +11,13 @@ public class BidList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int BidListId;
+    private Integer BidListId;
     private String account;
     private String type;
-    private double bidQuantity;
-    private double askQuantity;
-    private double bid;
-    private double ask;
+    private Double bidQuantity;
+    private Double askQuantity;
+    private Double bid;
+    private Double ask;
     private String benchmark;
     private Timestamp bidListDate;
     private String commentary;
@@ -35,7 +35,7 @@ public class BidList {
     private String side;
 
 
-    public BidList(String account, String type, double bidQuantity) {
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
@@ -43,7 +43,7 @@ public class BidList {
 
     public BidList(){}
 
-    public int getBidListId() {
+    public Integer getBidListId() {
         return BidListId;
     }
 
@@ -63,7 +63,7 @@ public class BidList {
         this.type = type;
     }
 
-    public double getBidQuantity() {
+    public Double getBidQuantity() {
         return bidQuantity;
     }
 
@@ -71,7 +71,7 @@ public class BidList {
         this.bidQuantity = bidQuantity;
     }
 
-    public double getAskQuantity() {
+    public Double getAskQuantity() {
         return askQuantity;
     }
 
@@ -79,7 +79,7 @@ public class BidList {
         this.askQuantity = askQuantity;
     }
 
-    public double getBid() {
+    public Double getBid() {
         return bid;
     }
 
@@ -87,7 +87,7 @@ public class BidList {
         this.bid = bid;
     }
 
-    public double getAsk() {
+    public Double getAsk() {
         return ask;
     }
 

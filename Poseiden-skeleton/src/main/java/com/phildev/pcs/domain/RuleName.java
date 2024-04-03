@@ -8,7 +8,7 @@ public class RuleName {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Integer Id;
     private String name;
     private String description;
     private String json;
@@ -28,7 +28,7 @@ public class RuleName {
         this.sqlPart = sqlPart;
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
