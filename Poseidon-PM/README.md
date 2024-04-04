@@ -1,10 +1,10 @@
 # spring-boot
 ## Technical:
 
-1. Spring Boot 3.1.0
-2. Java 17
+1. Spring Boot 3.2.4
+2. Java 21
 3. Thymeleaf
-4. Bootstrap v.4.3.1
+4. Bootstrap v.5.0.2
 
 
 ## Setup with Intellij IDE
