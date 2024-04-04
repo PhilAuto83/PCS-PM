@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid">
+        <form class="col-6 mx-auto" th:action="@{/login}" method="post">
+        <div style="font-size: 1.2rem;" class="font-weight-bold mt-5 mb-3">Login with Username and Password</div>
+        <div class="text-center text-danger font-weight-bold" th:if="${param.error}">
+            Invalid username and password.</div>
+        <div class="text-center text-danger font-weight-bold" th:if="${param.logout}">
+            You have been logged out.</div>
+        <div class="row mx-auto">
+        <div class="row">
+            <label for="username" class="col-4">User:</label>
+            <input type="text" id="username" name="username" placeholder="Username" class="col-8"/>
+        </div>
+        <div class="row">
+            <label for="password" class="col-4">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password" class="col-8"/>
+        </div>
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+        </form>
+    </div>
+    <div class="row mt-5 col-4 mx-auto">
+        <img class="img-fluid mb-0 me-1" th:src="@{/images/pcs-banner.PNG}" alt="Poseidon Capital Solutions logo"/>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
