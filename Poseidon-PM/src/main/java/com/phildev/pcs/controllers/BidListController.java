@@ -1,7 +1,9 @@
 package com.phildev.pcs.controllers;
 
 import com.phildev.pcs.domain.BidList;
+import com.phildev.pcs.service.BidListService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +13,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
+
+    @Autowired
+    private BidListService bidListService;
 
     @GetMapping("/bidList/list")
     public String home(Model model, @AuthenticationPrincipal Principal user)
     {
+        List<BidList> allBids = bidListService.findAll();
         model.addAttribute("user", user);
-        // TODO: call service find all bids to show to the view
+        model.addAttribute("bidLists", allBids);
         return "bidList/list";
     }
 

@@ -9,16 +9,24 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-6">
-
-		</div>
-		<div class="col-6 text-right">
-			<a href="/">Home</a>&nbsp;|&nbsp;<a href="/login">Login</a>
+		<div class="col-12 d-flex p-0">
+			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+			<a href="/ruleName/list">Rule</a>
+			<div class="ms-auto">Logged in user: <b th:text="${connectedUser}"></b>
+			</div>
 		</div>
 	</div>
-	<div class="row"><h2>User List</h2></div>
 	<div class="row">
-		<a href="/user/add" class="btn btn-primary btn-sm">Add New</a>
+		<form th:action="@{/logout}" method="POST" class="d-flex justify-content-end p-0">
+			<input type="submit" value="Logout" />
+		</form>
+	</div>
+	<div class="row"><h2 class="p-0">User List</h2></div>
+	<div class="row">
+		<a href="/user/add" class="btn btn-primary btn-sm col-2 col-md-1">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -42,6 +50,11 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-end p-0">
+			<img th:src="@{/images/pcs-banner.PNG}" alt="pcs logo" class="img-fluid col-4 col-md-2 ms-auto"/>
+		</div>
 	</div>
 </div>
 </body>

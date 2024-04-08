@@ -94,5 +94,5 @@ CREATE TABLE IF NOT EXISTS Users (
   PRIMARY KEY (Id)
 );
 
-insert into Users(username, password, fullname, role) values("admin", "$2a$10$TTtu3DJ49mv4KYcwErgWset9RiaJuXkI9nUlrvzlF/cZomielCV6a", "Administrator",  "ADMIN");
-insert into Users(username, password, fullname, role) values("user", "$2a$10$oa0GnYReZBX.AdVFT0LHNuJLjlkr0O0kH0wYlNfa59HHBe.soMRXK", "User", "USER");
+insert into Users(username, password, fullname, role) values("joe84", "$2a$10$YVkCtGPOjWWGEkN8nF9LJ.FiG78FuC5a79a9uoJ613qmMuit7ddGG", "Joe Admin",  "ADMIN");
+insert into Users(username, password, fullname, role) values("phildev", "$2a$10$3A5TonAD.rpsreOKJfT6EOzWb9buRiq6lVz77TwG4jvqpmcp1RWlO", "Phil Trader", "USER");
