@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +33,14 @@ public class PoseidonSecurityConfig {
                         })
                 .formLogin(form -> form.loginPage("/login")
                         .defaultSuccessUrl("/user/list"))
+                .sessionManagement(session -> session.maximumSessions(1)
+                        .maxSessionsPreventsLogin(true))
                 .build();
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
     @Bean
