@@ -29,14 +29,6 @@ import java.security.Principal;
 <span class="nc" id="L29">        return mav;</span>
     }
 
-    @GetMapping(&quot;/error&quot;)
-    public ModelAndView error(Principal user) {
-<span class="nc" id="L34">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L35">        String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
-<span class="nc" id="L36">        mav.addObject(&quot;userConnected&quot;, user.getName());</span>
-<span class="nc" id="L37">        mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L38">        mav.setViewName(&quot;403&quot;);</span>
-<span class="nc" id="L39">        return mav;</span>
-    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

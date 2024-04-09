@@ -1,6 +1,6 @@
-com\phildev\pcs\RatingTests.class
-com\phildev\pcs\CurvePointTests.class
 com\phildev\pcs\PasswordEncodeTest.class
-com\phildev\pcs\TradeTests.class
-com\phildev\pcs\BidTests.class
-com\phildev\pcs\RuleTests.class
+com\phildev\pcs\RatingTest.class
+com\phildev\pcs\CurvePointTest.class
+com\phildev\pcs\BidTest.class
+com\phildev\pcs\TradeTest.class
+com\phildev\pcs\RuleTest.class

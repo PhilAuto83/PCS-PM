@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BidListService {
@@ -23,6 +24,18 @@ public class BidListService {
             logger.info("Bid list is empty");
         }
         return allBids;
+    }
+
+    public BidList save(BidList bidList){
+        return bidListRepository.save(bidList);
+    }
+
+    public Optional<BidList> findById(Integer id){
+        return bidListRepository.findById(id);
+    }
+
+    public void delete(Integer id){
+        bidListRepository.deleteById(id);
     }
 
 }

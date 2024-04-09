@@ -18,6 +18,7 @@ com\phildev\pcs\controllers\CurveController.class
 com\phildev\pcs\repositories\TradeRepository.class
 com\phildev\pcs\repositories\RuleNameRepository.class
 com\phildev\pcs\domain\RuleName.class
+com\phildev\pcs\controllers\CustomErrorController.class
 com\phildev\pcs\repositories\BidListRepository.class
 com\phildev\pcs\repositories\CurvePointRepository.class
 com\phildev\pcs\controllers\RuleNameController.class
