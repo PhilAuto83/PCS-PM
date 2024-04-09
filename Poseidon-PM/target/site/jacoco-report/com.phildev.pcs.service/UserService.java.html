@@ -3,6 +3,8 @@
 
 import com.phildev.pcs.domain.User;
 import com.phildev.pcs.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,25 +12,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-<span class="fc" id="L13">public class UserService {</span>
+<span class="fc" id="L15">public class UserService {</span>
+
+<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(UserService.class);</span>
 
     @Autowired
     private UserRepository userRepository;
 
     public User save(User user){
-<span class="nc" id="L19">        return userRepository.save(user);</span>
+<span class="nc" id="L23">        return userRepository.save(user);</span>
     }
 
     public Optional&lt;User&gt; findById(Integer id){
-<span class="nc" id="L23">        return userRepository.findById(id);</span>
+<span class="nc" id="L27">        return userRepository.findById(id);</span>
     }
 
     public List&lt;User&gt; findAll(){
-<span class="nc" id="L27">        return userRepository.findAll();</span>
+<span class="nc" id="L31">        return userRepository.findAll();</span>
     }
 
     public void delete(User user){
-<span class="nc" id="L31">        userRepository.delete(user);</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L35">        userRepository.delete(user);</span>
+<span class="nc" id="L36">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

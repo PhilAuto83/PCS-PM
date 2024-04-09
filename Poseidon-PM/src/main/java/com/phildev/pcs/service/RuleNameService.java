@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RuleService {
+public class RuleNameService {
 
-    private static final Logger logger = LoggerFactory.getLogger(RuleService.class);
+    private static final Logger logger = LoggerFactory.getLogger(RuleNameService.class);
 
     @Autowired
     private RuleNameRepository ruleNameRepository;

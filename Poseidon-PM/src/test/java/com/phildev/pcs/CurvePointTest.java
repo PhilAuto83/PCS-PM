@@ -2,28 +2,32 @@ package com.phildev.pcs;
 
 import com.phildev.pcs.domain.CurvePoint;
 import com.phildev.pcs.repositories.CurvePointRepository;
+import com.phildev.pcs.service.CurvePointService;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class CurvePointTest {
 
 	@Autowired
-	private CurvePointRepository curvePointRepository;
+	private CurvePointService curvePointService;
 
 	@Test
 	public void curvePointSaveTest() {
 		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
 		// Save
-		curvePoint = curvePointRepository.save(curvePoint);
-		Assertions.assertNotNull(curvePoint.getId());
-		Assertions.assertTrue(curvePoint.getCurveId() == 10);
+		CurvePoint curvePointSaved = curvePointService.save(curvePoint);
+		Assertions.assertNotNull(curvePointSaved.getId());
+		Assertions.assertTrue(curvePointSaved.getCurveId() == 10);
 	}
 
 	@Test
@@ -31,15 +35,20 @@ public class CurvePointTest {
 		CurvePoint curvePoint2 = new CurvePoint(11, 11d, 30d);
 		// Update
 		curvePoint2.setCurveId(20);
-		curvePoint2 = curvePointRepository.save(curvePoint2);
-		Assertions.assertTrue(curvePoint2.getCurveId() == 20);
+		CurvePoint curveInDB = curvePointService.save(curvePoint2);
+		Assertions.assertTrue(curveInDB.getCurveId() == 20);
 	}
 
 	@Test
 	public void curvePointSearchTest() {
+		CurvePoint curvePointSearch = new CurvePoint(45, 100d, 30d);
+		// Save
+		curvePointService.save(curvePointSearch);
 		// Find
-		List<CurvePoint> listResult = curvePointRepository.findAll();
-		Assertions.assertTrue(listResult.size() > 0);
+		List<CurvePoint> listResult = curvePointService.findAll();
+        Assertions.assertFalse(listResult.isEmpty());
+		long curveFound  = listResult.stream().filter(curvePoint -> curvePoint.getCurveId()==45).count();
+        Assertions.assertEquals(1, curveFound);
 	}
 
 
@@ -47,10 +56,9 @@ public class CurvePointTest {
 	public void curvePointDeleteTest() {
 		CurvePoint curvePoint3 = new CurvePoint(11, 11d, 30d);
 		// Delete
-		Integer id = curvePoint3.getId();
-		curvePointRepository.delete(curvePoint3);
-		Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
-		Assertions.assertFalse(curvePointList.isPresent());
+		CurvePoint curveInDB = curvePointService.save(curvePoint3);
+		curvePointService.delete(curveInDB.getId());
+		Assertions.assertFalse(curvePointService.findById(curveInDB.getId()).isPresent());
 	}
 
 }

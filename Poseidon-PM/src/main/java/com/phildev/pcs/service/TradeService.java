@@ -27,11 +27,16 @@ public class TradeService {
     }
 
     public Trade save(Trade trade){
+        logger.info("Starting to save trade with account {} and type {}", trade.getAccount(), trade.getType());
         return tradeRepository.save(trade);
     }
 
     public Optional<Trade> findById(Integer id){
         return tradeRepository.findById(id);
+    }
+
+    public Optional<Trade> findTradeByAccount(String account){
+        return tradeRepository.findTradeByAccount(account);
     }
 
     public void delete(Integer id){

@@ -5,41 +5,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
-<span class="fc" id="L23">public class PoseidonSecurityConfig {</span>
+<span class="fc" id="L18">public class PoseidonSecurityConfig {</span>
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-<span class="fc" id="L30">        return http</span>
-<span class="fc" id="L31">                .authorizeHttpRequests(auth -&gt; {</span>
-<span class="fc" id="L32">                    auth.requestMatchers(&quot;/login&quot;,&quot;/error&quot;, &quot;/&quot;).permitAll();</span>
-<span class="fc" id="L33">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
-<span class="fc" id="L34">                    auth.anyRequest().authenticated();</span>
-<span class="fc" id="L35">                        })</span>
-<span class="fc" id="L36">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>
-<span class="fc" id="L37">                        .defaultSuccessUrl(&quot;/user/list&quot;))</span>
-<span class="fc" id="L38">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
-<span class="fc" id="L39">                            .maxSessionsPreventsLogin(true))</span>
-<span class="fc" id="L40">                .build();</span>
+<span class="fc" id="L25">        return http</span>
+<span class="fc" id="L26">                .authorizeHttpRequests(auth -&gt; {</span>
+<span class="fc" id="L27">                    auth.requestMatchers(&quot;/login&quot;,&quot;/error&quot;, &quot;/&quot;).permitAll();</span>
+<span class="fc" id="L28">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
+<span class="fc" id="L29">                    auth.anyRequest().authenticated();</span>
+<span class="fc" id="L30">                        })</span>
+<span class="fc" id="L31">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>
+<span class="fc" id="L32">                        .defaultSuccessUrl(&quot;/user/list&quot;))</span>
+<span class="fc" id="L33">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
+<span class="fc" id="L34">                            .maxSessionsPreventsLogin(true))</span>
+<span class="fc" id="L35">                .build();</span>
     }
 
+    /***
+     * This bean is used to publish event about session expired or session created
+     * It will be used to prevent user to be logged twice due to security filter chain config
+     * @return an object @see &lt;a href=&quot;https://docs.spring.io/spring-security/site/docs/4.0.x/apidocs/org/springframework/security/web/session/HttpSessionEventPublisher.html&quot;&gt;HttpSessionEventPublisher&lt;/a&gt;
+     */
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
 <span class="fc" id="L45">        return new HttpSessionEventPublisher();</span>
@@ -50,17 +50,25 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 <span class="fc" id="L50">        return new BCryptPasswordEncoder();</span>
     }
 
+    /***
+     * This method generates custom authentication manager bean to retrieve user from database with custom user details service and
+     * bcrypt password encoder to validate password
+     * @param http which is http security object used in filter chain
+     * @param bCryptPasswordEncoder used by Authentication Manager to validate password
+     * @return an AuthenticationManager object which will be used by authentication filter
+     * @throws Exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-<span class="fc" id="L55">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
-<span class="fc" id="L56">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
-<span class="fc" id="L57">        return authenticationManagerBuilder.build();</span>
+<span class="fc" id="L63">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
+<span class="fc" id="L64">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
+<span class="fc" id="L65">        return authenticationManagerBuilder.build();</span>
     }
 
 
     @Bean
     WebSecurityCustomizer enableStaticResources(){
-<span class="fc" id="L63">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
+<span class="fc" id="L71">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
     }
 
 

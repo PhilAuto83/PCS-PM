@@ -34,6 +34,10 @@ public class RatingService {
         return ratingRepository.findById(id);
     }
 
+    public Optional<Rating> findByOrderNumber(Integer id){
+        return ratingRepository.findByOrderNumber(id);
+    }
+
     public void delete(Integer id){
         ratingRepository.deleteById(id);
     }

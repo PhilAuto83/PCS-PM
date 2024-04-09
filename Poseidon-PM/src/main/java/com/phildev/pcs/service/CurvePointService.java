@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CurveService {
+public class CurvePointService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CurveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CurvePointService.class);
 
     @Autowired
     private CurvePointRepository curvePointRepository;
@@ -33,6 +33,10 @@ public class CurveService {
 
     public Optional<CurvePoint> findById(Integer id){
         return curvePointRepository.findById(id);
+    }
+
+    public Optional<CurvePoint> findByCurveId(Integer id){
+        return curvePointRepository.findByCurveId(id);
     }
 
     public void delete(Integer id){
