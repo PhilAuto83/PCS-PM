@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.controllers</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.controllers;
+
+import com.phildev.pcs.domain.User;
+import com.phildev.pcs.repositories.UserRepository;
+import com.phildev.pcs.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
+
+
+@Controller
+<span class="fc" id="L22">public class UserController {</span>
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(&quot;/user/list&quot;)
+    public String home(Model model, Principal connectedUser)
+    {
+<span class="nc" id="L29">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L30">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L31">        return &quot;user/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/user/add&quot;)
+    public String addUser(User bid) {
+<span class="nc" id="L36">        return &quot;user/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/user/validate&quot;)
+    public String validate(@Valid User user, BindingResult result, Model model, @AuthenticationPrincipal Principal connectedUser) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="nc" id="L42">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L43">            user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L44">            userService.save(user);</span>
+<span class="nc" id="L45">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L46">            return &quot;redirect:/user/list&quot;;</span>
+        }
+<span class="nc" id="L48">        return &quot;user/add&quot;;</span>
+    }
+
+    @GetMapping(&quot;/user/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L53">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L54">        user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L55">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L56">        return &quot;user/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/user/update/{id}&quot;)
+    public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
+                             BindingResult result, Model model) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L63">            return &quot;user/update&quot;;</span>
+        }
+
+<span class="nc" id="L66">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L67">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L68">        user.setId(id);</span>
+<span class="nc" id="L69">        userService.save(user);</span>
+<span class="nc" id="L70">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L71">        return &quot;redirect:/user/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/user/delete/{id}&quot;)
+    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L76">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L77">        userService.delete(user);</span>
+<span class="nc" id="L78">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L79">        return &quot;redirect:/user/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
