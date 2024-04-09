@@ -20,6 +20,13 @@ public class PoseidonSecurityConfig {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    /***
+     * This bean is used to manage authorized and public endpoints
+     * It has a session management layer with maximum 1 session per user
+     * @param http is the root object from which we can build our custom security filter chain
+     * @return SecurityFilterChain object used to filter request and add security layer
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
@@ -38,13 +45,18 @@ public class PoseidonSecurityConfig {
     /***
      * This bean is used to publish event about session expired or session created
      * It will be used to prevent user to be logged twice due to security filter chain config
-     * @return an object @see <a href="https://docs.spring.io/spring-security/site/docs/4.0.x/apidocs/org/springframework/security/web/session/HttpSessionEventPublisher.html">HttpSessionEventPublisher</a>
+     * @return an HttpSessionEventPublisher
      */
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
     }
 
+    /***
+     * This bean is a password encoder used in the app to encode user password
+     * It is used by Authentication Manager to check password in database which are encoded and the password entered by user to check if they matches
+     * @return a BCryptPasswordEncoder object
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -65,7 +77,10 @@ public class PoseidonSecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
-
+    /***
+     * This bean is used to grant public access to css files, images and js scripts
+     * @return WebSecurityCustomizer object
+     */
     @Bean
     WebSecurityCustomizer enableStaticResources(){
         return (web -> web.ignoring().requestMatchers("/css/**","/images/**", "/js/**"));
