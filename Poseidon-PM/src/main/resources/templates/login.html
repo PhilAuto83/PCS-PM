@@ -10,7 +10,7 @@
             <form name="f" th:action="@{/login}" method="post">
                 <div class="fs-3 fw-bold mb-3">Login with Username and Password</div>
                 <div th:if="${param.error}" class="d-flex justify-content-between alert alert-danger alert-dismissible fade show px-2" role="alert">
-                    Invalid username and password.
+                    Invalid username and password or session already in use.
                     <button type="button" class="close" onclick="redirectToLoginPage()">
                         <span aria-hidden="true">&times;</span>
                     </button>

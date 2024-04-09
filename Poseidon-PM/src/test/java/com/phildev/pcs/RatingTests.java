@@ -2,6 +2,7 @@ package com.phildev.pcs;
 
 import com.phildev.pcs.domain.Rating;
 import com.phildev.pcs.repositories.RatingRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

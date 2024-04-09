@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-      <title>PCS Access denied</title>
+      <title>PCS Bad request</title>
       <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="fs-2 fw-bold text-danger text-center">Access Denied Exception</div>
-            <div th:if="${user != null}" class="text-center mb-3">
-                User <b th:text="${user}"></b> is not authorized to view this page.
+            <div class="fs-2 fw-bold text-danger text-center" th:text="${pageTitle}"></div>
+            <div class="text-center mb-3">
+                <b th:text="${errorMsg}"></b>
             </div>
             <button type="button" class="btn btn-primary col-4 offset-4 mb-3" th:onclick="redirectToLoginPage()">Go back to login page</button>
             <button type="button" class="btn btn-primary col-4 offset-4" th:onclick="history.back()">Go back to previous page</button>

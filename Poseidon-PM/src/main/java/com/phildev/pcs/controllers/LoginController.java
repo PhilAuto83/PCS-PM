@@ -29,13 +29,5 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("/error")
-    public ModelAndView error(Principal user) {
-        ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
-        mav.addObject("userConnected", user.getName());
-        mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("403");
-        return mav;
-    }
+
 }
