@@ -1,21 +1,16 @@
 package com.phildev.pcs;
 
 import com.phildev.pcs.domain.CurvePoint;
-import com.phildev.pcs.repositories.CurvePointRepository;
 import com.phildev.pcs.service.CurvePointService;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class CurvePointTest {
 
 	@Autowired

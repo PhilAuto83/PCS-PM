@@ -1,21 +1,22 @@
 package com.phildev.pcs;
 
 import com.phildev.pcs.domain.Trade;
-import com.phildev.pcs.repositories.TradeRepository;
+
 import com.phildev.pcs.service.TradeService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
 
 import java.util.List;
 import java.util.Optional;
 
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class TradeTest {
 
 	@Autowired
@@ -26,8 +27,8 @@ public class TradeTest {
 		Trade trade = new Trade("Trade Account", "Type");
 		// Save
 		Trade tradeInDB = tradeService.save(trade);
-		Assert.assertNotNull(tradeInDB.getTradeId());
-		Assert.assertTrue(tradeInDB.getAccount().equals("Trade Account"));
+		Assertions.assertThat(tradeInDB.getTradeId()).isNotNull();
+		Assertions.assertThat(tradeInDB.getAccount()).isEqualTo("Trade Account");
 	}
 
 	@Test
@@ -36,7 +37,7 @@ public class TradeTest {
 		// Update
 		trade2.setAccount("Trade Account Update");
 		trade2 = tradeService.save(trade2);
-		Assert.assertTrue(trade2.getAccount().equals("Trade Account Update"));
+		Assertions.assertThat(trade2.getAccount()).isEqualTo("Trade Account Update");
 	}
 
 	@Test
@@ -45,7 +46,7 @@ public class TradeTest {
 		tradeService.save(tradeSearch);
 		// Find
 		List<Trade> listResult = tradeService.findAll();
-		Assert.assertTrue(listResult.size() > 0);
+		Assertions.assertThat(listResult.size()).isGreaterThan(0);
 	}
 
 	@Test
@@ -55,7 +56,7 @@ public class TradeTest {
 		// Delete
 		tradeService.delete(tradeInDB.getTradeId());
 		Optional<Trade> tradeDeleted = tradeService.findById(tradeInDB.getTradeId());
-		Assert.assertFalse(tradeDeleted.isPresent());
+		Assertions.assertThat(tradeDeleted).isEqualTo(Optional.empty());
 	}
 
 }

@@ -20,34 +20,46 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    /***
+     * This bean is used to manage authorized and public endpoints
+     * It has a session management layer with maximum 1 session per user
+     * @param http is the root object from which we can build our custom security filter chain
+     * @return SecurityFilterChain object used to filter request and add security layer
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-<span class="fc" id="L25">        return http</span>
-<span class="fc" id="L26">                .authorizeHttpRequests(auth -&gt; {</span>
-<span class="fc" id="L27">                    auth.requestMatchers(&quot;/login&quot;,&quot;/error&quot;, &quot;/&quot;).permitAll();</span>
-<span class="fc" id="L28">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
-<span class="fc" id="L29">                    auth.anyRequest().authenticated();</span>
-<span class="fc" id="L30">                        })</span>
-<span class="fc" id="L31">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>
-<span class="fc" id="L32">                        .defaultSuccessUrl(&quot;/user/list&quot;))</span>
-<span class="fc" id="L33">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
-<span class="fc" id="L34">                            .maxSessionsPreventsLogin(true))</span>
-<span class="fc" id="L35">                .build();</span>
+<span class="fc" id="L32">        return http</span>
+<span class="fc" id="L33">                .authorizeHttpRequests(auth -&gt; {</span>
+<span class="fc" id="L34">                    auth.requestMatchers(&quot;/login&quot;,&quot;/error&quot;, &quot;/&quot;).permitAll();</span>
+<span class="fc" id="L35">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
+<span class="fc" id="L36">                    auth.anyRequest().authenticated();</span>
+<span class="fc" id="L37">                        })</span>
+<span class="fc" id="L38">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>
+<span class="fc" id="L39">                        .defaultSuccessUrl(&quot;/user/list&quot;))</span>
+<span class="fc" id="L40">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
+<span class="fc" id="L41">                            .maxSessionsPreventsLogin(true))</span>
+<span class="fc" id="L42">                .build();</span>
     }
 
     /***
      * This bean is used to publish event about session expired or session created
      * It will be used to prevent user to be logged twice due to security filter chain config
-     * @return an object @see &lt;a href=&quot;https://docs.spring.io/spring-security/site/docs/4.0.x/apidocs/org/springframework/security/web/session/HttpSessionEventPublisher.html&quot;&gt;HttpSessionEventPublisher&lt;/a&gt;
+     * @return an HttpSessionEventPublisher
      */
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
-<span class="fc" id="L45">        return new HttpSessionEventPublisher();</span>
+<span class="fc" id="L52">        return new HttpSessionEventPublisher();</span>
     }
 
+    /***
+     * This bean is a password encoder used in the app to encode user password
+     * It is used by Authentication Manager to check password in database which are encoded and the password entered by user to check if they matches
+     * @return a BCryptPasswordEncoder object
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
-<span class="fc" id="L50">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L62">        return new BCryptPasswordEncoder();</span>
     }
 
     /***
@@ -60,15 +72,18 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
      */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-<span class="fc" id="L63">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
-<span class="fc" id="L64">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
-<span class="fc" id="L65">        return authenticationManagerBuilder.build();</span>
+<span class="fc" id="L75">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
+<span class="fc" id="L76">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
+<span class="fc" id="L77">        return authenticationManagerBuilder.build();</span>
     }
 
-
+    /***
+     * This bean is used to grant public access to css files, images and js scripts
+     * @return WebSecurityCustomizer object
+     */
     @Bean
     WebSecurityCustomizer enableStaticResources(){
-<span class="fc" id="L71">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
+<span class="fc" id="L86">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
     }
 
 

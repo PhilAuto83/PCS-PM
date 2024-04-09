@@ -1,14 +1,11 @@
 package com.phildev.pcs;
 
 import com.phildev.pcs.domain.RuleName;
-import com.phildev.pcs.repositories.RuleNameRepository;
 import com.phildev.pcs.service.RuleNameService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +13,6 @@ import java.util.Optional;
 
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class RuleTest {
 
 	@Autowired
@@ -28,8 +24,8 @@ public class RuleTest {
 
 		// Save
 		RuleName ruleInDB = ruleNameService.save(rule);
-		Assert.assertNotNull(ruleInDB.getId());
-		Assert.assertTrue(ruleInDB.getName().equals("Rule Name"));
+		Assertions.assertThat(ruleInDB.getId()).isNotNull();
+		Assertions.assertThat(ruleInDB.getName()).isEqualTo("Rule Name");
 	}
 
 	@Test
@@ -39,7 +35,7 @@ public class RuleTest {
 		// Update
 		rule2.setName("Rule Name Update");
 		RuleName ruleInDB = ruleNameService.save(rule2);
-		Assert.assertTrue(ruleInDB.getName().equals("Rule Name Update"));
+		Assertions.assertThat(ruleInDB.getName()).isEqualTo("Rule Name Update");
 	}
 
 	@Test
@@ -48,9 +44,9 @@ public class RuleTest {
 		ruleNameService.save(ruleSearch);
 		// Find
 		List<RuleName> listResult = ruleNameService.findAll();
-		Long ruleFound = listResult.stream().filter(ruleName -> Objects.equals(ruleName.getName(), "Rule Name S")).count();
-		Assert.assertTrue(listResult.size() > 0);
-		Assert.assertTrue(ruleFound==1);
+		long ruleFound = listResult.stream().filter(ruleName -> Objects.equals(ruleName.getName(), "Rule Name S")).count();
+		Assertions.assertThat(listResult.size()).isGreaterThan(0);
+		Assertions.assertThat(ruleFound).isEqualTo(1);
 	}
 
 	@Test
@@ -60,6 +56,6 @@ public class RuleTest {
 		RuleName ruleInDB = ruleNameService.save(rule3);
 		ruleNameService.delete(ruleInDB.getId());
 		Optional<RuleName> ruleDeleted = ruleNameService.findById(ruleInDB.getId());
-		Assert.assertFalse(ruleDeleted.isPresent());
+		Assertions.assertThat(ruleDeleted).isEqualTo(Optional.empty());
 	}
 }

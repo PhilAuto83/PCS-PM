@@ -2,19 +2,16 @@ package com.phildev.pcs;
 
 import com.phildev.pcs.domain.Rating;
 import com.phildev.pcs.service.RatingService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class RatingTest {
 
 	@Autowired
@@ -25,8 +22,8 @@ public class RatingTest {
 		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
 		// Save
 		Rating ratingInDB = ratingService.save(rating);
-		Assert.assertNotNull(ratingInDB.getId());
-		Assert.assertTrue(ratingInDB.getOrderNumber() == 10);
+		Assertions.assertThat(ratingInDB.getId()).isNotNull();
+		Assertions.assertThat(ratingInDB.getOrderNumber()).isEqualTo(10);
 	}
 
 	@Test
@@ -35,7 +32,7 @@ public class RatingTest {
 		// Update
 		rating2.setOrderNumber(20);
 		Rating ratingInDB = ratingService.save(rating2);
-		Assert.assertTrue(ratingInDB.getOrderNumber() == 20);
+		Assertions.assertThat(ratingInDB.getOrderNumber()).isEqualTo(20);
 	}
 
 	@Test
@@ -45,8 +42,8 @@ public class RatingTest {
 		// Find
 		List<Rating> listResult = ratingService.findAll();
 		long ratingFound = listResult.stream().filter(rating -> rating.getOrderNumber()==100).count();
-		Assert.assertTrue(listResult.size() > 0);
-		Assert.assertTrue(ratingFound==1);
+		Assertions.assertThat(listResult.size()).isGreaterThan(0);
+		Assertions.assertThat(ratingFound).isEqualTo(1);
 	}
 
 	@Test
@@ -56,7 +53,7 @@ public class RatingTest {
 		// Delete
 		ratingService.delete(ratingInDB.getId());
 		Optional<Rating> ratingDeleted = ratingService.findById(ratingInDB.getId());
-		Assert.assertFalse(ratingDeleted.isPresent());
+		Assertions.assertThat(ratingDeleted).isEqualTo(Optional.empty());
 	}
 
 }

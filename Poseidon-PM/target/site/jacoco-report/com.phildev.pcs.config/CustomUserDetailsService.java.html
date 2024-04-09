@@ -20,14 +20,14 @@ import org.springframework.stereotype.Service;
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="nc" id="L23">        User user = userRepository.findByUsername(username);</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(user == null){</span>
+<span class="fc" id="L23">        User user = userRepository.findByUsername(username);</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(user == null){</span>
 <span class="nc" id="L25">            logger.error(&quot;No user found with name {} in database when calling custom user details service&quot;, username);</span>
 <span class="nc" id="L26">            throw new UsernameNotFoundException(&quot;No user found with name &quot;+username);</span>
         }
-<span class="nc" id="L28">        logger.info(&quot;User {} retrieved from database by custom user details service&quot;, username);</span>
-<span class="nc" id="L29">        return org.springframework.security.core.userdetails.User.builder().username(user.getUsername())</span>
-<span class="nc" id="L30">                .password(user.getPassword()).roles(user.getRole()).build();</span>
+<span class="fc" id="L28">        logger.info(&quot;User {} retrieved from database by custom user details service&quot;, username);</span>
+<span class="fc" id="L29">        return org.springframework.security.core.userdetails.User.builder().username(user.getUsername())</span>
+<span class="fc" id="L30">                .password(user.getPassword()).roles(user.getRole()).build();</span>
     }
 
 }
