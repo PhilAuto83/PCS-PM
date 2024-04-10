@@ -8,10 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.regex.Pattern;
@@ -19,6 +16,7 @@ import java.util.regex.Pattern;
 
 @Controller
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -38,21 +36,27 @@ public class UserController {
         return "user/add";
     }
 
+
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model, Principal connectedUser) {
+        //adding regexp to validate password
         String passwordValidation = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
         model.addAttribute("connectedUser", connectedUser.getName());
-
-        if (!result.hasErrors() && Pattern.matches(passwordValidation, user.getPassword())) {
+        if (!result.hasErrors() && Pattern.matches(passwordValidation, user.getPassword())
+                && !userService.checkUserNameOrFullNameExist(user)) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
             userService.save(user);
             model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";
+        }else if(userService.checkUserNameOrFullNameExist(user)){
+            model.addAttribute("userError", "User already exists with username or fullname");
+            return "user/add";
+        }else{
+            model.addAttribute("validationError", "Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, " +
+                    "1 uppercase letter, 1 special character between @$!%?&");
+            return "user/add";
         }
-        model.addAttribute("validationError", "Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, " +
-                "1 uppercase letter, 1 special character betweeen @$!%?&");
-        return "user/add";
     }
 
     @GetMapping("/user/update/{id}")
@@ -68,12 +72,11 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
         String passwordValidation = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
-        if (result.hasErrors()|| Pattern.matches(passwordValidation, user.getPassword())) {
+        if (result.hasErrors()|| !Pattern.matches(passwordValidation, user.getPassword())) {
             model.addAttribute("validationError","Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, " +
-                    "1 uppercase letter, 1 special character betweeen @$!%?&");
+                    "1 uppercase letter, 1 special character between @$!%?&");
             return "user/update";
         }
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         user.setId(id);

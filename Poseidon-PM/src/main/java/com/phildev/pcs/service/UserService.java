@@ -23,6 +23,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+
     public Optional<User> findById(Integer id){
         return userRepository.findById(id);
     }
@@ -33,5 +34,9 @@ public class UserService {
 
     public void delete(User user){
         userRepository.delete(user);
+    }
+
+    public boolean checkUserNameOrFullNameExist(User user){
+        return (userRepository.findByUsername(user.getUsername()) != null) || (userRepository.findByFullName(user.getFullName()) != null);
     }
 }

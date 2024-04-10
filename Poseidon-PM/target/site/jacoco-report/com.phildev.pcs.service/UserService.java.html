@@ -20,19 +20,24 @@ import java.util.Optional;
     private UserRepository userRepository;
 
     public User save(User user){
-<span class="nc" id="L23">        return userRepository.save(user);</span>
+<span class="fc" id="L23">        return userRepository.save(user);</span>
     }
 
+
     public Optional&lt;User&gt; findById(Integer id){
-<span class="nc" id="L27">        return userRepository.findById(id);</span>
+<span class="fc" id="L28">        return userRepository.findById(id);</span>
     }
 
     public List&lt;User&gt; findAll(){
-<span class="fc" id="L31">        return userRepository.findAll();</span>
+<span class="fc" id="L32">        return userRepository.findAll();</span>
     }
 
     public void delete(User user){
-<span class="nc" id="L35">        userRepository.delete(user);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L36">        userRepository.delete(user);</span>
+<span class="fc" id="L37">    }</span>
+
+    public boolean checkUserNameOrFullNameExist(User user){
+<span class="fc bfc" id="L40" title="All 4 branches covered.">        return (userRepository.findByUsername(user.getUsername()) != null) || (userRepository.findByFullName(user.getFullName()) != null);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
