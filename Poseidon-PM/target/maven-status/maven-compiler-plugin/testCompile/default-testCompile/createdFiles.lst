@@ -1,6 +1,7 @@
 com\phildev\pcs\LoginControllerTest.class
 com\phildev\pcs\RatingTest.class
 com\phildev\pcs\CurvePointTest.class
+com\phildev\pcs\HomeControllerTest.class
 com\phildev\pcs\BidTest.class
 com\phildev\pcs\TradeTest.class
 com\phildev\pcs\RuleTest.class

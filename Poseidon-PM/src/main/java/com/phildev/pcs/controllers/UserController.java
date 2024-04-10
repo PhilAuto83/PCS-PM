@@ -1,11 +1,9 @@
 package com.phildev.pcs.controllers;
 
 import com.phildev.pcs.domain.User;
-import com.phildev.pcs.repositories.UserRepository;
 import com.phildev.pcs.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 

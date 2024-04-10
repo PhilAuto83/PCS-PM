@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 <span class="fc" id="L23">        User user = userRepository.findByUsername(username);</span>
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(user == null){</span>
-<span class="nc" id="L25">            logger.error(&quot;No user found with name {} in database when calling custom user details service&quot;, username);</span>
-<span class="nc" id="L26">            throw new UsernameNotFoundException(&quot;No user found with name &quot;+username);</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if(user == null){</span>
+<span class="fc" id="L25">            logger.error(&quot;No user found with name {} in database when calling custom user details service&quot;, username);</span>
+<span class="fc" id="L26">            throw new UsernameNotFoundException(&quot;No user found with name &quot;+username);</span>
         }
 <span class="fc" id="L28">        logger.info(&quot;User {} retrieved from database by custom user details service&quot;, username);</span>
 <span class="fc" id="L29">        return org.springframework.security.core.userdetails.User.builder().username(user.getUsername())</span>
