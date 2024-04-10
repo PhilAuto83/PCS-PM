@@ -1,6 +1,7 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 
 @Entity
@@ -13,6 +14,7 @@ public class Rating {
     private String moodysRating;
     private String sandPRating;
     private String fitchRating;
+    @Min(value=1, message="minimum order number must be 1")
     private int orderNumber;
 
     public Rating() {

@@ -1,6 +1,8 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 
 import java.sql.Timestamp;
 
@@ -12,9 +14,12 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
+    @Min(value=1, message = "Minimum value must be 1")
     private Integer CurveId;
     private Timestamp asOfDate;
+    @DecimalMin(value="0.0", inclusive = false)
     private Double term;
+    @DecimalMin(value="0.0", inclusive = false)
     private Double value;
     private Timestamp creationDate;
 

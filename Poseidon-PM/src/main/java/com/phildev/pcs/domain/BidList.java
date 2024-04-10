@@ -1,6 +1,9 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -14,7 +17,9 @@ public class BidList {
     private Integer BidListId;
     private String account;
     private String type;
+    @Pattern(regexp="[1-9]+[0-9]*", message="bid quantity must be at least 1")
     private Double bidQuantity;
+    @Pattern(regexp="[1-9]+[0-9]*", message="ask quantity must be at least 1")
     private Double askQuantity;
     private Double bid;
     private Double ask;

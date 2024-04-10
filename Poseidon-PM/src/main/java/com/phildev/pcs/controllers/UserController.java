@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Controller
@@ -32,24 +34,33 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(User bid) {
+    public String addUser(Model model, Principal connectedUser) {
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("connectedUser", connectedUser.getName());
         return "user/add";
     }
 
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model, @AuthenticationPrincipal Principal connectedUser) {
-        if (!result.hasErrors()) {
+    public String validate(@Valid User user, BindingResult result, Model model, Principal connectedUser) {
+        String passwordValidation = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
+        model.addAttribute("connectedUser", connectedUser.getName());
+
+        if (!result.hasErrors() && Pattern.matches(passwordValidation, user.getPassword())) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
             userService.save(user);
             model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";
         }
+        model.addAttribute("validationError", "Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, " +
+                "1 uppercase letter, 1 special character betweeen @$!%?&");
         return "user/add";
     }
 
     @GetMapping("/user/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, Principal connectedUser) {
+        model.addAttribute("connectedUser", connectedUser.getName());
         User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.setPassword("");
         model.addAttribute("user", user);
@@ -59,7 +70,10 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
-        if (result.hasErrors()) {
+        String passwordValidation = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
+        if (result.hasErrors()|| Pattern.matches(passwordValidation, user.getPassword())) {
+            model.addAttribute("validationError","Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, " +
+                    "1 uppercase letter, 1 special character betweeen @$!%?&");
             return "user/update";
         }
 
