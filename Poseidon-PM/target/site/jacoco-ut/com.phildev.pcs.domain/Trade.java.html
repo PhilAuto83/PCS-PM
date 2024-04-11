@@ -14,7 +14,7 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer TradeId;
-    @NotBlank(message = &quot;Type is mandatory&quot;)
+    @NotBlank(message = &quot;Account is mandatory&quot;)
     private String account;
     @NotBlank(message = &quot;Type is mandatory&quot;)
     private String type;

@@ -27,16 +27,20 @@ import java.util.Optional;
 <span class="fc" id="L27">        return allRules;</span>
     }
 
+    public boolean checkRuleNameExists(RuleName ruleName){
+<span class="nc" id="L31">        return ruleNameRepository.existsRuleNameByName(ruleName.getName());</span>
+    }
+
     public RuleName save(RuleName ruleName){
-<span class="fc" id="L31">        return ruleNameRepository.save(ruleName);</span>
+<span class="fc" id="L35">        return ruleNameRepository.save(ruleName);</span>
     }
 
     public Optional&lt;RuleName&gt; findById(Integer id){
-<span class="fc" id="L35">        return ruleNameRepository.findById(id);</span>
+<span class="fc" id="L39">        return ruleNameRepository.findById(id);</span>
     }
 
     public void delete(Integer id){
-<span class="fc" id="L39">        ruleNameRepository.deleteById(id);</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L43">        ruleNameRepository.deleteById(id);</span>
+<span class="fc" id="L44">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

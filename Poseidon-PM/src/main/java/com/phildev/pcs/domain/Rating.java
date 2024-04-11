@@ -37,8 +37,9 @@ public class Rating {
         return Id;
     }
 
-    public Integer setId(Integer id) {
-        return this.Id = id;
+    public void setId(Integer id) {
+
+        this.Id = id;
     }
 
     public String getMoodysRating() {

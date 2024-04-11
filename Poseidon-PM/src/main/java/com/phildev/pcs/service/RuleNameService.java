@@ -27,6 +27,10 @@ public class RuleNameService {
         return allRules;
     }
 
+    public boolean checkRuleNameExists(RuleName ruleName){
+        return ruleNameRepository.existsRuleNameByName(ruleName.getName());
+    }
+
     public RuleName save(RuleName ruleName){
         return ruleNameRepository.save(ruleName);
     }

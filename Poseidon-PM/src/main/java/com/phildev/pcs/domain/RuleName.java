@@ -1,6 +1,7 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "rulename")
@@ -9,11 +10,17 @@ public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
+    @NotBlank(message = "name cannot be null or empty")
     private String name;
+    @NotBlank(message = "description cannot be null or empty")
     private String description;
+    @NotBlank(message = "json cannot be null or empty")
     private String json;
+    @NotBlank(message = "template cannot be null or empty")
     private String template;
+    @NotBlank(message = "sqlStr cannot be null or empty")
     private String sqlStr;
+    @NotBlank(message = "sqlPart cannot be null or empty")
     private String sqlPart;
 
     public RuleName() {
@@ -30,6 +37,10 @@ public class RuleName {
 
     public Integer getId() {
         return Id;
+    }
+
+    public void setId(Integer Id) {
+         this.Id = Id;
     }
 
     public String getName() {
