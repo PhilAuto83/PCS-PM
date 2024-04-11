@@ -59,15 +59,17 @@ CREATE TABLE  IF NOT EXISTS CurvePoint (
   value DOUBLE ,
   creationDate TIMESTAMP ,
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (Id),
+  FOREIGN KEY (Id) REFERENCES Trade (TradeId)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE  IF NOT EXISTS Rating (
   Id tinyint(4) NOT NULL AUTO_INCREMENT,
   moodysRating VARCHAR(125),
-  sandRating VARCHAR(125),
+  sandPRating VARCHAR(125),
   fitchRating VARCHAR(125),
-  orderNumber tinyint,
+  orderNumber tinyint(4),
 
   PRIMARY KEY (Id)
 );
@@ -96,3 +98,6 @@ CREATE TABLE IF NOT EXISTS Users (
 
 insert into Users(username, password, fullname, role) values("joe84", "$2a$10$YVkCtGPOjWWGEkN8nF9LJ.FiG78FuC5a79a9uoJ613qmMuit7ddGG", "Joe Admin",  "ADMIN");
 insert into Users(username, password, fullname, role) values("phildev", "$2a$10$3A5TonAD.rpsreOKJfT6EOzWb9buRiq6lVz77TwG4jvqpmcp1RWlO", "Phil Trader", "USER");
+
+insert into Trade(account, type) values("123456","long term");
+insert into Rating(moodys_rating, sandprating, fitch_rating, order_number) values("AAA+", "AAA", "AAA-",1);

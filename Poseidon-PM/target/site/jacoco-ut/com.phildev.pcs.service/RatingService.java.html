@@ -2,6 +2,7 @@
 
 import com.phildev.pcs.domain.Rating;
 import com.phildev.pcs.repositories.RatingRepository;
+import com.phildev.pcs.repositories.TradeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,35 +12,48 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-<span class="fc" id="L14">public class RatingService {</span>
+<span class="fc" id="L15">public class RatingService {</span>
 
-<span class="fc" id="L16">    private static final Logger logger = LoggerFactory.getLogger(RatingService.class);</span>
+<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(RatingService.class);</span>
 
     @Autowired
     private RatingRepository ratingRepository;
 
+    @Autowired
+    private TradeRepository tradeRepository;
+
     public List&lt;Rating&gt; findAll(){
-<span class="fc" id="L22">        List&lt;Rating&gt; allRatings = ratingRepository.findAll();</span>
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if(allRatings.isEmpty()){</span>
-<span class="nc" id="L24">            logger.info(&quot;Curve point list  is empty&quot;);</span>
+<span class="fc" id="L26">        List&lt;Rating&gt; allRatings = ratingRepository.findAll();</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if(allRatings.isEmpty()){</span>
+<span class="nc" id="L28">            logger.info(&quot;Curve point list  is empty&quot;);</span>
         }
-<span class="fc" id="L26">        return allRatings;</span>
+<span class="fc" id="L30">        return allRatings;</span>
+    }
+
+    public boolean checkOrderNumberExistInTrade(Rating rating){
+        // checking trade id matches orderNumber to add a rating
+<span class="nc" id="L35">        return tradeRepository.existsById(rating.getOrderNumber());</span>
+    }
+
+    public boolean checkRatingExists(Rating rating){
+<span class="nc" id="L39">        Optional&lt;Rating&gt; ratingFound = ratingRepository.findByOrderNumber(rating.getOrderNumber());</span>
+<span class="nc" id="L40">        return ratingFound.isPresent();</span>
     }
 
     public Rating save(Rating rating){
-<span class="fc" id="L30">        return ratingRepository.save(rating);</span>
+<span class="fc" id="L44">        return ratingRepository.save(rating);</span>
     }
 
     public Optional&lt;Rating&gt; findById(Integer id){
-<span class="fc" id="L34">        return ratingRepository.findById(id);</span>
+<span class="fc" id="L48">        return ratingRepository.findById(id);</span>
     }
 
     public Optional&lt;Rating&gt; findByOrderNumber(Integer id){
-<span class="nc" id="L38">        return ratingRepository.findByOrderNumber(id);</span>
+<span class="nc" id="L52">        return ratingRepository.findByOrderNumber(id);</span>
     }
 
     public void delete(Integer id){
-<span class="fc" id="L42">        ratingRepository.deleteById(id);</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L56">        ratingRepository.deleteById(id);</span>
+<span class="fc" id="L57">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

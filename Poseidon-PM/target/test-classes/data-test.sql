@@ -67,7 +67,9 @@ CREATE TABLE IF NOT EXISTS Rating (
   fitchRating VARCHAR(125),
   orderNumber tinyint,
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (Id),
+  FOREIGN KEY (Id) REFERENCES Trade (TradeId)
+      ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS RuleName (
@@ -94,3 +96,6 @@ CREATE TABLE IF NOT EXISTS Users (
 
 insert into Users(username, password, fullname, role) values("admintest", "$2a$10$YVkCtGPOjWWGEkN8nF9LJ.FiG78FuC5a79a9uoJ613qmMuit7ddGG", "Administrator",  "ADMIN");
 insert into Users(username, password, fullname, role) values("usertest", "$2a$10$3A5TonAD.rpsreOKJfT6EOzWb9buRiq6lVz77TwG4jvqpmcp1RWlO", "User", "USER");
+
+insert into Trade(account, type) values("123456","long term");
+insert into Rating(moodys_rating, sandprating, fitch_rating, order_number) values("AAA+", "AAA", "AAA-",1);

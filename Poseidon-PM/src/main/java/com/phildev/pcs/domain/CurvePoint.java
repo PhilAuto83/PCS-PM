@@ -2,6 +2,7 @@ package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 
 import java.sql.Timestamp;
@@ -17,9 +18,9 @@ public class CurvePoint {
     @Min(value=1, message = "Minimum value must be 1")
     private Integer CurveId;
     private Timestamp asOfDate;
-    @DecimalMin(value="0.0", inclusive = false)
+    @DecimalMin(value = "1.00", inclusive = true)
     private Double term;
-    @DecimalMin(value="0.0", inclusive = false)
+    @DecimalMin(value = "1.00", inclusive = true)
     private Double value;
     private Timestamp creationDate;
 

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.phildev.pcs.HomeControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.019 s -- in com.phildev.pcs.HomeControllerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.740 s -- in com.phildev.pcs.HomeControllerTest

@@ -19,7 +19,7 @@ public class RatingTest {
 
 	@Test
 	public void ratingSaveTest() {
-		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+		Rating rating = new Rating("CCC", "CC", "CCC-", 10);
 		// Save
 		Rating ratingInDB = ratingService.save(rating);
 		Assertions.assertThat(ratingInDB.getId()).isNotNull();
@@ -28,7 +28,7 @@ public class RatingTest {
 
 	@Test
 	public void ratingUpdateTest() {
-		Rating rating2 = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+		Rating rating2 = new Rating("CCC", "CCC-", "CC+", 10);
 		// Update
 		rating2.setOrderNumber(20);
 		Rating ratingInDB = ratingService.save(rating2);

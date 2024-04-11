@@ -4,28 +4,33 @@
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
 </head>
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-6">
+		<div class="col-12 d-flex p-0">
 			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
 			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
 			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
 			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
-			<a href="/ruleName/list">Rule</a>
-		</div>
-		<div class="col-6 text-right">
-			Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-			<form th:action="@{/app-logout}" method="POST">
-				<input type="submit" value="Logout"/>
-			</form>
+			<a href="/ruleName/list">Rule</a>&nbsp;|&nbsp;
+			<a href="/user/list">User list</a>
+			<div class="ms-auto">Logged in user: <b th:text="${connectedUser}"></b>
+			</div>
 		</div>
 	</div>
-	<div class="row"><h2>Rating List</h2></div>
 	<div class="row">
-		<a href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
+		<form th:action="@{/logout}" method="POST" class="d-flex justify-content-end p-0">
+			<input type="submit" value="Logout" />
+		</form>
+	</div>
+	<div class="row">
+		<h2 class="p-0">Rating List</h2>
+	</div>
+	<div class="row">
+		<a href="/rating/add" class="btn btn-primary btn-sm btn btn-primary btn-sm col-2 col-md-1">Add New</a>
+
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -39,18 +44,24 @@
 			</thead>
 			<tbody>
 				<tr th:each="rating : ${ratings}">
-					<td style="width: 10%" th:text="${rating.id}"></td>
-					<td th:text="${rating.moodysRating}"></td>
-					<td th:text="${rating.sandPRating}"></td>
-					<td th:text="${rating.fitchRating}"></td>
-					<td th:text="${rating.order}"></td>
+					<td style="width: 10%" th:text="${rating.getId()}"></td>
+					<td th:text="${rating.getMoodysRating()}"></td>
+					<td th:text="${rating.getSandPRating()}"></td>
+					<td th:text="${rating.getFitchRating()}"></td>
+					<td th:text="${rating.getOrderNumber()}"></td>
 					<td style="width: 15%" class="text-center">
-						<a th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a>&nbsp;|&nbsp;
-						<a th:href="@{/rating/delete/{id}(id=${rating.id})}">Delete</a>
+						<a th:href="@{/rating/update/{id}(id=${rating.getId()})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/rating/delete/{id}(id=${rating.getId()})}">Delete</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${emptyRatings != null}" class="text-danger fw-bold p-0">You have currently no ratings</div>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-end p-0">
+			<img th:src="@{/images/pcs-banner.PNG}" alt="pcs logo" class="img-fluid col-4 col-md-2 ms-auto"/>
+		</div>
 	</div>
 </div>
 </body>
