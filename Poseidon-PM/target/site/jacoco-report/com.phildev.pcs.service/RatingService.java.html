@@ -32,12 +32,12 @@ import java.util.Optional;
 
     public boolean checkOrderNumberExistInTrade(Rating rating){
         // checking trade id matches orderNumber to add a rating
-<span class="nc" id="L35">        return tradeRepository.existsById(rating.getOrderNumber());</span>
+<span class="fc" id="L35">        return tradeRepository.existsById(rating.getOrderNumber());</span>
     }
 
     public boolean checkRatingExists(Rating rating){
-<span class="nc" id="L39">        Optional&lt;Rating&gt; ratingFound = ratingRepository.findByOrderNumber(rating.getOrderNumber());</span>
-<span class="nc" id="L40">        return ratingFound.isPresent();</span>
+<span class="fc" id="L39">        Optional&lt;Rating&gt; ratingFound = ratingRepository.findByOrderNumber(rating.getOrderNumber());</span>
+<span class="fc" id="L40">        return ratingFound.isPresent();</span>
     }
 
     public Rating save(Rating rating){

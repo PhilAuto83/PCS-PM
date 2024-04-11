@@ -98,4 +98,7 @@ insert into Users(username, password, fullname, role) values("admintest", "$2a$1
 insert into Users(username, password, fullname, role) values("usertest", "$2a$10$3A5TonAD.rpsreOKJfT6EOzWb9buRiq6lVz77TwG4jvqpmcp1RWlO", "User", "USER");
 
 insert into Trade(account, type) values("123456","long term");
+insert into Trade(account, type) values("456789","long term");
+insert into Trade(account, type) values("888888","short term");
+insert into Trade(account, type) values("741852","short term");
 insert into Rating(moodys_rating, sandprating, fitch_rating, order_number) values("AAA+", "AAA", "AAA-",1);
