@@ -47,7 +47,8 @@ public class TradeController {
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result, Model model, Principal connectedUser) {
+        model.addAttribute("connectedUser", connectedUser.getName());
         if(result.hasErrors()) {
             StringBuilder errors = new StringBuilder(" : \n");
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
