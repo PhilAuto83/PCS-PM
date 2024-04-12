@@ -36,10 +36,11 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 <span class="fc" id="L36">                    auth.anyRequest().authenticated();</span>
 <span class="fc" id="L37">                        })</span>
 <span class="fc" id="L38">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>
-<span class="fc" id="L39">                        .defaultSuccessUrl(&quot;/user/list&quot;))</span>
-<span class="fc" id="L40">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
-<span class="fc" id="L41">                            .maxSessionsPreventsLogin(true))</span>
-<span class="fc" id="L42">                .build();</span>
+<span class="fc" id="L39">                        .defaultSuccessUrl(&quot;/user/list&quot;)</span>
+<span class="fc" id="L40">                        .failureHandler(new CustomAuthenticationFailure()))</span>
+<span class="fc" id="L41">                .sessionManagement(session -&gt; session.maximumSessions(1)</span>
+<span class="fc" id="L42">                            .maxSessionsPreventsLogin(true))</span>
+<span class="fc" id="L43">                .build();</span>
     }
 
     /***
@@ -49,7 +50,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
      */
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
-<span class="fc" id="L52">        return new HttpSessionEventPublisher();</span>
+<span class="fc" id="L53">        return new HttpSessionEventPublisher();</span>
     }
 
     /***
@@ -59,7 +60,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
      */
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
-<span class="fc" id="L62">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L63">        return new BCryptPasswordEncoder();</span>
     }
 
     /***
@@ -72,9 +73,9 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
      */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-<span class="fc" id="L75">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
-<span class="fc" id="L76">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
-<span class="fc" id="L77">        return authenticationManagerBuilder.build();</span>
+<span class="fc" id="L76">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
+<span class="fc" id="L77">        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);</span>
+<span class="fc" id="L78">        return authenticationManagerBuilder.build();</span>
     }
 
     /***
@@ -83,7 +84,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
      */
     @Bean
     WebSecurityCustomizer enableStaticResources(){
-<span class="fc" id="L86">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
+<span class="fc" id="L87">        return (web -&gt; web.ignoring().requestMatchers(&quot;/css/**&quot;,&quot;/images/**&quot;, &quot;/js/**&quot;));</span>
     }
 
 

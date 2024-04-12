@@ -32,21 +32,21 @@ public class LoginIT {
     public void testLoginPageErrorWhenEmptyCredentials() throws Exception {
         mockMvc.perform(formLogin("/login").user("").password(""))
                 .andExpect(status().is(302))
-                .andExpect(redirectedUrl("/login?error"));
+                .andExpect(redirectedUrl("login?error"));
     }
 
     @Test
     public void testLoginPageErrorWhenInvalidCredentials() throws Exception {
         mockMvc.perform(formLogin("/login").user("T").password("2024"))
                 .andExpect(status().is(302))
-                .andExpect(redirectedUrl("/login?error"));
+                .andExpect(redirectedUrl("login?error"));
     }
 
     @Test
     public void testUnknownUserLandsOnErrorPage() throws Exception {
         mockMvc.perform(formLogin("/login").user("adminFake").password("Admin2024@"))
                 .andExpect(status().is(302))
-                .andExpect(redirectedUrl("/login?error"));
+                .andExpect(redirectedUrl("login?error"));
     }
 
     @Test

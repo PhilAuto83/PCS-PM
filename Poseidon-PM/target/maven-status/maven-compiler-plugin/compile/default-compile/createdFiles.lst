@@ -2,6 +2,7 @@ com\phildev\pcs\controllers\LoginController.class
 com\phildev\pcs\service\UserService.class
 com\phildev\pcs\controllers\HomeController.class
 com\phildev\pcs\domain\CurvePoint.class
+com\phildev\pcs\config\CustomAuthenticationFailure.class
 com\phildev\pcs\service\TradeService.class
 com\phildev\pcs\config\PoseidonSecurityConfig.class
 com\phildev\pcs\config\CustomUserDetailsService.class

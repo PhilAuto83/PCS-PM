@@ -36,7 +36,8 @@ public class PoseidonSecurityConfig {
                     auth.anyRequest().authenticated();
                         })
                 .formLogin(form -> form.loginPage("/login")
-                        .defaultSuccessUrl("/user/list"))
+                        .defaultSuccessUrl("/user/list")
+                        .failureHandler(new CustomAuthenticationFailure()))
                 .sessionManagement(session -> session.maximumSessions(1)
                             .maxSessionsPreventsLogin(true))
                 .build();
