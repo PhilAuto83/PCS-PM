@@ -12,4 +12,5 @@ public interface TradeRepository extends JpaRepository<Trade, Integer> {
 
     public Optional<Trade> findTradeByAccount(String account);
 
+
 }

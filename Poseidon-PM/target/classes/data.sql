@@ -29,7 +29,7 @@ CREATE TABLE  IF NOT EXISTS Trade (
   TradeId tinyint(4) NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
-  buyQuantity DOUBLE,
+  buyQuantity Integer,
   sellQuantity DOUBLE,
   buyPrice DOUBLE ,
   sellPrice DOUBLE,
@@ -99,5 +99,7 @@ CREATE TABLE IF NOT EXISTS Users (
 insert into Users(username, password, fullname, role) values("joe84", "$2a$10$YVkCtGPOjWWGEkN8nF9LJ.FiG78FuC5a79a9uoJ613qmMuit7ddGG", "Joe Admin",  "ADMIN");
 insert into Users(username, password, fullname, role) values("phildev", "$2a$10$3A5TonAD.rpsreOKJfT6EOzWb9buRiq6lVz77TwG4jvqpmcp1RWlO", "Phil Trader", "USER");
 
-insert into Trade(account, type) values("123456","long term");
+insert into Trade(account, type, buy_quantity) values("123456","BNP PARIBAS Actions", 10);
+insert into BidList(account, type, bid_quantity) values("123456","BNP PARIBAS Actions", 10);
+insert into BidList(account, type, bid_quantity) values("456789","Twitter Actions", 100);
 insert into Rating(moodys_rating, sandprating, fitch_rating, order_number) values("AAA+", "AAA", "AAA-",1);

@@ -19,7 +19,7 @@ public class BidList {
     private String account;
     private String type;
 
-    private Double bidQuantity;
+    private Integer bidQuantity;
     private Double askQuantity;
     private Double bid;
     private Double ask;
@@ -40,7 +40,7 @@ public class BidList {
     private String side;
 
 
-    public BidList(String account, String type, Double bidQuantity) {
+    public BidList(String account, String type, Integer bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
@@ -68,11 +68,11 @@ public class BidList {
         this.type = type;
     }
 
-    public Double getBidQuantity() {
+    public Integer getBidQuantity() {
         return bidQuantity;
     }
 
-    public void setBidQuantity(double bidQuantity) {
+    public void setBidQuantity(Integer bidQuantity) {
         this.bidQuantity = bidQuantity;
     }
 

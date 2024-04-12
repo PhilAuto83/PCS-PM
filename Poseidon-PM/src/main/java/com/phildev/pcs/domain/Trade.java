@@ -2,8 +2,12 @@ package com.phildev.pcs.domain;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 
@@ -13,13 +17,14 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer TradeId;
+    private Integer tradeId;
     @NotBlank(message = "Account is mandatory")
     private String account;
     @NotBlank(message = "Type is mandatory")
     private String type;
+    @Min(value = 1, message = "Minimum quantity to buy is 1.")
 
-    private Double buyQuantity;
+    private Integer buyQuantity;
 
     private Double sellQuantity;
 
@@ -62,7 +67,10 @@ public class Trade {
     public Trade(){}
 
     public Integer getTradeId() {
-        return TradeId;
+        return tradeId;
+    }
+    public Integer setTradeId(Integer tradeId) {
+        return this.tradeId = tradeId ;
     }
 
     public String getAccount() {
@@ -81,11 +89,11 @@ public class Trade {
         this.type = type;
     }
 
-    public Double getBuyQuantity() {
+    public Integer getBuyQuantity() {
         return buyQuantity;
     }
 
-    public void setBuyQuantity(double buyQuantity) {
+    public void setBuyQuantity(Integer buyQuantity) {
         this.buyQuantity = buyQuantity;
     }
 
