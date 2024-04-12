@@ -11,6 +11,11 @@
             <div th:if="${user != null}" class="text-center mb-3">
                 User <b th:text="${user}"></b> is not authorized to view this page.
             </div>
+            <div class="mb-2" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="POST" class="d-flex justify-content-center p-0">
+                    <input type="submit" value="Logout" />
+                </form>
+            </div>
             <button type="button" class="btn btn-primary col-4 offset-4 mb-3" th:onclick="redirectToLoginPage()">Go back to login page</button>
             <button type="button" class="btn btn-primary col-4 offset-4" th:onclick="history.back()">Go back to previous page</button>
         </div>
