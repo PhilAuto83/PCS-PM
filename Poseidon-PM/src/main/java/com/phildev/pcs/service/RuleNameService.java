@@ -31,6 +31,20 @@ public class RuleNameService {
         return ruleNameRepository.existsRuleNameByName(ruleName.getName());
     }
 
+    public boolean checkRuleNameIsUpdatedWithSameNameOrNonExistingOne(RuleName currentRuleName, RuleName updatedRuleName){
+        if(currentRuleName != null && updatedRuleName.getName().equals(currentRuleName.getName())){
+            return true;
+        }else if(ruleNameRepository.existsRuleNameByName(updatedRuleName.getName())){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    public RuleName findBYName(String name){
+        return ruleNameRepository.findRuleNameByName(name);
+    }
+
     public RuleName save(RuleName ruleName){
         return ruleNameRepository.save(ruleName);
     }

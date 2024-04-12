@@ -32,7 +32,7 @@ public class PoseidonSecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/login","/error", "/").permitAll();
-                    auth.requestMatchers("/secure/article-details", "/user/**","/rating/**","/admin/home", "/bidList/**").hasRole("ADMIN");
+                    auth.requestMatchers("/secure/article-details", "/user/**","/rating/**","/ruleName/**","/admin/home", "/bidList/**").hasRole("ADMIN");
                     auth.anyRequest().authenticated();
                         })
                 .formLogin(form -> form.loginPage("/login")

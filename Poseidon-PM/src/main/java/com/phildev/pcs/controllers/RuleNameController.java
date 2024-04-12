@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -75,17 +76,24 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                             BindingResult result) {
+                             BindingResult result, Model model) {
+        RuleName currentRuleName = ruleNameService.findById(id).orElse(null);
         if(result.hasErrors()){
             StringBuilder errors = new StringBuilder(" : \n");
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
             logger.error("The following errors occurred when trying to save a rule name {}", errors.toString());
             return "ruleName/add";
+        }else if(!ruleNameService.checkRuleNameIsUpdatedWithSameNameOrNonExistingOne(currentRuleName,ruleName)) {
+            model.addAttribute("ruleExists", "Rule already exists with this name");
+            logger.error("Rule already exists with name {}", ruleName.getName());
+            return "ruleName/add";
+        }else{
+            ruleName.setId(id);
+            RuleName ruleUpdated = ruleNameService.save(ruleName);
+            logger.info("Rule with id {} and name {} updated successfully", ruleUpdated.getId(), ruleUpdated.getName());
+            return "redirect:/ruleName/list";
         }
-        ruleName.setId(id);
-        RuleName ruleUpdated = ruleNameService.save(ruleName);
-        logger.info("Rule with id {} and name {} updated successfully", ruleUpdated.getId(), ruleUpdated.getName());
-        return "redirect:/ruleName/list";
+
     }
 
     @GetMapping("/ruleName/delete/{id}")

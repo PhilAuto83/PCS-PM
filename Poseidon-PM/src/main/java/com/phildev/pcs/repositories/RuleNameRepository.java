@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface RuleNameRepository extends JpaRepository<RuleName, Integer> {
 
     public boolean existsRuleNameByName(String name);
+
+    public RuleName findRuleNameByName(String name);
+
+
 }

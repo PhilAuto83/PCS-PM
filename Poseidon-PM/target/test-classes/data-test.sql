@@ -102,3 +102,4 @@ insert into Trade(account, type) values("456789","long term");
 insert into Trade(account, type) values("888888","short term");
 insert into Trade(account, type) values("741852","short term");
 insert into Rating(moodys_rating, sandprating, fitch_rating, order_number) values("AAA+", "AAA", "AAA-",1);
+insert into RuleName(name, description, json, template, sql_str, sql_part) values ("Rule 1", "this is rule 1", "json 1", "template 1", "select * from rulename;", "sql rule 1");

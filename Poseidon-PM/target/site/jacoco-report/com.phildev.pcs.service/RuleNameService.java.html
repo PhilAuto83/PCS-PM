@@ -28,19 +28,33 @@ import java.util.Optional;
     }
 
     public boolean checkRuleNameExists(RuleName ruleName){
-<span class="nc" id="L31">        return ruleNameRepository.existsRuleNameByName(ruleName.getName());</span>
+<span class="fc" id="L31">        return ruleNameRepository.existsRuleNameByName(ruleName.getName());</span>
+    }
+
+    public boolean checkRuleNameIsUpdatedWithSameNameOrNonExistingOne(RuleName currentRuleName, RuleName updatedRuleName){
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        if(currentRuleName != null &amp;&amp; updatedRuleName.getName().equals(currentRuleName.getName())){</span>
+<span class="nc" id="L36">            return true;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        }else if(ruleNameRepository.existsRuleNameByName(updatedRuleName.getName())){</span>
+<span class="fc" id="L38">            return false;</span>
+        } else{
+<span class="fc" id="L40">            return true;</span>
+        }
+    }
+
+    public RuleName findBYName(String name){
+<span class="nc" id="L45">        return ruleNameRepository.findRuleNameByName(name);</span>
     }
 
     public RuleName save(RuleName ruleName){
-<span class="fc" id="L35">        return ruleNameRepository.save(ruleName);</span>
+<span class="fc" id="L49">        return ruleNameRepository.save(ruleName);</span>
     }
 
     public Optional&lt;RuleName&gt; findById(Integer id){
-<span class="fc" id="L39">        return ruleNameRepository.findById(id);</span>
+<span class="fc" id="L53">        return ruleNameRepository.findById(id);</span>
     }
 
     public void delete(Integer id){
-<span class="fc" id="L43">        ruleNameRepository.deleteById(id);</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L57">        ruleNameRepository.deleteById(id);</span>
+<span class="fc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
