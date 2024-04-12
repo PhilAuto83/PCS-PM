@@ -16,7 +16,7 @@ public class CurvePoint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     @Min(value=1, message = "Minimum value must be 1")
-    private Integer CurveId;
+    private Integer curveId;
     private Timestamp asOfDate;
     @DecimalMin(value = "1.00", inclusive = true)
     private Double term;
@@ -28,7 +28,7 @@ public class CurvePoint {
     }
 
     public CurvePoint(Integer curveId, Double term, Double value) {
-        CurveId = curveId;
+        this.curveId = curveId;
         this.term = term;
         this.value = value;
     }
@@ -38,11 +38,11 @@ public class CurvePoint {
     }
 
     public Integer getCurveId() {
-        return CurveId;
+        return curveId;
     }
 
     public void setCurveId(int curveId) {
-        CurveId = curveId;
+        this.curveId = curveId;
     }
 
     public Timestamp getAsOfDate() {

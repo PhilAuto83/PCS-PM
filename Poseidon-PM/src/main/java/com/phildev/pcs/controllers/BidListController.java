@@ -4,7 +4,6 @@ import com.phildev.pcs.domain.BidList;
 import com.phildev.pcs.service.BidListService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,16 +22,17 @@ public class BidListController {
     private BidListService bidListService;
 
     @GetMapping("/bidList/list")
-    public String home(Model model, @AuthenticationPrincipal Principal user)
+    public String home(Model model, Principal connectedUser)
     {
         List<BidList> allBids = bidListService.findAll();
-        model.addAttribute("user", user);
+        model.addAttribute("connectedUser", connectedUser.getName());
         model.addAttribute("bidLists", allBids);
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(BidList bid, Model model, Principal connectedUser) {
+        model.addAttribute("connectedUser", connectedUser.getName());
         return "bidList/add";
     }
 
@@ -43,8 +43,10 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, Principal connectedUser) {
+        BidList bidList = bidListService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid bid id :"+id));
+        model.addAttribute("bidList", bidList);
+        model.addAttribute("connectedUser", connectedUser.getName());
         return "bidList/update";
     }
 
