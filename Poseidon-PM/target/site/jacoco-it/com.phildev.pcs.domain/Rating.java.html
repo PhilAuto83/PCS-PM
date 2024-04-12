@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rating.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.domain</a> &gt; <span class="el_source">Rating.java</span></div><h1>Rating.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.domain;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+
+@Entity
+@Table(name = &quot;rating&quot;)
+public class Rating {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer Id;
+    @Pattern(regexp = &quot;A{1,3}[+-]?|B{1,3}[+-]?|C{1,3}[+-]?&quot;, message = &quot;Rating must follow agency notation A, B or C like AA, AAA, AAA+ or AAA- for A&quot;)
+    private String moodysRating;
+    @Pattern(regexp = &quot;A{1,3}[+-]?|B{1,3}[+-]?|C{1,3}[+-]?&quot;, message = &quot;Rating must follow agency notation A, B or C like AA, AAA, AAA+ or AAA- for A&quot;)
+    private String sandPRating;
+    @Pattern(regexp = &quot;A{1,3}[+-]?|B{1,3}[+-]?|C{1,3}[+-]?&quot;, message = &quot;Rating must follow agency notation A, B or C like AA, AAA, AAA+ or AAA- for A&quot;)
+    private String fitchRating;
+    @Min(value=1, message=&quot;minimum order number must be 1&quot;)
+    private int orderNumber;
+
+<span class="fc" id="L26">    public Rating() {</span>
+<span class="fc" id="L27">    }</span>
+
+<span class="nc" id="L29">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
+<span class="nc" id="L30">        this.moodysRating = moodysRating;</span>
+<span class="nc" id="L31">        this.sandPRating = sandPRating;</span>
+<span class="nc" id="L32">        this.fitchRating = fitchRating;</span>
+<span class="nc" id="L33">        this.orderNumber = orderNumber;</span>
+<span class="nc" id="L34">    }</span>
+
+    public Integer getId() {
+<span class="fc" id="L37">        return Id;</span>
+    }
+
+    public void setId(Integer id) {
+
+<span class="fc" id="L42">        this.Id = id;</span>
+<span class="fc" id="L43">    }</span>
+
+    public String getMoodysRating() {
+<span class="fc" id="L46">        return moodysRating;</span>
+    }
+
+    public void setMoodysRating(String moodysRating) {
+<span class="fc" id="L50">        this.moodysRating = moodysRating;</span>
+<span class="fc" id="L51">    }</span>
+
+    public String getSandPRating() {
+<span class="fc" id="L54">        return sandPRating;</span>
+    }
+
+    public void setSandPRating(String sandPRating) {
+<span class="fc" id="L58">        this.sandPRating = sandPRating;</span>
+<span class="fc" id="L59">    }</span>
+
+    public String getFitchRating() {
+<span class="fc" id="L62">        return fitchRating;</span>
+    }
+
+    public void setFitchRating(String fitchRating) {
+<span class="fc" id="L66">        this.fitchRating = fitchRating;</span>
+<span class="fc" id="L67">    }</span>
+
+    public Integer getOrderNumber() {
+<span class="fc" id="L70">        return orderNumber;</span>
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+<span class="fc" id="L74">        this.orderNumber = orderNumber;</span>
+<span class="fc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

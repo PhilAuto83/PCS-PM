@@ -17,17 +17,17 @@ import java.security.Principal;
 
     @GetMapping(&quot;/login&quot;)
     public ModelAndView login() {
-<span class="fc" id="L20">        ModelAndView mav = new ModelAndView();</span>
-<span class="fc" id="L21">        mav.setViewName(&quot;login&quot;);</span>
-<span class="fc" id="L22">        return mav;</span>
+<span class="nc" id="L20">        ModelAndView mav = new ModelAndView();</span>
+<span class="nc" id="L21">        mav.setViewName(&quot;login&quot;);</span>
+<span class="nc" id="L22">        return mav;</span>
     }
 
     @GetMapping(&quot;/secure/article-details&quot;)
     public ModelAndView getAllUserArticles() {
-<span class="fc" id="L27">        ModelAndView mav = new ModelAndView();</span>
-<span class="fc" id="L28">        mav.addObject(&quot;users&quot;, userService.findAll());</span>
-<span class="fc" id="L29">        mav.setViewName(&quot;user/list&quot;);</span>
-<span class="fc" id="L30">        return mav;</span>
+<span class="nc" id="L27">        ModelAndView mav = new ModelAndView();</span>
+<span class="nc" id="L28">        mav.addObject(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L29">        mav.setViewName(&quot;user/list&quot;);</span>
+<span class="nc" id="L30">        return mav;</span>
     }
 
 

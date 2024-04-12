@@ -31,73 +31,73 @@ import java.util.List;
     @GetMapping(&quot;/rating/list&quot;)
     public String home(Model model, Principal connectedUser)
     {
-<span class="fc" id="L34">        List&lt;Rating&gt; ratings = ratingService.findAll();</span>
-<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        if(ratings == null || ratings.isEmpty()){</span>
+<span class="nc" id="L34">        List&lt;Rating&gt; ratings = ratingService.findAll();</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">        if(ratings == null || ratings.isEmpty()){</span>
 <span class="nc" id="L36">            model.addAttribute(&quot;emptyRatings&quot;, &quot;You have currently no ratings&quot;);</span>
         }
-<span class="fc" id="L38">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
-<span class="fc" id="L39">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="fc" id="L40">        return &quot;rating/list&quot;;</span>
+<span class="nc" id="L38">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
+<span class="nc" id="L39">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L40">        return &quot;rating/list&quot;;</span>
     }
 
     @GetMapping(&quot;/rating/add&quot;)
     public String addRatingForm(Model model, Principal connectedUser) {
-<span class="fc" id="L45">        Rating rating = new Rating();</span>
-<span class="fc" id="L46">        model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="fc" id="L47">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="fc" id="L48">        return &quot;rating/add&quot;;</span>
+<span class="nc" id="L45">        Rating rating = new Rating();</span>
+<span class="nc" id="L46">        model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="nc" id="L47">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L48">        return &quot;rating/add&quot;;</span>
     }
 
     @PostMapping(&quot;/rating/validate&quot;)
     public String validate(@Valid Rating rating, BindingResult result, Model model, Principal connectedUser) {
-<span class="fc" id="L53">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        if(ratingService.checkRatingExists(rating)){</span>
-<span class="fc" id="L55">            model.addAttribute(&quot;ratingError&quot;, &quot;Rating already exists with this order number&quot;);</span>
-<span class="fc" id="L56">            return &quot;rating/add&quot;;</span>
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        }else if(!ratingService.checkOrderNumberExistInTrade(rating)){</span>
-<span class="fc" id="L58">            model.addAttribute(&quot;ratingError&quot;, &quot;You cannot add a rating with an order number not matching a trade&quot;);</span>
-<span class="fc" id="L59">            return &quot;rating/add&quot;;</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        }else if(result.hasErrors()){</span>
-<span class="fc" id="L61">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
-<span class="fc" id="L62">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
-<span class="fc" id="L63">            logger.error(&quot;The following errors occurred when trying to save a rating {}&quot;, errors.toString());</span>
-<span class="fc" id="L64">            return &quot;rating/add&quot;;</span>
+<span class="nc" id="L53">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if(ratingService.checkRatingExists(rating)){</span>
+<span class="nc" id="L55">            model.addAttribute(&quot;ratingError&quot;, &quot;Rating already exists with this order number&quot;);</span>
+<span class="nc" id="L56">            return &quot;rating/add&quot;;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        }else if(!ratingService.checkOrderNumberExistInTrade(rating)){</span>
+<span class="nc" id="L58">            model.addAttribute(&quot;ratingError&quot;, &quot;You cannot add a rating with an order number not matching a trade&quot;);</span>
+<span class="nc" id="L59">            return &quot;rating/add&quot;;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        }else if(result.hasErrors()){</span>
+<span class="nc" id="L61">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
+<span class="nc" id="L62">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
+<span class="nc" id="L63">            logger.error(&quot;The following errors occurred when trying to save a rating {}&quot;, errors.toString());</span>
+<span class="nc" id="L64">            return &quot;rating/add&quot;;</span>
         }
-<span class="fc" id="L66">        ratingService.save(rating);</span>
-<span class="fc" id="L67">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L66">        ratingService.save(rating);</span>
+<span class="nc" id="L67">        return &quot;redirect:/rating/list&quot;;</span>
     }
 
     @GetMapping(&quot;/rating/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, Principal connectedUser) {
-<span class="fc" id="L72">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="pc" id="L73">        Rating rating = ratingService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
-<span class="fc" id="L74">        model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="fc" id="L75">        return &quot;rating/update&quot;;</span>
+<span class="nc" id="L72">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L73">        Rating rating = ratingService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
+<span class="nc" id="L74">        model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="nc" id="L75">        return &quot;rating/update&quot;;</span>
     }
 
     @PostMapping(&quot;/rating/update/{id}&quot;)
     public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,
                              BindingResult result, Model model, Principal connectedUser) {
 
-<span class="fc" id="L82">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if(result.hasErrors()){</span>
+<span class="nc" id="L82">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if(result.hasErrors()){</span>
 <span class="nc" id="L84">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
 <span class="nc" id="L85">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
 <span class="nc" id="L86">            logger.error(&quot;The following errors occurred when trying to save a rating {}&quot;, errors.toString());</span>
 <span class="nc" id="L87">            return &quot;rating/add&quot;;</span>
         }
-<span class="fc" id="L89">        rating.setId(id);</span>
-<span class="fc" id="L90">        ratingService.save(rating);</span>
-<span class="fc" id="L91">        logger.info(&quot;Rating with orderNumber {} has been updated&quot;, rating.getOrderNumber());</span>
-<span class="fc" id="L92">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L89">        rating.setId(id);</span>
+<span class="nc" id="L90">        ratingService.save(rating);</span>
+<span class="nc" id="L91">        logger.info(&quot;Rating with orderNumber {} has been updated&quot;, rating.getOrderNumber());</span>
+<span class="nc" id="L92">        return &quot;redirect:/rating/list&quot;;</span>
     }
 
     @GetMapping(&quot;/rating/delete/{id}&quot;)
     public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="pc" id="L97">        Rating rating = ratingService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
-<span class="fc" id="L98">        ratingService.delete(rating.getId());</span>
-<span class="fc" id="L99">        model.addAttribute(&quot;users&quot;, ratingService.findAll());</span>
-<span class="fc" id="L100">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L97">        Rating rating = ratingService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
+<span class="nc" id="L98">        ratingService.delete(rating.getId());</span>
+<span class="nc" id="L99">        model.addAttribute(&quot;users&quot;, ratingService.findAll());</span>
+<span class="nc" id="L100">        return &quot;redirect:/rating/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
