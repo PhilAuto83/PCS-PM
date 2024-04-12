@@ -2,10 +2,7 @@ package com.phildev.pcs.domain;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -23,7 +20,7 @@ public class Trade {
     @NotBlank(message = "Type is mandatory")
     private String type;
     @Min(value = 1, message = "Minimum quantity to buy is 1.")
-
+    @NotNull
     private Integer buyQuantity;
 
     private Double sellQuantity;
@@ -59,9 +56,10 @@ public class Trade {
     private String sourceListId;
     private String side;
 
-    public Trade(String account, String type) {
+    public Trade(String account, String type, Integer buyQuantity) {
         this.account = account;
         this.type = type;
+        this.buyQuantity = buyQuantity;
     }
 
     public Trade(){}

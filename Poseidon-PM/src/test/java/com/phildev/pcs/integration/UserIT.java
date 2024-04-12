@@ -1,6 +1,7 @@
 package com.phildev.pcs.integration;
 
 
+import com.phildev.pcs.domain.RuleName;
 import com.phildev.pcs.domain.User;
 import com.phildev.pcs.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -191,4 +192,5 @@ public class UserIT {
         userUpdated.ifPresent(user -> org.assertj.core.api.Assertions.assertThat(user.getFullName()).isEqualTo("Last Tester2"));
         userUpdated.ifPresent(user -> org.assertj.core.api.Assertions.assertThat(user.getRole()).isEqualTo("ADMIN"));
     }
+
 }

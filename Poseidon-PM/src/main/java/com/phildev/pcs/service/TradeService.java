@@ -57,7 +57,7 @@ public class TradeService {
         return tradeRepository.findById(id);
     }
 
-    public Optional<Trade> findTradeByAccount(String account){
+    public List<Trade> findTradeByAccount(String account){
         return tradeRepository.findTradeByAccount(account);
     }
 

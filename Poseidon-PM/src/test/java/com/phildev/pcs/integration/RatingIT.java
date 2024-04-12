@@ -127,7 +127,7 @@ public class RatingIT {
                         .param("moodysRating","AAA")
                         .param("sandPRating", "A+")
                         .param("fitchRating", "BBB+")
-                        .param("orderNumber","5"))
+                        .param("orderNumber","36"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("rating/add"))
                 .andExpect(content().string(containsString("You cannot add a rating with an order number not matching a trade")));

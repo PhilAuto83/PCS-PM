@@ -1,6 +1,8 @@
 package com.phildev.pcs.integration;
 
 
+import com.phildev.pcs.domain.RuleName;
+import com.phildev.pcs.domain.Trade;
 import com.phildev.pcs.repositories.RuleNameRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -200,7 +204,18 @@ public class RuleNameIT {
                 .andExpect(status().is(200))
                 .andExpect(view().name("ruleName/add"))
                 .andExpect(content().string(containsString("Rule already exists with this name")));
+    }
 
+    @Test
+    @WithMockUser(roles={"ADMIN"})
+    public void testDeletingTradeWithAdminRole() throws Exception {
+        mockMvc.perform(get("/ruleName/delete/2").with((csrf())))
+                .andExpect(status().is(302))
+                .andExpect(view().name("redirect:/ruleName/list"));
+        Optional<RuleName> ruleDeleted = ruleNameRepository.findById(2);
+        if(ruleDeleted.isPresent()){
+            Assertions.fail("Error : Rule was not deleted");
+        }
     }
 
 }
