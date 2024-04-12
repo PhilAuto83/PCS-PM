@@ -1,10 +1,7 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -16,9 +13,13 @@ public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
-    private String account;
-    private String type;
 
+    @NotBlank(message ="account cannot be null or empty")
+    private String account;
+    @NotBlank(message ="type cannot be null or empty")
+    private String type;
+    @Min(value=1, message ="bid quantity must be at least 1")
+    @NotNull(message="bid quantity cannot be null")
     private Integer bidQuantity;
     private Double askQuantity;
     private Double bid;

@@ -52,7 +52,7 @@ public class TradeController {
         if(result.hasErrors()) {
             StringBuilder errors = new StringBuilder(" : \n");
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
-            logger.error("The following errors occurred when trying to save a rule name {}", errors);
+            logger.error("The following errors occurred when trying to save a trade  {}", errors);
             return "trade/add";
         }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){
             model.addAttribute("tradeError", "No bid found for this account, type and quantity");
@@ -79,7 +79,7 @@ public class TradeController {
         if(result.hasErrors()) {
             StringBuilder errors = new StringBuilder(" : \n");
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
-            logger.error("The following errors occurred when trying to save a rule name {}", errors);
+            logger.error("The following errors occurred when trying to save a trade name {}", errors);
             return "trade/add";
         }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){
             model.addAttribute("tradeError", "No bid found for this account, type and quantity");

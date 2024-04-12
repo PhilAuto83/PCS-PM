@@ -1,8 +1,11 @@
 package com.phildev.pcs.controllers;
 
 import com.phildev.pcs.domain.BidList;
+import com.phildev.pcs.domain.Trade;
 import com.phildev.pcs.service.BidListService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import java.util.List;
 @Controller
 public class BidListController {
 
+    private static final Logger logger = LoggerFactory.getLogger(BidListController.class);
+
     @Autowired
     private BidListService bidListService;
 
@@ -31,16 +36,25 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid, Model model, Principal connectedUser) {
+    public String addBidForm(Model model, Principal connectedUser) {
+        BidList bidList = new BidList();
+        model.addAttribute("bidList", bidList);
         model.addAttribute("connectedUser", connectedUser.getName());
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model, Principal connectedUser) {
-        // TODO: check data valid and save to db, after saving return bid list
+        if(result.hasErrors()) {
+            StringBuilder errors = new StringBuilder(" : \n");
+            result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
+            logger.error("The following errors occurred when trying to save a bid {}", errors);
+            return "bidList/add";
+        }
+        BidList bidSaved = bidListService.save(bid);
+        logger.info("Bid  fro account {} was saved successfully for user {}", bidSaved.getAccount(), connectedUser.getName());
         model.addAttribute("connectedUser", connectedUser.getName());
-        return "bidList/add";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -53,14 +67,26 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+                             BindingResult result, Model model, Principal connectedUser) {
+        if(result.hasErrors()) {
+            StringBuilder errors = new StringBuilder(" : \n");
+            result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
+            logger.error("The following errors occurred when trying to save a bid {}", errors);
+            return "bidList/add";
+        }
+        bidList.setBidListId(id);
+        BidList bidUpdated = bidListService.save(bidList);
+        logger.info("Bid was saved successfully with current id {} for user {}", bidUpdated.getBidListId(), connectedUser.getName());
+
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+    public String deleteBid(@PathVariable("id") Integer id, Model model, Principal connectedUser) {
+        BidList bid = bidListService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));
+        bidListService.delete(id);
+        model.addAttribute("trades", bidListService.findAll());
+        logger.info("Bid was deleted successfully for id {} and user {}", id, connectedUser.getName());
         return "redirect:/bidList/list";
     }
 }
