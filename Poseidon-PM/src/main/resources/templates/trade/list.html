@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>PCS - Trade list</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-12 d-flex p-0">
+			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+			<a href="/ruleName/list">Rule</a>&nbsp;|&nbsp;
+			<a href="/user/list">User list</a>
+			<div class="ms-auto">Logged in user: <b th:text="${connectedUser}"></b>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<form th:action="@{/logout}" method="POST" class="d-flex justify-content-end p-0">
+			<input type="submit" value="Logout" />
+		</form>
+	</div>
+	<div class="row"><h2 class="p-0">Trade List</h2></div>
+	<div class="row">
+		<a href="/trade/add" class="btn btn-primary btn-sm col-2 col-md-1">Add New</a>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Account</th>
+					<th>Type</th>
+					<th>Buy Quantity</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="trade : ${trades}">
+					<td style="width: 10%" th:text="${trade.tradeId}"></td>
+					<td th:text="${trade.account}"></td>
+					<td th:text="${trade.type}"></td>
+					<td th:text="${trade.buyQuantity}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/trade/update/{id}(id=${trade.tradeId})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/trade/delete/{id}(id=${trade.tradeId})}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:if="${emptyTrades != null}" th:text="${emptyTrades}" class="text-danger fw-bold p-0"></div>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-end p-0">
+			<img th:src="@{/images/pcs-banner.PNG}" alt="pcs logo" class="img-fluid col-4 col-md-2 ms-auto"/>
+		</div>
+	</div>
+</div>
+</body>
+</html>

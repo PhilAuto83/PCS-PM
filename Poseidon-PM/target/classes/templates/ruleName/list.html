@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>PCS - Rule list</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-12 d-flex p-0">
+			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+			<a href="/ruleName/list">Rule</a>&nbsp;|&nbsp;
+			<a href="/user/list">User list</a>
+			<div class="ms-auto">Logged in user: <b th:text="${connectedUser}"></b>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<form th:action="@{/logout}" method="POST" class="d-flex justify-content-end p-0">
+			<input type="submit" value="Logout" />
+		</form>
+	</div>
+	<div class="row"><h2 class="p-0">Rule List</h2></div>
+	<div class="row">
+		<a href="/ruleName/add" class="btn btn-primary btn-sm col-2 col-md-1">Add New</a>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>json</th>
+					<th>template</th>
+					<th>sql</th>
+					<th>sqlPart</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ruleName : ${rules}">
+					<td style="width: 10%" th:text="${ruleName.id}"></td>
+					<td th:text="${ruleName.name}"></td>
+					<td th:text="${ruleName.description}"></td>
+					<td th:text="${ruleName.json}"></td>
+					<td th:text="${ruleName.template}"></td>
+					<td th:text="${ruleName.sqlStr}"></td>
+					<td th:text="${ruleName.sqlPart}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/ruleName/update/{id}(id=${ruleName.id})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/ruleName/delete/{id}(id=${ruleName.id})}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:if="${emptyRule != null}" th:text="${emptyRule}" class="text-danger fw-bold p-0"></div>
+	</div>
+	<div class="row">
+		<div class="d-flex justify-content-end p-0">
+			<img th:src="@{/images/pcs-banner.PNG}" alt="pcs logo" class="img-fluid col-4 col-md-2 ms-auto"/>
+		</div>
+	</div>
+</div>
+</body>
+</html>

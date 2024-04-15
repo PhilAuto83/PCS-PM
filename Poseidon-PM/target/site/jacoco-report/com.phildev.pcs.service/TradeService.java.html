@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.service</a> &gt; <span class="el_source">TradeService.java</span></div><h1>TradeService.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.service;
+
+import com.phildev.pcs.domain.BidList;
+import com.phildev.pcs.domain.Trade;
+import com.phildev.pcs.repositories.BidListRepository;
+import com.phildev.pcs.repositories.TradeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L16">public class TradeService {</span>
+
+<span class="fc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(TradeService.class);</span>
+
+    @Autowired
+    private TradeRepository tradeRepository;
+
+    @Autowired
+    private BidListRepository bidListRepository;
+
+    public List&lt;Trade&gt; findAll(){
+<span class="fc" id="L27">        List&lt;Trade&gt; allTrades = tradeRepository.findAll();</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if(allTrades.isEmpty()){</span>
+<span class="nc" id="L29">            logger.info(&quot;Curve point list  is empty&quot;);</span>
+        }
+<span class="fc" id="L31">        return allTrades;</span>
+    }
+
+    public List&lt;BidList&gt;findBidListByAccount(String account){
+<span class="fc" id="L35">        return bidListRepository.findBidListByAccount(account);</span>
+    }
+
+    public boolean checkBidExistWithAccountQuantityAndType(Trade trade){
+<span class="fc" id="L39">        List&lt;BidList&gt; bidListRelatedToTradeAccount = findBidListByAccount(trade.getAccount());</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if(bidListRelatedToTradeAccount.isEmpty()){</span>
+<span class="fc" id="L41">            return false;</span>
+        }
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for(BidList bidList : bidListRelatedToTradeAccount){</span>
+<span class="pc bpc" id="L44" title="1 of 4 branches missed.">            if(bidList.getType().equals(trade.getType())&amp;&amp; bidList.getBidQuantity().equals(trade.getBuyQuantity())){</span>
+<span class="fc" id="L45">                return true;</span>
+            }
+<span class="fc" id="L47">        }</span>
+<span class="fc" id="L48">        return false;</span>
+    }
+
+    public Trade save(Trade trade){
+<span class="fc" id="L52">        logger.info(&quot;Starting to save trade with account {} and type {}&quot;, trade.getAccount(), trade.getType());</span>
+<span class="fc" id="L53">        return tradeRepository.save(trade);</span>
+    }
+
+    public Optional&lt;Trade&gt; findById(Integer id){
+<span class="fc" id="L57">        return tradeRepository.findById(id);</span>
+    }
+
+    public List&lt;Trade&gt; findTradeByAccount(String account){
+<span class="nc" id="L61">        return tradeRepository.findTradeByAccount(account);</span>
+    }
+
+    public void delete(Integer id){
+<span class="fc" id="L65">        tradeRepository.deleteById(id);</span>
+<span class="fc" id="L66">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

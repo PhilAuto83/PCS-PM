@@ -1,0 +1,13 @@
+com\phildev\pcs\RatingTest.class
+com\phildev\pcs\CurvePointTest.class
+com\phildev\pcs\HomeControllerTest.class
+com\phildev\pcs\BidTest.class
+com\phildev\pcs\integration\RatingIT.class
+com\phildev\pcs\integration\UserIT.class
+com\phildev\pcs\integration\BidListIT.class
+com\phildev\pcs\integration\CurvePointIT.class
+com\phildev\pcs\integration\TradeIT.class
+com\phildev\pcs\integration\RuleNameIT.class
+com\phildev\pcs\integration\LoginIT.class
+com\phildev\pcs\TradeTest.class
+com\phildev\pcs\RuleTest.class

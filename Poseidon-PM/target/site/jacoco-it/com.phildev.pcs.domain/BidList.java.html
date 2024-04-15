@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.domain</a> &gt; <span class="el_source">BidList.java</span></div><h1>BidList.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+
+@Getter
+<span class="pc" id="L12">@Setter</span>
+@Entity
+@Table(name = &quot;bidlist&quot;)
+public class BidList {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<span class="fc" id="L19">    private Integer bidListId;</span>
+
+    @NotBlank(message =&quot;account cannot be null or empty&quot;)
+<span class="fc" id="L22">    private String account;</span>
+    @NotBlank(message =&quot;type cannot be null or empty&quot;)
+<span class="fc" id="L24">    private String type;</span>
+    @DecimalMin(value = &quot;1.00&quot;, message = &quot;minimum bid quantity must be 1.0, only 2 digits allowed after decimal point&quot;)
+    @DecimalMax(value = &quot;1000000.00&quot;, message=&quot;maximum bid quantity should be 1 000 000, only 2 digits allowed after decimal point&quot;)
+    @NotNull(message=&quot;bid quantity cannot be null&quot;)
+<span class="fc" id="L28">    private Double bidQuantity;</span>
+<span class="nc" id="L29">    private Double askQuantity;</span>
+<span class="nc" id="L30">    private Double bid;</span>
+<span class="nc" id="L31">    private Double ask;</span>
+<span class="nc" id="L32">    private String benchmark;</span>
+<span class="nc" id="L33">    private Timestamp bidListDate;</span>
+<span class="nc" id="L34">    private String commentary;</span>
+<span class="nc" id="L35">    private String security;</span>
+<span class="nc" id="L36">    private String status;</span>
+<span class="nc" id="L37">    private String trader;</span>
+<span class="nc" id="L38">    private String book;</span>
+<span class="nc" id="L39">    private String creationName;</span>
+<span class="nc" id="L40">    private Timestamp creationDate;</span>
+<span class="nc" id="L41">    private String revisionName;</span>
+<span class="nc" id="L42">    private Time revisionDate;</span>
+<span class="nc" id="L43">   private String  dealName;</span>
+<span class="nc" id="L44">    private String dealType;</span>
+<span class="nc" id="L45">    private String sourceListId;</span>
+<span class="nc" id="L46">    private String side;</span>
+
+
+<span class="nc" id="L49">    public BidList(String account, String type, Double bidQuantity) {</span>
+<span class="nc" id="L50">        this.account = account;</span>
+<span class="nc" id="L51">        this.type = type;</span>
+<span class="nc" id="L52">        this.bidQuantity = bidQuantity;</span>
+<span class="nc" id="L53">    }</span>
+
+<span class="fc" id="L55">    public BidList(){}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
