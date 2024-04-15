@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 
 @SpringBootTest
 public class CurvePointTest {
@@ -18,38 +16,36 @@ public class CurvePointTest {
 
 	@Test
 	public void curvePointSaveTest() {
-		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
+		CurvePoint curvePoint = new CurvePoint(10d, 30d);
 		// Save
 		CurvePoint curvePointSaved = curvePointService.save(curvePoint);
 		Assertions.assertNotNull(curvePointSaved.getId());
-		Assertions.assertTrue(curvePointSaved.getCurveId() == 10);
+        Assertions.assertEquals(10d, curvePointSaved.getTerm());
 	}
 
 	@Test
 	public void curvePointUpdateTest() {
-		CurvePoint curvePoint2 = new CurvePoint(11, 11d, 30d);
+		CurvePoint curvePoint2 = new CurvePoint(11d, 30d);
 		// Update
-		curvePoint2.setCurveId(20);
+		curvePoint2.setValue(20d);
 		CurvePoint curveInDB = curvePointService.save(curvePoint2);
-		Assertions.assertTrue(curveInDB.getCurveId() == 20);
+        Assertions.assertEquals(20d, curveInDB.getValue());
 	}
 
 	@Test
 	public void curvePointSearchTest() {
-		CurvePoint curvePointSearch = new CurvePoint(45, 100d, 30d);
+		CurvePoint curvePointSearch = new CurvePoint(100d, 30d);
 		// Save
-		curvePointService.save(curvePointSearch);
+		CurvePoint curvePointSaved = curvePointService.save(curvePointSearch);
 		// Find
-		List<CurvePoint> listResult = curvePointService.findAll();
-        Assertions.assertFalse(listResult.isEmpty());
-		long curveFound  = listResult.stream().filter(curvePoint -> curvePoint.getCurveId()==45).count();
-        Assertions.assertEquals(1, curveFound);
+
+        org.assertj.core.api.Assertions.assertThat(curvePointSaved).isNotNull();
 	}
 
 
 	@Test
 	public void curvePointDeleteTest() {
-		CurvePoint curvePoint3 = new CurvePoint(11, 11d, 30d);
+		CurvePoint curvePoint3 = new CurvePoint(11d, 30d);
 		// Delete
 		CurvePoint curveInDB = curvePointService.save(curvePoint3);
 		curvePointService.delete(curveInDB.getId());

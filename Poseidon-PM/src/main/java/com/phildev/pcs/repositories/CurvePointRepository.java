@@ -11,9 +11,5 @@ import java.util.Optional;
 @Repository
 public interface CurvePointRepository extends JpaRepository<CurvePoint, Integer> {
 
-    @Query( value="SELECT cv FROM CurvePoint cv WHERE cv.curveId=:curvedId",
-            nativeQuery = false
-    )
-    public Optional<CurvePoint> findByCurveId(@Param("curvedId") Integer id);
 
 }

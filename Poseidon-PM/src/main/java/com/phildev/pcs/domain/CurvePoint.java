@@ -1,9 +1,8 @@
 package com.phildev.pcs.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.*;
+
 
 import java.sql.Timestamp;
 
@@ -15,20 +14,23 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
-    @Min(value=1, message = "Minimum value must be 1")
-    private Integer curveId;
     private Timestamp asOfDate;
-    @DecimalMin(value = "1.00", inclusive = true)
+
+
+    @DecimalMin(value = "1.000", message="minimum value must 1.000")
+    @NotNull(message = "term cannot be null")
     private Double term;
-    @DecimalMin(value = "1.00", inclusive = true)
+
+
+    @DecimalMin(value = "1.000", message="minimum value must 1.000")
+    @NotNull(message = "value cannot be null")
     private Double value;
     private Timestamp creationDate;
 
     public CurvePoint() {
     }
 
-    public CurvePoint(Integer curveId, Double term, Double value) {
-        this.curveId = curveId;
+    public CurvePoint(Double term, Double value) {
         this.term = term;
         this.value = value;
     }
@@ -37,13 +39,10 @@ public class CurvePoint {
         return Id;
     }
 
-    public Integer getCurveId() {
-        return curveId;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
-    public void setCurveId(int curveId) {
-        this.curveId = curveId;
-    }
 
     public Timestamp getAsOfDate() {
         return asOfDate;
@@ -57,7 +56,7 @@ public class CurvePoint {
         return term;
     }
 
-    public void setTerm(double term) {
+    public void setTerm(Double term) {
         this.term = term;
     }
 
@@ -65,7 +64,7 @@ public class CurvePoint {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

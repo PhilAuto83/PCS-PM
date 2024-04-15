@@ -22,7 +22,7 @@ public class CurvePointService {
     public List<CurvePoint> findAll(){
         List<CurvePoint> allCurvePoints = curvePointRepository.findAll();
         if(allCurvePoints.isEmpty()){
-            logger.info("Curve point list  is empty");
+            logger.info("Curve point list is empty");
         }
         return allCurvePoints;
     }
@@ -35,9 +35,6 @@ public class CurvePointService {
         return curvePointRepository.findById(id);
     }
 
-    public Optional<CurvePoint> findByCurveId(Integer id){
-        return curvePointRepository.findByCurveId(id);
-    }
 
     public void delete(Integer id){
         curvePointRepository.deleteById(id);
