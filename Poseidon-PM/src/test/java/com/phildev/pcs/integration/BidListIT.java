@@ -157,7 +157,6 @@ public class BidListIT {
         }else{
             Assertions.assertThat(bidListUpdated.get().getBidQuantity()).isEqualTo(4000.20);
         }
-
     }
 
     @Test
@@ -171,6 +170,4 @@ public class BidListIT {
             Assertions.fail("Error : Bid was not deleted");
         }
     }
-
-
 }

@@ -2,93 +2,43 @@
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+<span class="fc" id="L10">@Setter</span>
 @Entity
 @Table(name = &quot;rulename&quot;)
 public class RuleName {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+<span class="fc" id="L17">    private Integer Id;</span>
     @NotBlank(message = &quot;name cannot be null or empty&quot;)
-    private String name;
+<span class="fc" id="L19">    private String name;</span>
     @NotBlank(message = &quot;description cannot be null or empty&quot;)
-    private String description;
+<span class="fc" id="L21">    private String description;</span>
     @NotBlank(message = &quot;json cannot be null or empty&quot;)
-    private String json;
+<span class="fc" id="L23">    private String json;</span>
     @NotBlank(message = &quot;template cannot be null or empty&quot;)
-    private String template;
+<span class="fc" id="L25">    private String template;</span>
     @NotBlank(message = &quot;sqlStr cannot be null or empty&quot;)
-    private String sqlStr;
+<span class="fc" id="L27">    private String sqlStr;</span>
     @NotBlank(message = &quot;sqlPart cannot be null or empty&quot;)
-    private String sqlPart;
+<span class="fc" id="L29">    private String sqlPart;</span>
 
-<span class="fc" id="L26">    public RuleName() {</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L31">    public RuleName() {</span>
+<span class="fc" id="L32">    }</span>
 
-<span class="fc" id="L29">    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {</span>
-<span class="fc" id="L30">        this.name = name;</span>
-<span class="fc" id="L31">        this.description = description;</span>
-<span class="fc" id="L32">        this.json = json;</span>
-<span class="fc" id="L33">        this.template = template;</span>
-<span class="fc" id="L34">        this.sqlStr = sqlStr;</span>
-<span class="fc" id="L35">        this.sqlPart = sqlPart;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L34">    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {</span>
+<span class="fc" id="L35">        this.name = name;</span>
+<span class="fc" id="L36">        this.description = description;</span>
+<span class="fc" id="L37">        this.json = json;</span>
+<span class="fc" id="L38">        this.template = template;</span>
+<span class="fc" id="L39">        this.sqlStr = sqlStr;</span>
+<span class="fc" id="L40">        this.sqlPart = sqlPart;</span>
+<span class="fc" id="L41">    }</span>
 
-    public Integer getId() {
-<span class="fc" id="L39">        return Id;</span>
-    }
-
-    public void setId(Integer Id) {
-<span class="fc" id="L43">         this.Id = Id;</span>
-<span class="fc" id="L44">    }</span>
-
-    public String getName() {
-<span class="fc" id="L47">        return name;</span>
-    }
-
-    public void setName(String name) {
-<span class="fc" id="L51">        this.name = name;</span>
-<span class="fc" id="L52">    }</span>
-
-    public String getDescription() {
-<span class="fc" id="L55">        return description;</span>
-    }
-
-    public void setDescription(String description) {
-<span class="fc" id="L59">        this.description = description;</span>
-<span class="fc" id="L60">    }</span>
-
-    public String getJson() {
-<span class="fc" id="L63">        return json;</span>
-    }
-
-    public void setJson(String json) {
-<span class="fc" id="L67">        this.json = json;</span>
-<span class="fc" id="L68">    }</span>
-
-    public String getTemplate() {
-<span class="fc" id="L71">        return template;</span>
-    }
-
-    public void setTemplate(String template) {
-<span class="fc" id="L75">        this.template = template;</span>
-<span class="fc" id="L76">    }</span>
-
-    public String getSqlStr() {
-<span class="fc" id="L79">        return sqlStr;</span>
-    }
-
-    public void setSqlStr(String sqlStr) {
-<span class="fc" id="L83">        this.sqlStr = sqlStr;</span>
-<span class="fc" id="L84">    }</span>
-
-    public String getSqlPart() {
-<span class="fc" id="L87">        return sqlPart;</span>
-    }
-
-    public void setSqlPart(String sqlPart) {
-<span class="fc" id="L91">        this.sqlPart = sqlPart;</span>
-<span class="fc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

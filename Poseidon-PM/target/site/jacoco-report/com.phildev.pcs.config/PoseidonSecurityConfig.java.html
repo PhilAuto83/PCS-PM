@@ -32,7 +32,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 <span class="fc" id="L32">        return http</span>
 <span class="fc" id="L33">                .authorizeHttpRequests(auth -&gt; {</span>
 <span class="fc" id="L34">                    auth.requestMatchers(&quot;/login&quot;,&quot;/error&quot;, &quot;/&quot;).permitAll();</span>
-<span class="fc" id="L35">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/rating/**&quot;,&quot;/ruleName/**&quot;, &quot;/trade/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
+<span class="fc" id="L35">                    auth.requestMatchers(&quot;/secure/article-details&quot;, &quot;/user/**&quot;,&quot;/rating/**&quot;,&quot;/ruleName/**&quot;, &quot;/trade/**&quot;,&quot;/admin/home&quot;, &quot;/bidList/**&quot;, &quot;/curvePoint/**&quot;).hasRole(&quot;ADMIN&quot;);</span>
 <span class="fc" id="L36">                    auth.anyRequest().authenticated();</span>
 <span class="fc" id="L37">                        })</span>
 <span class="fc" id="L38">                .formLogin(form -&gt; form.loginPage(&quot;/login&quot;)</span>

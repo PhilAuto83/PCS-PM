@@ -20,27 +20,24 @@ import java.util.Optional;
     private CurvePointRepository curvePointRepository;
 
     public List&lt;CurvePoint&gt; findAll(){
-<span class="nc" id="L23">        List&lt;CurvePoint&gt; allCurvePoints = curvePointRepository.findAll();</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(allCurvePoints.isEmpty()){</span>
-<span class="nc" id="L25">            logger.info(&quot;Curve point list  is empty&quot;);</span>
+<span class="fc" id="L23">        List&lt;CurvePoint&gt; allCurvePoints = curvePointRepository.findAll();</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(allCurvePoints.isEmpty()){</span>
+<span class="nc" id="L25">            logger.info(&quot;Curve point list is empty&quot;);</span>
         }
-<span class="nc" id="L27">        return allCurvePoints;</span>
+<span class="fc" id="L27">        return allCurvePoints;</span>
     }
 
     public CurvePoint save(CurvePoint curvePoint){
-<span class="nc" id="L31">        return curvePointRepository.save(curvePoint);</span>
+<span class="fc" id="L31">        return curvePointRepository.save(curvePoint);</span>
     }
 
     public Optional&lt;CurvePoint&gt; findById(Integer id){
-<span class="nc" id="L35">        return curvePointRepository.findById(id);</span>
+<span class="fc" id="L35">        return curvePointRepository.findById(id);</span>
     }
 
-    public Optional&lt;CurvePoint&gt; findByCurveId(Integer id){
-<span class="nc" id="L39">        return curvePointRepository.findByCurveId(id);</span>
-    }
 
     public void delete(Integer id){
-<span class="nc" id="L43">        curvePointRepository.deleteById(id);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L40">        curvePointRepository.deleteById(id);</span>
+<span class="fc" id="L41">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
