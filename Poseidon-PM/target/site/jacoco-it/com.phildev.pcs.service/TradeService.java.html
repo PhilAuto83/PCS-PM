@@ -41,7 +41,7 @@ import java.util.Optional;
 <span class="fc" id="L41">            return false;</span>
         }
 <span class="fc bfc" id="L43" title="All 2 branches covered.">        for(BidList bidList : bidListRelatedToTradeAccount){</span>
-<span class="fc bfc" id="L44" title="All 4 branches covered.">            if(bidList.getType().equals(trade.getType())&amp;&amp; bidList.getBidQuantity().equals(trade.getBuyQuantity())){</span>
+<span class="pc bpc" id="L44" title="1 of 4 branches missed.">            if(bidList.getType().equals(trade.getType())&amp;&amp; bidList.getBidQuantity().equals(trade.getBuyQuantity())){</span>
 <span class="fc" id="L45">                return true;</span>
             }
 <span class="fc" id="L47">        }</span>

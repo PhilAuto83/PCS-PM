@@ -19,9 +19,10 @@ public class Trade {
     private String account;
     @NotBlank(message = "Type is mandatory")
     private String type;
-    @Min(value = 1, message = "Minimum quantity to buy is 1.")
-    @NotNull
-    private Integer buyQuantity;
+    @DecimalMin(value = "1.00", message = "minimum bid quantity must be 1.0, only 2 digits allowed after decimal point")
+    @DecimalMax(value = "1000000.00", message="maximum bid quantity should be 1 000 000, only 2 digits allowed after decimal point")
+    @NotNull(message = "buy quantity cannot be null")
+    private Double buyQuantity;
 
     private Double sellQuantity;
 
@@ -56,7 +57,7 @@ public class Trade {
     private String sourceListId;
     private String side;
 
-    public Trade(String account, String type, Integer buyQuantity) {
+    public Trade(String account, String type, Double buyQuantity) {
         this.account = account;
         this.type = type;
         this.buyQuantity = buyQuantity;
@@ -87,11 +88,11 @@ public class Trade {
         this.type = type;
     }
 
-    public Integer getBuyQuantity() {
+    public Double getBuyQuantity() {
         return buyQuantity;
     }
 
-    public void setBuyQuantity(Integer buyQuantity) {
+    public void setBuyQuantity(Double buyQuantity) {
         this.buyQuantity = buyQuantity;
     }
 

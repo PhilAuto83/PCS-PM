@@ -19,24 +19,24 @@ import java.util.Optional;
     private BidListRepository bidListRepository;
 
     public List&lt;BidList&gt; findAll(){
-<span class="nc" id="L22">        List&lt;BidList&gt; allBids = bidListRepository.findAll();</span>
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if(allBids.isEmpty()){</span>
+<span class="fc" id="L22">        List&lt;BidList&gt; allBids = bidListRepository.findAll();</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if(allBids.isEmpty()){</span>
 <span class="nc" id="L24">            logger.info(&quot;Bid list is empty&quot;);</span>
         }
-<span class="nc" id="L26">        return allBids;</span>
+<span class="fc" id="L26">        return allBids;</span>
     }
 
     public BidList save(BidList bidList){
-<span class="nc" id="L30">        return bidListRepository.save(bidList);</span>
+<span class="fc" id="L30">        return bidListRepository.save(bidList);</span>
     }
 
     public Optional&lt;BidList&gt; findById(Integer id){
-<span class="nc" id="L34">        return bidListRepository.findById(id);</span>
+<span class="fc" id="L34">        return bidListRepository.findById(id);</span>
     }
 
     public void delete(Integer id){
-<span class="nc" id="L38">        bidListRepository.deleteById(id);</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L38">        bidListRepository.deleteById(id);</span>
+<span class="fc" id="L39">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -50,58 +50,59 @@ import java.util.Optional;
     }
 
     @PostMapping(&quot;/ruleName/validate&quot;)
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        if(result.hasErrors()){</span>
-<span class="fc" id="L55">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
-<span class="fc" id="L56">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
-<span class="fc" id="L57">            logger.error(&quot;The following errors occurred when trying to save a rule name {}&quot;, errors.toString());</span>
-<span class="fc" id="L58">            return &quot;ruleName/add&quot;;</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        } else if(ruleNameService.checkRuleNameExists(ruleName)) {</span>
-<span class="fc" id="L60">            model.addAttribute(&quot;ruleExists&quot;, &quot;Rule already exists with this name&quot;);</span>
-<span class="fc" id="L61">            logger.error(&quot;Rule already exists with name {}&quot;, ruleName.getName());</span>
-<span class="fc" id="L62">            return &quot;ruleName/add&quot;;</span>
+    public String validate(@Valid RuleName ruleName, BindingResult result, Model model, Principal connectedUser) {
+<span class="fc" id="L54">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if(result.hasErrors()){</span>
+<span class="fc" id="L56">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
+<span class="fc" id="L57">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
+<span class="fc" id="L58">            logger.error(&quot;The following errors occurred when trying to save a rule name {}&quot;, errors.toString());</span>
+<span class="fc" id="L59">            return &quot;ruleName/add&quot;;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        } else if(ruleNameService.checkRuleNameExists(ruleName)) {</span>
+<span class="fc" id="L61">            model.addAttribute(&quot;ruleExists&quot;, &quot;Rule already exists with this name&quot;);</span>
+<span class="fc" id="L62">            logger.error(&quot;Rule already exists with name {}&quot;, ruleName.getName());</span>
+<span class="fc" id="L63">            return &quot;ruleName/add&quot;;</span>
         }
-<span class="fc" id="L64">        RuleName ruleSaved = ruleNameService.save(ruleName);</span>
-<span class="fc" id="L65">        logger.info(&quot;Rule name {} was successfully saved&quot;, ruleSaved.getName());</span>
-<span class="fc" id="L66">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L65">        RuleName ruleSaved = ruleNameService.save(ruleName);</span>
+<span class="fc" id="L66">        logger.info(&quot;Rule name {} was successfully saved&quot;, ruleSaved.getName());</span>
+<span class="fc" id="L67">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, Principal connectedUser) {
-<span class="fc" id="L71">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="pc" id="L72">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rule name Id:&quot; + id));</span>
-<span class="fc" id="L73">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
-<span class="fc" id="L74">        return &quot;ruleName/update&quot;;</span>
+<span class="fc" id="L72">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="pc" id="L73">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rule name Id:&quot; + id));</span>
+<span class="fc" id="L74">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
+<span class="fc" id="L75">        return &quot;ruleName/update&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/update/{id}&quot;)
     public String updateRuleName(@PathVariable(&quot;id&quot;) Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
-<span class="fc" id="L80">        RuleName currentRuleName = ruleNameService.findById(id).orElse(null);</span>
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if(result.hasErrors()){</span>
-<span class="nc" id="L82">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
-<span class="nc" id="L83">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
-<span class="nc" id="L84">            logger.error(&quot;The following errors occurred when trying to save a rule name {}&quot;, errors.toString());</span>
-<span class="nc" id="L85">            return &quot;ruleName/add&quot;;</span>
-<span class="fc bfc" id="L86" title="All 2 branches covered.">        }else if(!ruleNameService.checkRuleNameIsUpdatedWithSameNameOrNonExistingOne(currentRuleName,ruleName)) {</span>
-<span class="fc" id="L87">            model.addAttribute(&quot;ruleExists&quot;, &quot;Rule already exists with this name&quot;);</span>
-<span class="fc" id="L88">            logger.error(&quot;Rule already exists with name {}&quot;, ruleName.getName());</span>
-<span class="fc" id="L89">            return &quot;ruleName/add&quot;;</span>
+<span class="fc" id="L81">        RuleName currentRuleName = ruleNameService.findById(id).orElse(null);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if(result.hasErrors()){</span>
+<span class="nc" id="L83">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
+<span class="nc" id="L84">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
+<span class="nc" id="L85">            logger.error(&quot;The following errors occurred when trying to save a rule name {}&quot;, errors.toString());</span>
+<span class="nc" id="L86">            return &quot;ruleName/add&quot;;</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        }else if(!ruleNameService.checkRuleNameIsUpdatedWithSameNameOrNonExistingOne(currentRuleName,ruleName)) {</span>
+<span class="fc" id="L88">            model.addAttribute(&quot;ruleExists&quot;, &quot;Rule already exists with this name&quot;);</span>
+<span class="fc" id="L89">            logger.error(&quot;Rule already exists with name {}&quot;, ruleName.getName());</span>
+<span class="fc" id="L90">            return &quot;ruleName/add&quot;;</span>
         }else{
-<span class="fc" id="L91">            ruleName.setId(id);</span>
-<span class="fc" id="L92">            RuleName ruleUpdated = ruleNameService.save(ruleName);</span>
-<span class="fc" id="L93">            logger.info(&quot;Rule with id {} and name {} updated successfully&quot;, ruleUpdated.getId(), ruleUpdated.getName());</span>
-<span class="fc" id="L94">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L92">            ruleName.setId(id);</span>
+<span class="fc" id="L93">            RuleName ruleUpdated = ruleNameService.save(ruleName);</span>
+<span class="fc" id="L94">            logger.info(&quot;Rule with id {} and name {} updated successfully&quot;, ruleUpdated.getId(), ruleUpdated.getName());</span>
+<span class="fc" id="L95">            return &quot;redirect:/ruleName/list&quot;;</span>
         }
 
     }
 
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="pc" id="L101">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rule name Id:&quot; + id));</span>
-<span class="fc" id="L102">        ruleNameService.delete(ruleName.getId());</span>
-<span class="fc" id="L103">        model.addAttribute(&quot;users&quot;, ruleNameService.findAll());</span>
-<span class="fc" id="L104">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="pc" id="L102">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rule name Id:&quot; + id));</span>
+<span class="fc" id="L103">        ruleNameService.delete(ruleName.getId());</span>
+<span class="fc" id="L104">        model.addAttribute(&quot;users&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L105">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

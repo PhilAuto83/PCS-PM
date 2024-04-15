@@ -18,9 +18,10 @@ public class BidList {
     private String account;
     @NotBlank(message ="type cannot be null or empty")
     private String type;
-    @Min(value=1, message ="bid quantity must be at least 1")
+    @DecimalMin(value = "1.00", message = "minimum bid quantity must be 1.0, only 2 digits allowed after decimal point")
+    @DecimalMax(value = "1000000.00", message="maximum bid quantity should be 1 000 000, only 2 digits allowed after decimal point")
     @NotNull(message="bid quantity cannot be null")
-    private Integer bidQuantity;
+    private Double bidQuantity;
     private Double askQuantity;
     private Double bid;
     private Double ask;
@@ -41,13 +42,15 @@ public class BidList {
     private String side;
 
 
-    public BidList(String account, String type, Integer bidQuantity) {
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
     }
 
     public BidList(){}
+
+
 
     public Integer getBidListId() {
         return bidListId;
@@ -73,11 +76,11 @@ public class BidList {
         this.type = type;
     }
 
-    public Integer getBidQuantity() {
+    public Double getBidQuantity() {
         return bidQuantity;
     }
 
-    public void setBidQuantity(Integer bidQuantity) {
+    public void setBidQuantity(Double bidQuantity) {
         this.bidQuantity = bidQuantity;
     }
 

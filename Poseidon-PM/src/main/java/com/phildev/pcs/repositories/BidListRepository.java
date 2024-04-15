@@ -12,5 +12,7 @@ public interface BidListRepository extends JpaRepository<BidList, Integer> {
 
     List<BidList> findBidListByAccount(String account);
 
+    List<BidList> findBidListByAccountAndType(String account , String type);
+
 
 }

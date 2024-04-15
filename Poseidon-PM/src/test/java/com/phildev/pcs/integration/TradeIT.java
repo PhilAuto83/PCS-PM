@@ -84,12 +84,12 @@ public class TradeIT {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("account","888888")
                         .param("type", "type test5")
-                        .param("buyQuantity", "100"))
+                        .param("buyQuantity", "100.00"))
                 .andExpect(status().is(302))
                 .andExpect(view().name("redirect:/trade/list"));
        List<Trade>trades = tradeRepository.findTradeByAccount("888888");
        for(Trade trade: trades){
-           if(!trade.getBuyQuantity().equals(100)&&trade.getType().equals("type test5")){
+           if(!trade.getBuyQuantity().equals(100d)&&trade.getType().equals("type test5")){
                Assertions.fail("No trade saved");
            }
        }
@@ -106,7 +106,22 @@ public class TradeIT {
                 .andExpect(status().is(200))
                 .andExpect(content().string(containsString("Account is mandatory")))
                 .andExpect(content().string(containsString("Type is mandatory")))
-                .andExpect(content().string(containsString("Minimum quantity to buy is 1.")))
+                .andExpect(content().string(containsString("minimum bid quantity must be 1.0")))
+                .andExpect(view().name("trade/add"));
+    }
+
+    @Test
+    @WithMockUser(roles={"ADMIN"})
+    public void testExceedingMaxQuantityWhenCreatingTradeWithAdminRole() throws Exception {
+        mockMvc.perform(post("/trade/validate").with((csrf()))
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("account","")
+                        .param("type", "")
+                        .param("buyQuantity", "4000000"))
+                .andExpect(status().is(200))
+                .andExpect(content().string(containsString("Account is mandatory")))
+                .andExpect(content().string(containsString("Type is mandatory")))
+                .andExpect(content().string(containsString("maximum bid quantity should be 1 000 000")))
                 .andExpect(view().name("trade/add"));
     }
 
@@ -117,7 +132,7 @@ public class TradeIT {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("account","888888")
                         .param("type", "type test5")
-                        .param("buyQuantity", "2000"))
+                        .param("buyQuantity", "2000.15"))
                 .andExpect(status().is(200))
                 .andExpect(content().string(containsString("No bid found for this account, type and quantity")))
                 .andExpect(view().name("trade/add"));
@@ -130,7 +145,7 @@ public class TradeIT {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("account","8899888")
                         .param("type", "type test5")
-                        .param("buyQuantity", "2000"))
+                        .param("buyQuantity", "2000.20"))
                 .andExpect(status().is(200))
                 .andExpect(content().string(containsString("No bid found for this account, type and quantity")))
                 .andExpect(view().name("trade/add"));

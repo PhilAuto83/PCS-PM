@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -46,13 +48,13 @@ public class BidListController {
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model, Principal connectedUser) {
         if(result.hasErrors()) {
-            StringBuilder errors = new StringBuilder(" : \n");
+            StringBuilder errors = new StringBuilder();
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
             logger.error("The following errors occurred when trying to save a bid {}", errors);
             return "bidList/add";
         }
         BidList bidSaved = bidListService.save(bid);
-        logger.info("Bid  fro account {} was saved successfully for user {}", bidSaved.getAccount(), connectedUser.getName());
+        logger.info("Bid  for account {} was saved successfully for user {}", bidSaved.getAccount(), connectedUser.getName());
         model.addAttribute("connectedUser", connectedUser.getName());
         return "redirect:/bidList/list";
     }

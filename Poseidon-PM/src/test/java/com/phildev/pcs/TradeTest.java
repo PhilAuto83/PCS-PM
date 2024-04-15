@@ -24,7 +24,7 @@ public class TradeTest {
 
 	@Test
 	public void tradeSaveTest() {
-		Trade trade = new Trade("Trade Account", "Type",100);
+		Trade trade = new Trade("Trade Account", "Type",100d);
 		// Save
 		Trade tradeInDB = tradeService.save(trade);
 		Assertions.assertThat(tradeInDB.getTradeId()).isNotNull();
@@ -33,7 +33,7 @@ public class TradeTest {
 
 	@Test
 	public void tradeUpdateTest() {
-		Trade trade2 = new Trade("Trade Account2", "Type2",10);
+		Trade trade2 = new Trade("Trade Account2", "Type2",10d);
 		// Update
 		trade2.setAccount("Trade Account Update");
 		trade2 = tradeService.save(trade2);
@@ -42,7 +42,7 @@ public class TradeTest {
 
 	@Test
 	public void tradeSearchTest() {
-		Trade tradeSearch = new Trade("Trade Account S", "Type S",20);
+		Trade tradeSearch = new Trade("Trade Account S", "Type S",20d);
 		tradeService.save(tradeSearch);
 		// Find
 		List<Trade> listResult = tradeService.findAll();
@@ -51,7 +51,7 @@ public class TradeTest {
 
 	@Test
 	public void tradeDeleteTest() {
-		Trade trade3 = new Trade("Trade Account3", "Type3",100);
+		Trade trade3 = new Trade("Trade Account3", "Type3",100d);
 		Trade tradeInDB = tradeService.save(trade3);
 		// Delete
 		tradeService.delete(tradeInDB.getTradeId());

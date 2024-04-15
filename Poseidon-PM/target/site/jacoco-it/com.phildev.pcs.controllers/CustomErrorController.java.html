@@ -3,6 +3,8 @@
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -11,32 +13,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-<span class="fc" id="L14">public class CustomErrorController implements ErrorController {</span>
+<span class="fc" id="L16">public class CustomErrorController implements ErrorController {</span>
+
+<span class="fc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(CustomErrorController.class);</span>
 
 
     @GetMapping(&quot;/error&quot;)
     public ModelAndView handleErrors(HttpServletRequest request){
-<span class="nc" id="L19">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L20">        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);</span>
-<span class="nc bnc" id="L21" title="All 4 branches missed.">        if(status != null &amp;&amp; Integer.parseInt(status.toString())== HttpStatus.FORBIDDEN.value()){</span>
+<span class="nc" id="L23">        ModelAndView mav = new ModelAndView();</span>
+<span class="nc" id="L24">        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);</span>
+<span class="nc bnc" id="L25" title="All 4 branches missed.">        if(status != null &amp;&amp; Integer.parseInt(status.toString())== HttpStatus.FORBIDDEN.value()){</span>
 
-<span class="nc" id="L23">            mav.addObject(&quot;pageTitle&quot;, &quot;Access denied&quot;);</span>
-<span class="nc" id="L24">            String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
-<span class="nc" id="L25">            mav.addObject(&quot;user&quot;, request.getRemoteUser());</span>
-<span class="nc" id="L26">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L27">            mav.setViewName(&quot;403&quot;);</span>
-<span class="nc bnc" id="L28" title="All 4 branches missed.">        }else if(status != null &amp;&amp; Integer.parseInt(status.toString())== HttpStatus.NOT_FOUND.value()){</span>
-<span class="nc" id="L29">            String errorMessage= &quot;The requested page does not exist&quot;;</span>
-<span class="nc" id="L30">            mav.addObject(&quot;pageTitle&quot;, &quot;Resource not found&quot;);</span>
-<span class="nc" id="L31">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L32">            mav.setViewName(&quot;404&quot;);</span>
-<span class="nc" id="L33">        }else{</span>
-<span class="nc" id="L34">            String errorMessage= &quot;You made a bad request&quot;;</span>
-<span class="nc" id="L35">            mav.addObject(&quot;pageTitle&quot;, &quot;Unknown request&quot;);</span>
+<span class="nc" id="L27">            mav.addObject(&quot;pageTitle&quot;, &quot;Access denied&quot;);</span>
+<span class="nc" id="L28">            String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
+<span class="nc" id="L29">            mav.addObject(&quot;user&quot;, request.getRemoteUser());</span>
+<span class="nc" id="L30">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
+<span class="nc" id="L31">            logger.error(&quot;User is not authorized to view this page&quot;);</span>
+<span class="nc" id="L32">            mav.setViewName(&quot;403&quot;);</span>
+<span class="nc bnc" id="L33" title="All 4 branches missed.">        }else if(status != null &amp;&amp; Integer.parseInt(status.toString())== HttpStatus.NOT_FOUND.value()){</span>
+<span class="nc" id="L34">            String errorMessage= &quot;The requested page does not exist&quot;;</span>
+<span class="nc" id="L35">            mav.addObject(&quot;pageTitle&quot;, &quot;Resource not found&quot;);</span>
 <span class="nc" id="L36">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L37">            mav.setViewName(&quot;400&quot;);</span>
+<span class="nc" id="L37">            logger.error(&quot;Page requested does not exist in PCS app&quot;);</span>
+<span class="nc" id="L38">            mav.setViewName(&quot;404&quot;);</span>
+<span class="nc" id="L39">        }else{</span>
+<span class="nc" id="L40">            String errorMessage= &quot;You made a bad request&quot;;</span>
+<span class="nc" id="L41">            mav.addObject(&quot;pageTitle&quot;, &quot;Unknown request&quot;);</span>
+<span class="nc" id="L42">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
+<span class="nc" id="L43">            logger.error(&quot;Invalid request sent&quot;);</span>
+<span class="nc" id="L44">            mav.setViewName(&quot;400&quot;);</span>
         }
-<span class="nc" id="L39">        return mav;</span>
+<span class="nc" id="L46">        return mav;</span>
 
     }
 }
