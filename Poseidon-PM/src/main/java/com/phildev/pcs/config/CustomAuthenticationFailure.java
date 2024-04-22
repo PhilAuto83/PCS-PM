@@ -17,6 +17,14 @@ import java.io.IOException;
 public class CustomAuthenticationFailure implements AuthenticationFailureHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationFailure.class);
+
+    /**
+     * This method handles the redirection of users after authentication fails for SessionAuthenticationException or for Invalid input
+     * @param request which an {@link HttpServletRequest}
+     * @param response which is an {@link HttpServletResponse}
+     * @param exception which is an {@link AuthenticationException}
+     * @throws IOException
+     */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         if(exception instanceof SessionAuthenticationException){

@@ -17,7 +17,11 @@ public class CustomErrorController implements ErrorController {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomErrorController.class);
 
-
+    /**
+     * This method is handling different kinds of errors and redirecting users to specific pages depending on the https status retrieved from the request
+     * @param request which is an {@link HttpServletRequest}
+     * @return  a view which can be 400.html, 404.html or 403.html
+     */
     @GetMapping("/error")
     public ModelAndView handleErrors(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
