@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.service</a> &gt; <span class="el_source">TradeService.java</span></div><h1>TradeService.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.service;
 
 import com.phildev.pcs.domain.BidList;
+import com.phildev.pcs.domain.RuleName;
 import com.phildev.pcs.domain.Trade;
 import com.phildev.pcs.repositories.BidListRepository;
+import com.phildev.pcs.repositories.RuleNameRepository;
 import com.phildev.pcs.repositories.TradeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-<span class="fc" id="L16">public class TradeService {</span>
 
-<span class="fc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(TradeService.class);</span>
+/**
+ * This class is the service used to communicate between {@link com.phildev.pcs.controllers.TradeController} and {@link TradeRepository}
+ * All the methods in this service helps saving, deleting, retrieving Trade in database
+ */
+@Service
+<span class="fc" id="L23">public class TradeService {</span>
+
+<span class="fc" id="L25">    private static final Logger logger = LoggerFactory.getLogger(TradeService.class);</span>
 
     @Autowired
     private TradeRepository tradeRepository;
@@ -23,46 +30,84 @@ import java.util.Optional;
     @Autowired
     private BidListRepository bidListRepository;
 
+
+    /**
+     * This method calls {@link TradeRepository#findAll()} method to find all trades in database
+     * @return a list of Trade
+     */
     public List&lt;Trade&gt; findAll(){
-<span class="fc" id="L27">        List&lt;Trade&gt; allTrades = tradeRepository.findAll();</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if(allTrades.isEmpty()){</span>
-<span class="nc" id="L29">            logger.info(&quot;Curve point list  is empty&quot;);</span>
+<span class="fc" id="L39">        List&lt;Trade&gt; allTrades = tradeRepository.findAll();</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if(allTrades.isEmpty()){</span>
+<span class="nc" id="L41">            logger.info(&quot;Curve point list  is empty&quot;);</span>
         }
-<span class="fc" id="L31">        return allTrades;</span>
+<span class="fc" id="L43">        return allTrades;</span>
     }
 
+    /**
+     * This method is called to retrieve all bids found by account
+     * It is used to see if a trade matches a bid
+     * @param account
+     * @return a list of bid
+     */
     public List&lt;BidList&gt;findBidListByAccount(String account){
-<span class="fc" id="L35">        return bidListRepository.findBidListByAccount(account);</span>
+<span class="fc" id="L53">        return bidListRepository.findBidListByAccount(account);</span>
     }
 
+    /**
+     * This method is used to check if a bid exists with the same account, type and quantity
+     * @param trade which is an object of type {@link Trade}
+     * @return true or false
+     */
     public boolean checkBidExistWithAccountQuantityAndType(Trade trade){
-<span class="fc" id="L39">        List&lt;BidList&gt; bidListRelatedToTradeAccount = findBidListByAccount(trade.getAccount());</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if(bidListRelatedToTradeAccount.isEmpty()){</span>
-<span class="fc" id="L41">            return false;</span>
+<span class="fc" id="L62">        List&lt;BidList&gt; bidListRelatedToTradeAccount = findBidListByAccount(trade.getAccount());</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if(bidListRelatedToTradeAccount.isEmpty()){</span>
+<span class="fc" id="L64">            return false;</span>
         }
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        for(BidList bidList : bidListRelatedToTradeAccount){</span>
-<span class="pc bpc" id="L44" title="1 of 4 branches missed.">            if(bidList.getType().equals(trade.getType())&amp;&amp; bidList.getBidQuantity().equals(trade.getBuyQuantity())){</span>
-<span class="fc" id="L45">                return true;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        for(BidList bidList : bidListRelatedToTradeAccount){</span>
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">            if(bidList.getType().equals(trade.getType())&amp;&amp; bidList.getBidQuantity().equals(trade.getBuyQuantity())){</span>
+<span class="fc" id="L68">                return true;</span>
             }
-<span class="fc" id="L47">        }</span>
-<span class="fc" id="L48">        return false;</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">        return false;</span>
     }
 
+    /**
+     * This method saves a {@link Trade} in database
+     * @param trade with its properties {@link Trade#account}, {@link Trade#type},
+     * and {@link Trade#buyQuantity} that will be saved in database
+     * @return a trade which was saved successfully in database
+     */
     public Trade save(Trade trade){
-<span class="fc" id="L52">        logger.info(&quot;Starting to save trade with account {} and type {}&quot;, trade.getAccount(), trade.getType());</span>
-<span class="fc" id="L53">        return tradeRepository.save(trade);</span>
+<span class="fc" id="L81">        logger.info(&quot;Starting to save trade with account {} and type {}&quot;, trade.getAccount(), trade.getType());</span>
+<span class="fc" id="L82">        return tradeRepository.save(trade);</span>
     }
 
+    /**
+     * This method takes the id of a trade we want to find and the method {@link TradeRepository#findById(Object)} will retrieve the trade or not owing to Optional type
+     * @param id which is the unique trade identifier
+     * @return an optional of trade so it can be empty or return something
+     */
     public Optional&lt;Trade&gt; findById(Integer id){
-<span class="fc" id="L57">        return tradeRepository.findById(id);</span>
+<span class="fc" id="L91">        return tradeRepository.findById(id);</span>
     }
 
+
+    /**
+     * This method is used to retrieve a list of trade by passing an account parameter
+     * @param account
+     * @return a list of trade
+     */
     public List&lt;Trade&gt; findTradeByAccount(String account){
-<span class="nc" id="L61">        return tradeRepository.findTradeByAccount(account);</span>
+<span class="nc" id="L101">        return tradeRepository.findTradeByAccount(account);</span>
     }
 
+    /**
+     * This method takes the id matching a trade we want to delete and the method {@link Trade#deleteById(Object)} will delete the trade
+     * @param id which is the unique trade identifier
+     * @return void
+     */
     public void delete(Integer id){
-<span class="fc" id="L65">        tradeRepository.deleteById(id);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L110">        tradeRepository.deleteById(id);</span>
+<span class="fc" id="L111">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

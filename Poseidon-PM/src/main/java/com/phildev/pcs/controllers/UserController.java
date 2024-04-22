@@ -123,7 +123,7 @@ public class UserController {
     }
 
     /**
-     * This method is deleting a user by its id by using the service {@link UserService#delete(Integer)}
+     * This method is deleting a user by its id by using the service {@link UserService#delete(User)}
      * @param id which is the path variable to retrieve user by id
      * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
      * @return the user/list view after calling /user/list endpoint

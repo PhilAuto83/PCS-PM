@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.phildev.pcs.integration.CurvePointIT" time="0.359" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="com.phildev.pcs.integration.CurvePointIT" time="0.333" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.1.12-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\B294LQ\AppData\Local\Temp\surefire17278187068875045689\surefirebooter-20240415173645002_74.jar C:\Users\B294LQ\AppData\Local\Temp\surefire17278187068875045689 2024-04-15T17-36-28_240-jvmRun1 surefire-20240415173645002_72tmp surefire_1-20240415173645002_73tmp"/>
+    <property name="sun.java.command" value="C:\Users\B294LQ\AppData\Local\Temp\surefire17457850114396142700\surefirebooter-20240422223332470_74.jar C:\Users\B294LQ\AppData\Local\Temp\surefire17457850114396142700 2024-04-22T22-33-19_529-jvmRun1 surefire-20240422223332470_72tmp surefire_1-20240422223332470_73tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\B294LQ\OneDrive - AXA\Desktop\Formation Java\Projet 7\PCS-PM\Poseidon-PM\target\test-classes;C:\Users\B294LQ\OneDrive - AXA\Desktop\Formation Java\Projet 7\PCS-PM\Poseidon-PM\target\classes;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.2.4\spring-boot-starter-data-jpa-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.4\spring-boot-starter-aop-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\aspectj\aspectjweaver\1.9.21\aspectjweaver-1.9.21.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.4\spring-boot-starter-jdbc-3.2.4.jar;C:\Users\B294LQ\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-jdbc\6.1.5\spring-jdbc-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\hibernate\orm\hibernate-core\6.4.4.Final\hibernate-core-6.4.4.Final.jar;C:\Users\B294LQ\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\B294LQ\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\B294LQ\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\B294LQ\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\B294LQ\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\B294LQ\.m2\repository\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Users\B294LQ\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\B294LQ\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\B294LQ\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\B294LQ\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\B294LQ\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\B294LQ\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\B294LQ\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\B294LQ\.m2\repository\org\springframework\data\spring-data-jpa\3.2.4\spring-data-jpa-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\data\spring-data-commons\3.2.4\spring-data-commons-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-orm\6.1.5\spring-orm-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-context\6.1.5\spring-context-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-tx\6.1.5\spring-tx-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-beans\6.1.5\spring-beans-6.1.5.jar;C:\Users\B294LQ\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-aspects\6.1.5\spring-aspects-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.2.4\spring-boot-starter-security-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.4\spring-boot-starter-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.4\spring-boot-starter-logging-3.2.4.jar;C:\Users\B294LQ\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\B294LQ\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\B294LQ\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\B294LQ\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\B294LQ\.m2\repository\org\slf4j\jul-to-slf4j\2.0.12\jul-to-slf4j-2.0.12.jar;C:\Users\B294LQ\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-aop\6.1.5\spring-aop-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\security\spring-security-config\6.2.3\spring-security-config-6.2.3.jar;C:\Users\B294LQ\.m2\repository\org\springframework\security\spring-security-web\6.2.3\spring-security-web-6.2.3.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-expression\6.1.5\spring-expression-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\3.2.4\spring-boot-starter-thymeleaf-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\thymeleaf\thymeleaf-spring6\3.1.2.RELEASE\thymeleaf-spring6-3.1.2.RELEASE.jar;C:\Users\B294LQ\.m2\repository\org\thymeleaf\thymeleaf\3.1.2.RELEASE\thymeleaf-3.1.2.RELEASE.jar;C:\Users\B294LQ\.m2\repository\org\attoparser\attoparser\2.0.7.RELEASE\attoparser-2.0.7.RELEASE.jar;C:\Users\B294LQ\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.4\spring-boot-starter-validation-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.19\tomcat-embed-el-10.1.19.jar;C:\Users\B294LQ\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\B294LQ\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.4\spring-boot-starter-web-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.4\spring-boot-starter-json-3.2.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\B294LQ\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.4\spring-boot-starter-tomcat-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.19\tomcat-embed-core-10.1.19.jar;C:\Users\B294LQ\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.19\tomcat-embed-websocket-10.1.19.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-web\6.1.5\spring-web-6.1.5.jar;C:\Users\B294LQ\.m2\repository\io\micrometer\micrometer-observation\1.12.4\micrometer-observation-1.12.4.jar;C:\Users\B294LQ\.m2\repository\io\micrometer\micrometer-commons\1.12.4\micrometer-commons-1.12.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-webmvc\6.1.5\spring-webmvc-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity6\3.1.2.RELEASE\thymeleaf-extras-springsecurity6-3.1.2.RELEASE.jar;C:\Users\B294LQ\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-devtools\3.2.4\spring-boot-devtools-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot\3.2.4\spring-boot-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.4\spring-boot-autoconfigure-3.2.4.jar;C:\Users\B294LQ\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\B294LQ\.m2\repository\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.4\spring-boot-starter-test-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-test\3.2.4\spring-boot-test-3.2.4.jar;C:\Users\B294LQ\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.4\spring-boot-test-autoconfigure-3.2.4.jar;C:\Users\B294LQ\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\B294LQ\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\B294LQ\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\B294LQ\.m2\repository\net\minidev\json-smart\2.5.0\json-smart-2.5.0.jar;C:\Users\B294LQ\.m2\repository\net\minidev\accessors-smart\2.5.0\accessors-smart-2.5.0.jar;C:\Users\B294LQ\.m2\repository\org\ow2\asm\asm\9.3\asm-9.3.jar;C:\Users\B294LQ\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\B294LQ\.m2\repository\org\awaitility\awaitility\4.2.0\awaitility-4.2.0.jar;C:\Users\B294LQ\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\B294LQ\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\B294LQ\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\B294LQ\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\B294LQ\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\B294LQ\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\B294LQ\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\B294LQ\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\B294LQ\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\B294LQ\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\B294LQ\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Users\B294LQ\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\B294LQ\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\B294LQ\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\B294LQ\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-core\6.1.5\spring-core-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-jcl\6.1.5\spring-jcl-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\springframework\spring-test\6.1.5\spring-test-6.1.5.jar;C:\Users\B294LQ\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\B294LQ\.m2\repository\org\springframework\security\spring-security-test\6.2.3\spring-security-test-6.2.3.jar;C:\Users\B294LQ\.m2\repository\org\springframework\security\spring-security-core\6.2.3\spring-security-core-6.2.3.jar;C:\Users\B294LQ\.m2\repository\org\springframework\security\spring-security-crypto\6.2.3\spring-security-crypto-6.2.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\B294LQ\AppData\Local\Temp\surefire17278187068875045689\surefirebooter-20240415173645002_74.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\B294LQ\AppData\Local\Temp\surefire17457850114396142700\surefirebooter-20240422223332470_74.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS"/>
@@ -54,11 +54,11 @@
     <property name="user.dir" value="C:\Users\B294LQ\OneDrive - AXA\Desktop\Formation Java\Projet 7\PCS-PM\Poseidon-PM"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="22872"/>
+    <property name="PID" value="9260"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.1.12-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\IcedTeaWeb\WebStart\bin;C:\Program Files\Eclipse Adoptium\jdk-21.0.1.12-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.4\bin;%JAVA_HOME%\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\RedHat\java-1.8.0-openjdk-1.8.0.362-1\bin;C:\Program Files (x86)\RedHat\java-1.8.0-openjdk-1.8.0.362-1\jre\bin;C:\Users\B294LQ\AppData\Local\Microsoft\WindowsApps;C:\Users\B294LQ\.dotnet\tools;C:\Users\B294LQ\AppData\Roaming\npm;."/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.1.12-hotspot\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\IcedTeaWeb\WebStart\bin;C:\Program Files\Eclipse Adoptium\jdk-21.0.1.12-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\apache-maven-3.9.4\bin;C:\Program Files (x86)\RedHat\java-1.8.0-openjdk-1.8.0.362-1\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\RedHat\java-1.8.0-openjdk-1.8.0.362-1\bin;C:\Program Files (x86)\RedHat\java-1.8.0-openjdk-1.8.0.362-1\jre\bin;C:\Users\B294LQ\AppData\Local\Microsoft\WindowsApps;C:\Users\B294LQ\.dotnet\tools;C:\Users\B294LQ\AppData\Roaming\npm;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Eclipse Adoptium"/>
@@ -66,16 +66,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testCreatingCurvePointWithEmptyFieldsReturnsError" classname="com.phildev.pcs.integration.CurvePointIT" time="0.05">
-    <system-out><![CDATA[2024-04-15T17:38:02.724+02:00  INFO 22872 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.phildev.pcs.integration.CurvePointIT]: CurvePointIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-04-15T17:38:02.737+02:00  INFO 22872 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.phildev.pcs.Application for test class com.phildev.pcs.integration.CurvePointIT
-2024-04-15T17:38:02.775+02:00 ERROR 22872 --- [           main] c.p.pcs.controllers.CurveController      : Field value : value cannot be null
-2024-04-15T17:38:02.776+02:00 ERROR 22872 --- [           main] c.p.pcs.controllers.CurveController      : Field term : term cannot be null
+  <testcase name="testCreatingCurvePointWithEmptyFieldsReturnsError" classname="com.phildev.pcs.integration.CurvePointIT" time="0.045">
+    <system-out><![CDATA[2024-04-22T22:33:47.911+02:00  INFO 9260 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.phildev.pcs.integration.CurvePointIT]: CurvePointIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-04-22T22:33:47.919+02:00  INFO 9260 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.phildev.pcs.Application for test class com.phildev.pcs.integration.CurvePointIT
+2024-04-22T22:33:47.943+02:00 ERROR 9260 --- [           main] c.p.pcs.controllers.CurveController      : Field value : value cannot be null
+2024-04-22T22:33:47.944+02:00 ERROR 9260 --- [           main] c.p.pcs.controllers.CurveController      : Field term : term cannot be null
 
 MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /curvePoint/validate
-       Parameters = {term=[], value=[], _csrf=[_4fG71f1ssDXT6eASiiknUNWnRO1grx7sDQe08AWihB8E0f2nL723mfMgab6KcGzcwWQrCFusHGM4IhW1lJ84PZ0u3EaKiHG]}
+       Parameters = {term=[], value=[], _csrf=[b8tR2NpNZdTyaySK3IPnFmBl6iC5ZLhMt_kwvnNoj6N0JwEXWKlive10BLbfX0Xs6K7TLgNRxxmOAYFh0stRiBZZusBAQWJ0]}
           Headers = [Content-Type:"application/x-www-form-urlencoded;charset=UTF-8"]
              Body = null
     Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
@@ -95,7 +95,7 @@ ModelAndView:
         View name = curvePoint/add
              View = null
         Attribute = curvePoint
-            value = com.phildev.pcs.domain.CurvePoint@566878e0
+            value = com.phildev.pcs.domain.CurvePoint@b73e0b6
            errors = [Field error in object 'curvePoint' on field 'value': rejected value [null]; codes [NotNull.curvePoint.value,NotNull.value,NotNull.java.lang.Double,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.value,value]; arguments []; default message [value]]; default message [value cannot be null], Field error in object 'curvePoint' on field 'term': rejected value [null]; codes [NotNull.curvePoint.term,NotNull.term,NotNull.java.lang.Double,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.term,term]; arguments []; default message [term]]; default message [term cannot be null]]
         Attribute = connectedUser
             value = user
@@ -130,7 +130,7 @@ MockHttpServletResponse:
 		</div>
 	</div>
 	<div class="row">
-		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="dmSF0NNxjDdumuxLiDhXt6DL51d8lEYzBU39gQ6YMhROUp6HFV214eNIv1FD_Ip4sRVjhsLzyjVF9nIeYyufsjj6A3Uoa_i3"/>
+		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="vJ6e6NqY8xxFfl1fxyH_cj39Q5oRZVyvVQjRYUoHizQiu2b7i_ytje2hkn5oSjw58wzLSl7JbqMmAGWCMDqwVy82vlcW3QWY"/>
 			<input type="submit" value="Logout" />
 		</form>
 	</div>
@@ -140,7 +140,7 @@ MockHttpServletResponse:
 	</div>
 
 	<div class="row">
-		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="dmSF0NNxjDdumuxLiDhXt6DL51d8lEYzBU39gQ6YMhROUp6HFV214eNIv1FD_Ip4sRVjhsLzyjVF9nIeYyufsjj6A3Uoa_i3"/>
+		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="vJ6e6NqY8xxFfl1fxyH_cj39Q5oRZVyvVQjRYUoHizQiu2b7i_ytje2hkn5oSjw58wzLSl7JbqMmAGWCMDqwVy82vlcW3QWY"/>
 			<div class="form-group">
 				<label for="term" class="col-sm-2 control-label">Term</label>
 				<div class="col-sm-10">
@@ -178,14 +178,14 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="testCreatingCurvePointWithValidInputs" classname="com.phildev.pcs.integration.CurvePointIT" time="0.047">
+  <testcase name="testCreatingCurvePointWithValidInputs" classname="com.phildev.pcs.integration.CurvePointIT" time="0.037">
     <system-out><![CDATA[Hibernate: insert into curvepoint (as_of_date,creation_date,term,value) values (?,?,?,?)
-2024-04-15T17:38:02.830+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : New curve point saved with id 3
+2024-04-22T22:33:47.995+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : New curve point saved with id 3
 
 MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /curvePoint/validate
-       Parameters = {term=[1.001], value=[1.005], _csrf=[wd5rHoSMPsDSeuDjN3nIDsqD8EqK1iqOeeGWKdso_VjgqAeepbtfL-C0Xff_SoGGDlT8bfi73SvsshujQND1S-5LzTrSyTH_]}
+       Parameters = {term=[1.001], value=[1.005], _csrf=[fTqAKzoq8k6kOhamoEnNzM2mRO9hi8YqF607jC_3gJrAFN_RH1u3Sggaln6JCSeRxmT5-f3DadcFv_cHL8xduRrDsv_1Je_o]}
           Headers = [Content-Type:"application/x-www-form-urlencoded;charset=UTF-8"]
              Body = null
     Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
@@ -221,14 +221,14 @@ MockHttpServletResponse:
 Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0
 ]]></system-out>
   </testcase>
-  <testcase name="testCreatingCurvePointWithInvalidMinValueReturnsError" classname="com.phildev.pcs.integration.CurvePointIT" time="0.026">
-    <system-out><![CDATA[2024-04-15T17:38:02.859+02:00 ERROR 22872 --- [           main] c.p.pcs.controllers.CurveController      : Field term : minimum value must 1.000
-2024-04-15T17:38:02.860+02:00 ERROR 22872 --- [           main] c.p.pcs.controllers.CurveController      : Field value : minimum value must 1.000
+  <testcase name="testCreatingCurvePointWithInvalidMinValueReturnsError" classname="com.phildev.pcs.integration.CurvePointIT" time="0.022">
+    <system-out><![CDATA[2024-04-22T22:33:48.019+02:00 ERROR 9260 --- [           main] c.p.pcs.controllers.CurveController      : Field value : minimum value must 1.000
+2024-04-22T22:33:48.019+02:00 ERROR 9260 --- [           main] c.p.pcs.controllers.CurveController      : Field term : minimum value must 1.000
 
 MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /curvePoint/validate
-       Parameters = {term=[0.999], value=[0.1], _csrf=[5_N5sFkLDFH-8xNboPZL-cfA4BXd6j7anYDVx3yh0hPlDQJ33pBLgDo8amjTxCdpl9t_nabzzSy72l_3-7Ll_k2Y6iKHPzBH]}
+       Parameters = {term=[0.999], value=[0.1], _csrf=[K3QaFk3JKwFXoS216mGhdoJOdFQHmoORf-sNn5CODPTDTknUHkwqcH2tTjV6lR_Xi0yVELcqWTU0-LK8HI5s-aC_NcPwei_m]}
           Headers = [Content-Type:"application/x-www-form-urlencoded;charset=UTF-8"]
              Body = null
     Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
@@ -248,8 +248,8 @@ ModelAndView:
         View name = curvePoint/add
              View = null
         Attribute = curvePoint
-            value = com.phildev.pcs.domain.CurvePoint@85c77fa
-           errors = [Field error in object 'curvePoint' on field 'term': rejected value [0.999]; codes [DecimalMin.curvePoint.term,DecimalMin.term,DecimalMin.java.lang.Double,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.term,term]; arguments []; default message [term],true,1.000]; default message [minimum value must 1.000], Field error in object 'curvePoint' on field 'value': rejected value [0.1]; codes [DecimalMin.curvePoint.value,DecimalMin.value,DecimalMin.java.lang.Double,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.value,value]; arguments []; default message [value],true,1.000]; default message [minimum value must 1.000]]
+            value = com.phildev.pcs.domain.CurvePoint@3600fd7f
+           errors = [Field error in object 'curvePoint' on field 'value': rejected value [0.1]; codes [DecimalMin.curvePoint.value,DecimalMin.value,DecimalMin.java.lang.Double,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.value,value]; arguments []; default message [value],true,1.000]; default message [minimum value must 1.000], Field error in object 'curvePoint' on field 'term': rejected value [0.999]; codes [DecimalMin.curvePoint.term,DecimalMin.term,DecimalMin.java.lang.Double,DecimalMin]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [curvePoint.term,term]; arguments []; default message [term],true,1.000]; default message [minimum value must 1.000]]
         Attribute = connectedUser
             value = user
 
@@ -283,7 +283,7 @@ MockHttpServletResponse:
 		</div>
 	</div>
 	<div class="row">
-		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="QPOWBjm-e6JsVqX_BqMLlktWZLena9dHw78KqsbJuLKSTy6neZCkNlqJHZtBYZHNMY4_8iplSY7BW7ZqpY06k_fwgIPwfRyX"/>
+		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="Ngz4bS6P9JdVZbUtu67bUINaTZ7p_Dw3fd1ePY_S4-y3_PMlAzTICx7rkaN4UYdP2oPvNrY-YP_ang0aHrg_W7_j2tuEyJUX"/>
 			<input type="submit" value="Logout" />
 		</form>
 	</div>
@@ -293,7 +293,7 @@ MockHttpServletResponse:
 	</div>
 
 	<div class="row">
-		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="QPOWBjm-e6JsVqX_BqMLlktWZLena9dHw78KqsbJuLKSTy6neZCkNlqJHZtBYZHNMY4_8iplSY7BW7ZqpY06k_fwgIPwfRyX"/>
+		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="Ngz4bS6P9JdVZbUtu67bUINaTZ7p_Dw3fd1ePY_S4-y3_PMlAzTICx7rkaN4UYdP2oPvNrY-YP_ang0aHrg_W7_j2tuEyJUX"/>
 			<div class="form-group">
 				<label for="term" class="col-sm-2 control-label">Term</label>
 				<div class="col-sm-10">
@@ -331,20 +331,20 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="testDeletingCurvePointWithAdminRole" classname="com.phildev.pcs.integration.CurvePointIT" time="0.065">
+  <testcase name="testDeletingCurvePointWithAdminRole" classname="com.phildev.pcs.integration.CurvePointIT" time="0.067">
     <system-out><![CDATA[Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0 where cp1_0.id=?
-2024-04-15T17:38:02.909+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : User user deleted curve point with id 2 
+2024-04-22T22:33:48.063+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : User user deleted curve point with id 2 
 Hibernate: delete from curvepoint where id=?
 Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0 where cp1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="testAccessToCurvePointListForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.045">
+  <testcase name="testAccessToCurvePointListForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.041">
     <system-out><![CDATA[Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0
-2024-04-15T17:38:02.964+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : User user is accessing curve point list page
+2024-04-22T22:33:48.120+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : User user is accessing curve point list page
 ]]></system-out>
   </testcase>
-  <testcase name="testAccessToCurvePointAddPageForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.009">
-    <system-out><![CDATA[2024-04-15T17:38:02.995+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : User user accessing curve point add page
+  <testcase name="testAccessToCurvePointAddPageForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.016">
+    <system-out><![CDATA[2024-04-22T22:33:48.160+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : User user accessing curve point add page
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -352,7 +352,7 @@ MockHttpServletRequest:
        Parameters = {}
           Headers = []
              Body = null
-    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@c20d03e, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
+    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@61a1ca20, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
 
 Handler:
              Type = com.phildev.pcs.controllers.CurveController
@@ -369,7 +369,7 @@ ModelAndView:
         View name = curvePoint/add
              View = null
         Attribute = curvePoint
-            value = com.phildev.pcs.domain.CurvePoint@3a8a370
+            value = com.phildev.pcs.domain.CurvePoint@325cb16
            errors = []
         Attribute = connectedUser
             value = user
@@ -404,7 +404,7 @@ MockHttpServletResponse:
 		</div>
 	</div>
 	<div class="row">
-		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="E4uJPQ-lJBrYutwd8juWgdhqpPQLvVFyoCC41vXyMAnJ_1cMIbrtWT7BECv13OQoxBaiub1Ticw7iGlfmRSN4ZDBBzivz2Y_"/>
+		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="yER5iGgKkt_yxXmnZmJY3XLhO3MSGsBG2Dz_BZsHWSKqlM3Y_SVPvQk-qrrf_EHGAk9suEKEFhF0KPlrvA_MMvhhPESSov3h"/>
 			<input type="submit" value="Logout" />
 		</form>
 	</div>
@@ -414,7 +414,7 @@ MockHttpServletResponse:
 	</div>
 
 	<div class="row">
-		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="E4uJPQ-lJBrYutwd8juWgdhqpPQLvVFyoCC41vXyMAnJ_1cMIbrtWT7BECv13OQoxBaiub1Ticw7iGlfmRSN4ZDBBzivz2Y_"/>
+		<form action="/curvePoint/validate" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="yER5iGgKkt_yxXmnZmJY3XLhO3MSGsBG2Dz_BZsHWSKqlM3Y_SVPvQk-qrrf_EHGAk9suEKEFhF0KPlrvA_MMvhhPESSov3h"/>
 			<div class="form-group">
 				<label for="term" class="col-sm-2 control-label">Term</label>
 				<div class="col-sm-10">
@@ -452,9 +452,9 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="testAccessToCurvePointUpdatePageForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.039">
+  <testcase name="testAccessToCurvePointUpdatePageForAdminUser" classname="com.phildev.pcs.integration.CurvePointIT" time="0.031">
     <system-out><![CDATA[Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0 where cp1_0.id=?
-2024-04-15T17:38:03.024+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : User john83 accessing page to update curve point with id 1
+2024-04-22T22:33:48.182+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : User john83 accessing page to update curve point with id 1
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -462,7 +462,7 @@ MockHttpServletRequest:
        Parameters = {}
           Headers = []
              Body = null
-    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@5dbfe04b, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=john83, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
+    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@2b2a94a4, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=john83, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN]]]}
 
 Handler:
              Type = com.phildev.pcs.controllers.CurveController
@@ -481,7 +481,7 @@ ModelAndView:
         Attribute = connectedUser
             value = john83
         Attribute = curvePoint
-            value = com.phildev.pcs.domain.CurvePoint@7bf8eb4f
+            value = com.phildev.pcs.domain.CurvePoint@601b8fe3
            errors = []
 
 FlashMap:
@@ -514,7 +514,7 @@ MockHttpServletResponse:
 		</div>
 	</div>
 	<div class="row">
-		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="BVzPL9SEconyipEQE38xmPV-1ywlKRnVsEi8KVQ0Y_CJJ0HkN2j2TLW2QbHfs6EiIVIFrpAa-k5HHy3403yJTzAHUZKwHiWH"/>
+		<form action="/logout" method="POST" class="d-flex justify-content-end p-0"><input type="hidden" name="_csrf" value="8kUice3z1Qe7RU4x2k82i2uc_idswPCHncq5Fky_UEaQ1Y0ckHRAR9TLsTaWci0I72IC71_400ZUocaq-_mJJy2HYSSn4Lgv"/>
 			<input type="submit" value="Logout" />
 		</form>
 	</div>
@@ -523,7 +523,7 @@ MockHttpServletResponse:
 	</div>
 
 	<div class="row">
-		<form action="/curvePoint/update/1" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="BVzPL9SEconyipEQE38xmPV-1ywlKRnVsEi8KVQ0Y_CJJ0HkN2j2TLW2QbHfs6EiIVIFrpAa-k5HHy3403yJTzAHUZKwHiWH"/>
+		<form action="/curvePoint/update/1" method="post" class="form-horizontal" style="width: 100%"><input type="hidden" name="_csrf" value="8kUice3z1Qe7RU4x2k82i2uc_idswPCHncq5Fky_UEaQ1Y0ckHRAR9TLsTaWci0I72IC71_400ZUocaq-_mJJy2HYSSn4Lgv"/>
 			<div class="form-group">
 				<label for="term" class="col-sm-2 control-label">Term</label>
 				<div class="col-sm-10">
@@ -562,8 +562,8 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="testUpdatingCurvePoint1WithAdminRole" classname="com.phildev.pcs.integration.CurvePointIT" time="0.036">
-    <system-out><![CDATA[2024-04-15T17:38:03.047+02:00  INFO 22872 --- [           main] c.p.pcs.controllers.CurveController      : Curve point updated for id 1 with term 500.505 and value 400.565
+  <testcase name="testUpdatingCurvePoint1WithAdminRole" classname="com.phildev.pcs.integration.CurvePointIT" time="0.039">
+    <system-out><![CDATA[2024-04-22T22:33:48.207+02:00  INFO 9260 --- [           main] c.p.pcs.controllers.CurveController      : Curve point updated for id 1 with term 500.505 and value 400.565
 Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0 where cp1_0.id=?
 Hibernate: update curvepoint set as_of_date=?,creation_date=?,term=?,value=? where id=?
 Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.term,cp1_0.value from curvepoint cp1_0 where cp1_0.id=?

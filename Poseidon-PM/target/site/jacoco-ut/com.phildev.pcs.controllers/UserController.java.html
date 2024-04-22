@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.controllers</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.controllers;
 
+import com.phildev.pcs.domain.Trade;
 import com.phildev.pcs.domain.User;
+import com.phildev.pcs.service.TradeService;
 import com.phildev.pcs.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,82 +17,123 @@ import java.util.regex.Pattern;
 
 
 @Controller
-<span class="fc" id="L18">public class UserController {</span>
+<span class="fc" id="L20">public class UserController {</span>
 
     @Autowired
     private UserService userService;
 
+    /**
+     * This method is displaying user/list view when calling endpoint /user/list
+     * @param model which is sending user connected and trades to the view to be displayed
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return user/list view
+     */
     @RequestMapping(&quot;/user/list&quot;)
     public String home(Model model, Principal connectedUser)
     {
-<span class="nc" id="L26">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L27">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L28">        return &quot;user/list&quot;;</span>
+<span class="nc" id="L34">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L35">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L36">        return &quot;user/list&quot;;</span>
     }
 
+    /**
+     * This method is displaying user/add view when calling endpoint /user/add
+     * @param model which is sending user connected and  a single {@link User} object to the view to be used in the form
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return user/add view
+     */
     @GetMapping(&quot;/user/add&quot;)
     public String addUser(Model model, Principal connectedUser) {
-<span class="nc" id="L33">        User user = new User();</span>
-<span class="nc" id="L34">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L35">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L36">        return &quot;user/add&quot;;</span>
+<span class="nc" id="L47">        User user = new User();</span>
+<span class="nc" id="L48">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L49">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L50">        return &quot;user/add&quot;;</span>
     }
 
 
+    /**
+     * This method is validating {@link User} object and saving it in database through {@link UserService#save(User)}
+     * @param user which is a {@link User} object
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return user/add if there is an error or redirect to /user/list endpoint to display new user list with freshly added user
+     */
     @PostMapping(&quot;/user/validate&quot;)
     public String validate(@Valid User user, BindingResult result, Model model, Principal connectedUser) {
         //adding regexp to validate password
-<span class="nc" id="L43">        String passwordValidation = &quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&amp;])[A-Za-z\\d@$!%?&amp;]{8,}$&quot;;</span>
-<span class="nc" id="L44">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc bnc" id="L45" title="All 4 branches missed.">        if (!result.hasErrors() &amp;&amp; Pattern.matches(passwordValidation, user.getPassword())</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">                &amp;&amp; !userService.checkUserNameOrFullNameExist(user)) {</span>
-<span class="nc" id="L47">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L48">            user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L49">            userService.save(user);</span>
-<span class="nc" id="L50">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L51">            return &quot;redirect:/user/list&quot;;</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        }else if(userService.checkUserNameOrFullNameExist(user)){</span>
-<span class="nc" id="L53">            model.addAttribute(&quot;userError&quot;, &quot;User already exists with username or fullname&quot;);</span>
-<span class="nc" id="L54">            return &quot;user/add&quot;;</span>
+<span class="nc" id="L65">        String passwordValidation = &quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&amp;])[A-Za-z\\d@$!%?&amp;]{8,}$&quot;;</span>
+<span class="nc" id="L66">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        if (!result.hasErrors() &amp;&amp; Pattern.matches(passwordValidation, user.getPassword())</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                &amp;&amp; !userService.checkUserNameOrFullNameExist(user)) {</span>
+<span class="nc" id="L69">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L70">            user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L71">            userService.save(user);</span>
+<span class="nc" id="L72">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L73">            return &quot;redirect:/user/list&quot;;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        }else if(userService.checkUserNameOrFullNameExist(user)){</span>
+<span class="nc" id="L75">            model.addAttribute(&quot;userError&quot;, &quot;User already exists with username or fullname&quot;);</span>
+<span class="nc" id="L76">            return &quot;user/add&quot;;</span>
         }else{
-<span class="nc" id="L56">            model.addAttribute(&quot;validationError&quot;, &quot;Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, &quot; +</span>
+<span class="nc" id="L78">            model.addAttribute(&quot;validationError&quot;, &quot;Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, &quot; +</span>
                     &quot;1 uppercase letter, 1 special character between @$!%?&amp;&quot;);
-<span class="nc" id="L58">            return &quot;user/add&quot;;</span>
+<span class="nc" id="L80">            return &quot;user/add&quot;;</span>
         }
     }
 
+    /**
+     * This method is displaying user/update view with a user retrieved by its id through {@link UserService#findById(Integer)}
+     * @param id which is the path variable to retrieve user by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return user/update view
+     */
     @GetMapping(&quot;/user/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, Principal connectedUser) {
-<span class="nc" id="L64">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L65">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L66">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L67">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L68">        return &quot;user/update&quot;;</span>
+<span class="nc" id="L93">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L94">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L95">        user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L96">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L97">        return &quot;user/update&quot;;</span>
     }
 
+    /**
+     * This method is used to save a user which has been updated and retrieved by its id
+     * @param id which is the path variable to retrieve user by id
+     * @param user which is the {@link User} object updated by user in the form
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the user/add view if there is an error or the user/list if the update is successful
+     */
     @PostMapping(&quot;/user/update/{id}&quot;)
     public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
                              BindingResult result, Model model) {
-<span class="nc" id="L74">        String passwordValidation = &quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&amp;])[A-Za-z\\d@$!%?&amp;]{8,}$&quot;;</span>
-<span class="nc bnc" id="L75" title="All 4 branches missed.">        if (result.hasErrors()|| !Pattern.matches(passwordValidation, user.getPassword())) {</span>
-<span class="nc" id="L76">            model.addAttribute(&quot;validationError&quot;,&quot;Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, &quot; +</span>
+<span class="nc" id="L111">        String passwordValidation = &quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&amp;])[A-Za-z\\d@$!%?&amp;]{8,}$&quot;;</span>
+<span class="nc bnc" id="L112" title="All 4 branches missed.">        if (result.hasErrors()|| !Pattern.matches(passwordValidation, user.getPassword())) {</span>
+<span class="nc" id="L113">            model.addAttribute(&quot;validationError&quot;,&quot;Password must be at minimum 8 characters with 1 digit, 1 lowercase letter, &quot; +</span>
                     &quot;1 uppercase letter, 1 special character between @$!%?&amp;&quot;);
-<span class="nc" id="L78">            return &quot;user/update&quot;;</span>
+<span class="nc" id="L115">            return &quot;user/update&quot;;</span>
         }
-<span class="nc" id="L80">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L81">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L82">        user.setId(id);</span>
-<span class="nc" id="L83">        userService.save(user);</span>
-<span class="nc" id="L84">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L85">        return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L117">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L118">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L119">        user.setId(id);</span>
+<span class="nc" id="L120">        userService.save(user);</span>
+<span class="nc" id="L121">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L122">        return &quot;redirect:/user/list&quot;;</span>
     }
 
+    /**
+     * This method is deleting a user by its id by using the service {@link UserService#delete(Integer)}
+     * @param id which is the path variable to retrieve user by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the user/list view after calling /user/list endpoint
+     */
     @GetMapping(&quot;/user/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L90">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L91">        userService.delete(user);</span>
-<span class="nc" id="L92">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L93">        return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L133">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L134">        userService.delete(user);</span>
+<span class="nc" id="L135">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L136">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

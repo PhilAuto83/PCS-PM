@@ -17,20 +17,28 @@ import java.io.IOException;
 <span class="fc" id="L17">public class CustomAuthenticationFailure implements AuthenticationFailureHandler {</span>
 
 <span class="fc" id="L19">    private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationFailure.class);</span>
+
+    /**
+     * This method handles the redirection of users after authentication fails for SessionAuthenticationException or for Invalid input
+     * @param request which an {@link HttpServletRequest}
+     * @param response which is an {@link HttpServletResponse}
+     * @param exception which is an {@link AuthenticationException}
+     * @throws IOException
+     */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if(exception instanceof SessionAuthenticationException){</span>
-<span class="nc" id="L23">            logger.error(&quot;Session is no longer valid due to maximium session set to 1 for current user&quot;);</span>
-<span class="nc" id="L24">            response.sendRedirect(&quot;login?sessionError&quot;);</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if(exception instanceof SessionAuthenticationException){</span>
+<span class="nc" id="L31">            logger.error(&quot;Session is no longer valid due to maximium session set to 1 for current user&quot;);</span>
+<span class="nc" id="L32">            response.sendRedirect(&quot;login?sessionError&quot;);</span>
         }else{
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if(request.getUserPrincipal() !=null){</span>
-<span class="nc" id="L27">                logger.error(&quot;Invalid credentials typed by user so authentication fails for user {}&quot;,request.getUserPrincipal().getName() );</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if(request.getUserPrincipal() !=null){</span>
+<span class="nc" id="L35">                logger.error(&quot;Invalid credentials typed by user so authentication fails for user {}&quot;,request.getUserPrincipal().getName() );</span>
             }else{
-<span class="fc" id="L29">                logger.error(&quot;Invalid credentials typed or unknown user in the app.&quot;);</span>
+<span class="fc" id="L37">                logger.error(&quot;Invalid credentials typed or unknown user in the app.&quot;);</span>
             }
-<span class="fc" id="L31">            response.sendRedirect(&quot;login?error&quot;);</span>
+<span class="fc" id="L39">            response.sendRedirect(&quot;login?error&quot;);</span>
         }
 
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L42">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

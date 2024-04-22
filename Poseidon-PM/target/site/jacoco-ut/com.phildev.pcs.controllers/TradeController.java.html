@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.controllers</a> &gt; <span class="el_source">TradeController.java</span></div><h1>TradeController.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.controllers;
 
+import com.phildev.pcs.domain.RuleName;
 import com.phildev.pcs.domain.Trade;
+import com.phildev.pcs.service.RuleNameService;
 import com.phildev.pcs.service.TradeService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -18,86 +20,128 @@ import java.security.Principal;
 
 
 @Controller
-<span class="fc" id="L21">public class TradeController {</span>
+<span class="fc" id="L23">public class TradeController {</span>
 
-<span class="fc" id="L23">    private static final Logger logger  = LoggerFactory.getLogger(TradeController.class);</span>
+<span class="fc" id="L25">    private static final Logger logger  = LoggerFactory.getLogger(TradeController.class);</span>
 
     @Autowired
     private TradeService tradeService;
 
+    /**
+     * This method is displaying trade/list view when calling endpoint /trade/list
+     * @param model which is sending user connected and trades to the view to be displayed
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return trade/list view
+     */
     @RequestMapping(&quot;/trade/list&quot;)
     public String home(Model model, Principal connectedUser)
     {
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if(tradeService.findAll().isEmpty()){</span>
-<span class="nc" id="L32">            model.addAttribute(&quot;emptyTrades&quot;, &quot;You have currently no trades&quot;);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if(tradeService.findAll().isEmpty()){</span>
+<span class="nc" id="L40">            model.addAttribute(&quot;emptyTrades&quot;, &quot;You have currently no trades&quot;);</span>
         }
-<span class="nc" id="L34">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
-<span class="nc" id="L35">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L36">        logger.info(&quot;Trade list page rendered successfully to user {}&quot;, connectedUser.getName());</span>
-<span class="nc" id="L37">        return &quot;trade/list&quot;;</span>
+<span class="nc" id="L42">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L44">        logger.info(&quot;Trade list page rendered successfully to user {}&quot;, connectedUser.getName());</span>
+<span class="nc" id="L45">        return &quot;trade/list&quot;;</span>
     }
 
+    /**
+     * This method is displaying trade/add view when calling endpoint /trade/add
+     * @param model which is sending user connected and  a single {@link Trade} object to the view to be used in the form
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return trade/add view
+     */
     @GetMapping(&quot;/trade/add&quot;)
     public String addUser(Model model, Principal connectedUser) {
-<span class="nc" id="L42">        Trade trade = new Trade();</span>
-<span class="nc" id="L43">        model.addAttribute(&quot;trade&quot;, trade);</span>
-<span class="nc" id="L44">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L45">        logger.info(&quot;Trade add page rendered to user {}&quot;, connectedUser.getName());</span>
-<span class="nc" id="L46">        return &quot;trade/add&quot;;</span>
+<span class="nc" id="L56">        Trade trade = new Trade();</span>
+<span class="nc" id="L57">        model.addAttribute(&quot;trade&quot;, trade);</span>
+<span class="nc" id="L58">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L59">        logger.info(&quot;Trade add page rendered to user {}&quot;, connectedUser.getName());</span>
+<span class="nc" id="L60">        return &quot;trade/add&quot;;</span>
     }
 
+    /**
+     * This method is validating {@link Trade} object and saving it in database through {@link TradeService#save(Trade)}
+     * @param trade which is a {@link Trade} object
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return trade/add if there is an error or redirect to /trade/list endpoint to display new trade list with freshly added trade
+     */
     @PostMapping(&quot;/trade/validate&quot;)
     public String validate(@Valid Trade trade, BindingResult result, Model model, Principal connectedUser) {
-<span class="nc" id="L51">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(result.hasErrors()) {</span>
-<span class="nc" id="L53">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
-<span class="nc" id="L54">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
-<span class="nc" id="L55">            logger.error(&quot;The following errors occurred when trying to save a trade  {}&quot;, errors);</span>
-<span class="nc" id="L56">            return &quot;trade/add&quot;;</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){</span>
-<span class="nc" id="L58">            model.addAttribute(&quot;tradeError&quot;, &quot;No bid found for this account, type and quantity&quot;);</span>
-<span class="nc" id="L59">            logger.error(&quot;No bid found for the account {} , type {} and quantity {}&quot;, trade.getAccount(), trade.getType(), trade.getBuyQuantity());</span>
-<span class="nc" id="L60">            return &quot;trade/add&quot;;</span>
+<span class="nc" id="L73">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(result.hasErrors()) {</span>
+<span class="nc" id="L75">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
+<span class="nc" id="L76">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
+<span class="nc" id="L77">            logger.error(&quot;The following errors occurred when trying to save a trade  {}&quot;, errors);</span>
+<span class="nc" id="L78">            return &quot;trade/add&quot;;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){</span>
+<span class="nc" id="L80">            model.addAttribute(&quot;tradeError&quot;, &quot;No bid found for this account, type and quantity&quot;);</span>
+<span class="nc" id="L81">            logger.error(&quot;No bid found for the account {} , type {} and quantity {}&quot;, trade.getAccount(), trade.getType(), trade.getBuyQuantity());</span>
+<span class="nc" id="L82">            return &quot;trade/add&quot;;</span>
         }else{
-<span class="nc" id="L62">            Trade tradeSaved = tradeService.save(trade);</span>
-<span class="nc" id="L63">            logger.info(&quot;Trade of type  {} with buy quantity {} was successfully saved&quot;, tradeSaved.getType(), tradeSaved.getBuyQuantity());</span>
-<span class="nc" id="L64">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="nc" id="L84">            Trade tradeSaved = tradeService.save(trade);</span>
+<span class="nc" id="L85">            logger.info(&quot;Trade of type  {} with buy quantity {} was successfully saved&quot;, tradeSaved.getType(), tradeSaved.getBuyQuantity());</span>
+<span class="nc" id="L86">            return &quot;redirect:/trade/list&quot;;</span>
         }
     }
 
+    /**
+     * This method is displaying trade/update view with a trade retrieved by its id through {@link TradeService#findById(Integer)}
+     * @param id which is the path variable to retrieve trade by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return trade/update view
+     */
     @GetMapping(&quot;/trade/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, Principal connectedUser) {
-<span class="nc" id="L70">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
-<span class="nc" id="L71">        Trade trade = tradeService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid trade Id:&quot; + id));</span>
-<span class="nc" id="L72">        model.addAttribute(&quot;trade&quot;, trade);</span>
-<span class="nc" id="L73">        return &quot;trade/update&quot;;</span>
+<span class="nc" id="L99">        model.addAttribute(&quot;connectedUser&quot;, connectedUser.getName());</span>
+<span class="nc" id="L100">        Trade trade = tradeService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid trade Id:&quot; + id));</span>
+<span class="nc" id="L101">        model.addAttribute(&quot;trade&quot;, trade);</span>
+<span class="nc" id="L102">        return &quot;trade/update&quot;;</span>
     }
+
+    /**
+     * This method is used to save a trade which has been updated and retrieved by its id
+     * @param id which is the path variable to retrieve trade by id
+     * @param trade which is the {@link Trade} object updated by user in the form
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the trade/add view if there is an error or the trade/list if the update is successful
+     */
 
     @PostMapping(&quot;/trade/update/{id}&quot;)
     public String updateTrade(@PathVariable(&quot;id&quot;) Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if(result.hasErrors()) {</span>
-<span class="nc" id="L80">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
-<span class="nc" id="L81">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
-<span class="nc" id="L82">            logger.error(&quot;The following errors occurred when trying to save a trade name {}&quot;, errors);</span>
-<span class="nc" id="L83">            return &quot;trade/add&quot;;</span>
-<span class="nc bnc" id="L84" title="All 2 branches missed.">        }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){</span>
-<span class="nc" id="L85">            model.addAttribute(&quot;tradeError&quot;, &quot;No bid found for this account, type and quantity&quot;);</span>
-<span class="nc" id="L86">            logger.error(&quot;No bid found for the account {} , type {} and quantity {}&quot;, trade.getAccount(), trade.getType(), trade.getBuyQuantity());</span>
-<span class="nc" id="L87">            return &quot;trade/add&quot;;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if(result.hasErrors()) {</span>
+<span class="nc" id="L118">            StringBuilder errors = new StringBuilder(&quot; : \n&quot;);</span>
+<span class="nc" id="L119">            result.getAllErrors().forEach(objectError -&gt; errors.append(objectError.getDefaultMessage()).append(&quot;\n&quot;));</span>
+<span class="nc" id="L120">            logger.error(&quot;The following errors occurred when trying to save a trade name {}&quot;, errors);</span>
+<span class="nc" id="L121">            return &quot;trade/add&quot;;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        }else if(!tradeService.checkBidExistWithAccountQuantityAndType(trade)){</span>
+<span class="nc" id="L123">            model.addAttribute(&quot;tradeError&quot;, &quot;No bid found for this account, type and quantity&quot;);</span>
+<span class="nc" id="L124">            logger.error(&quot;No bid found for the account {} , type {} and quantity {}&quot;, trade.getAccount(), trade.getType(), trade.getBuyQuantity());</span>
+<span class="nc" id="L125">            return &quot;trade/add&quot;;</span>
         }else{
-<span class="nc" id="L89">            Trade tradeSaved = tradeService.save(trade);</span>
-<span class="nc" id="L90">            logger.info(&quot;Trade of type  {} with buy quantity {} was successfully updated&quot;, tradeSaved.getType(), tradeSaved.getBuyQuantity());</span>
-<span class="nc" id="L91">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="nc" id="L127">            Trade tradeSaved = tradeService.save(trade);</span>
+<span class="nc" id="L128">            logger.info(&quot;Trade of type  {} with buy quantity {} was successfully updated&quot;, tradeSaved.getType(), tradeSaved.getBuyQuantity());</span>
+<span class="nc" id="L129">            return &quot;redirect:/trade/list&quot;;</span>
         }
     }
 
+    /**
+     * This method is deleting a trade by its id by using the service {@link TradeService#delete(Integer)}
+     * @param id which is the path variable to retrieve trade by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the trade/list view after calling /trade/list endpoint
+     */
     @GetMapping(&quot;/trade/delete/{id}&quot;)
     public String deleteTrade(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L97">        Trade trade = tradeService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid trade Id:&quot; + id));</span>
-<span class="nc" id="L98">        tradeService.delete(trade.getTradeId());</span>
-<span class="nc" id="L99">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
-<span class="nc" id="L100">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="nc" id="L141">        Trade trade = tradeService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid trade Id:&quot; + id));</span>
+<span class="nc" id="L142">        tradeService.delete(trade.getTradeId());</span>
+<span class="nc" id="L143">        model.addAttribute(&quot;trades&quot;, tradeService.findAll());</span>
+<span class="nc" id="L144">        return &quot;redirect:/trade/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
