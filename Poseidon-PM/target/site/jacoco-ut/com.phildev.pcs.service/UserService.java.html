@@ -11,33 +11,55 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class is the service used to communicate between {@link com.phildev.pcs.controllers.UserController} and {@link UserRepository}
+ * All the methods in this service helps saving, deleting, retrieving {@link User} in database
+ */
 @Service
-<span class="fc" id="L15">public class UserService {</span>
+<span class="fc" id="L19">public class UserService {</span>
 
-<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(UserService.class);</span>
+<span class="fc" id="L21">    private static final Logger logger = LoggerFactory.getLogger(UserService.class);</span>
 
     @Autowired
     private UserRepository userRepository;
 
     public User save(User user){
-<span class="nc" id="L23">        return userRepository.save(user);</span>
+<span class="nc" id="L27">        return userRepository.save(user);</span>
     }
 
-
+    /**
+     * This method is searching a user by its id in database through the {@link UserRepository#findById(Object)} method
+     * @param id which is the user id
+     * @return an optional {@link User}
+     */
     public Optional&lt;User&gt; findById(Integer id){
-<span class="nc" id="L28">        return userRepository.findById(id);</span>
+<span class="nc" id="L36">        return userRepository.findById(id);</span>
     }
 
+    /**
+     * This method calls {@link UserRepository#findAll()} method to find all users in database
+     * @return a list of User
+     */
     public List&lt;User&gt; findAll(){
-<span class="nc" id="L32">        return userRepository.findAll();</span>
+<span class="nc" id="L44">        return userRepository.findAll();</span>
     }
 
+    /**
+     * This method is deleting a user passed as a parameter through the method {@link UserRepository#delete(Object)}
+     * @param user
+     */
     public void delete(User user){
-<span class="nc" id="L36">        userRepository.delete(user);</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L52">        userRepository.delete(user);</span>
+<span class="nc" id="L53">    }</span>
 
+    /**
+     * This method checks whether a username or full name already exists in database
+     * It uses spring data jpa methods {@link UserRepository#findByUsername(String)} and {@link UserRepository#findByUsername(String)}
+     * @param user
+     * @return true or false
+     */
     public boolean checkUserNameOrFullNameExist(User user){
-<span class="nc bnc" id="L40" title="All 4 branches missed.">        return (userRepository.findByUsername(user.getUsername()) != null) || (userRepository.findByFullName(user.getFullName()) != null);</span>
+<span class="nc bnc" id="L62" title="All 4 branches missed.">        return (userRepository.findByUsername(user.getUsername()) != null) || (userRepository.findByFullName(user.getFullName()) != null);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

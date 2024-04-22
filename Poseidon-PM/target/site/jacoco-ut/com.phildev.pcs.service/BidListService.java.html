@@ -10,33 +10,57 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-<span class="fc" id="L14">public class BidListService {</span>
 
-<span class="fc" id="L16">    private static final Logger logger = LoggerFactory.getLogger(BidListService.class);</span>
+/**
+ * This class is the service used to communicate between {@link com.phildev.pcs.controllers.BidListController} and {@link BidListRepository}
+ * All the methods in this service helps saving, deleting, retrieving bid in database
+ */
+@Service
+<span class="fc" id="L19">public class BidListService {</span>
+
+<span class="fc" id="L21">    private static final Logger logger = LoggerFactory.getLogger(BidListService.class);</span>
 
     @Autowired
     private BidListRepository bidListRepository;
 
+    /**
+     * This method calls bid repository with its {@link BidListRepository#findAll()} method to find all bids in database
+     * @return a list of BidList
+     */
     public List&lt;BidList&gt; findAll(){
-<span class="fc" id="L22">        List&lt;BidList&gt; allBids = bidListRepository.findAll();</span>
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if(allBids.isEmpty()){</span>
-<span class="nc" id="L24">            logger.info(&quot;Bid list is empty&quot;);</span>
+<span class="fc" id="L31">        List&lt;BidList&gt; allBids = bidListRepository.findAll();</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if(allBids.isEmpty()){</span>
+<span class="nc" id="L33">            logger.info(&quot;Bid list is empty&quot;);</span>
         }
-<span class="fc" id="L26">        return allBids;</span>
+<span class="fc" id="L35">        return allBids;</span>
     }
 
+    /**
+     * This method saves a {@link BidList} in database
+     * @param bidList with its properties account , type and  bid quantity that will be saved in database
+     * @return a bid  which was saved successfully in database
+     */
     public BidList save(BidList bidList){
-<span class="fc" id="L30">        return bidListRepository.save(bidList);</span>
+<span class="fc" id="L44">        return bidListRepository.save(bidList);</span>
     }
 
+    /**
+     * This method takes the id of a bid we want to find and the method {@link BidListRepository#findById(Object)} will retrieve the bid or not owing to Optional type
+     * @param id which is the unique bid identifier
+     * @return an optional of bidList so it can be empty or return something
+     */
     public Optional&lt;BidList&gt; findById(Integer id){
-<span class="fc" id="L34">        return bidListRepository.findById(id);</span>
+<span class="fc" id="L53">        return bidListRepository.findById(id);</span>
     }
 
+    /**
+     * This method takes the id of a bid we want to delete and the method {@link BidListRepository#deleteById(Object)} will delete the bid
+     * @param id which is the unique bid identifier
+     * @return void
+     */
     public void delete(Integer id){
-<span class="fc" id="L38">        bidListRepository.deleteById(id);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L62">        bidListRepository.deleteById(id);</span>
+<span class="fc" id="L63">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

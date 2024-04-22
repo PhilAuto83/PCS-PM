@@ -7,17 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 <span class="fc" id="L8">public class HomeController</span>
 {
+	/**
+	 * This method displays the home page which has a link to login page or user list endpoint
+	 * @param model
+	 * @return the home.html page
+	 */
 	@GetMapping(&quot;/&quot;)
 	public String home(Model model)
 	{
-<span class="nc" id="L13">		return &quot;home&quot;;</span>
+<span class="nc" id="L18">		return &quot;home&quot;;</span>
 	}
 
+	/**
+	 * This method is calling /admin/home and redirects to bidList/list view which is the list of all bids in the app
+	 * @param model
+	 * @return the bidList/list view by calling /bidList/list endpoint
+	 */
 	@GetMapping(&quot;/admin/home&quot;)
 	public String adminHome(Model model)
 	{
 
-<span class="nc" id="L20">		return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L30">		return &quot;redirect:/bidList/list&quot;;</span>
 	}
 
 

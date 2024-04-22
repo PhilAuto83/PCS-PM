@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.phildev.pcs.integration.CurvePointIT
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.359 s -- in com.phildev.pcs.integration.CurvePointIT
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.333 s -- in com.phildev.pcs.integration.CurvePointIT

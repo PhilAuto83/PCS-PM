@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-pcs-pm</a> &gt; <a href="index.source.html" class="el_package">com.phildev.pcs.service</a> &gt; <span class="el_source">RatingService.java</span></div><h1>RatingService.java</h1><pre class="source lang-java linenums">package com.phildev.pcs.service;
 
+import com.phildev.pcs.domain.CurvePoint;
 import com.phildev.pcs.domain.Rating;
+import com.phildev.pcs.repositories.CurvePointRepository;
 import com.phildev.pcs.repositories.RatingRepository;
 import com.phildev.pcs.repositories.TradeRepository;
 import org.slf4j.Logger;
@@ -11,10 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-<span class="fc" id="L15">public class RatingService {</span>
 
-<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(RatingService.class);</span>
+/**
+ * This class is the service used to communicate between {@link com.phildev.pcs.controllers.RatingController} and {@link RatingRepository}
+ * All the methods in this service helps saving, deleting, retrieving rating in database
+ */
+@Service
+<span class="fc" id="L22">public class RatingService {</span>
+
+<span class="fc" id="L24">    private static final Logger logger = LoggerFactory.getLogger(RatingService.class);</span>
 
     @Autowired
     private RatingRepository ratingRepository;
@@ -22,38 +29,72 @@ import java.util.Optional;
     @Autowired
     private TradeRepository tradeRepository;
 
+    /**
+     * This method calls {@link RatingRepository#findAll()} method to find all ratings in database
+     * @return a list of Rating
+     */
     public List&lt;Rating&gt; findAll(){
-<span class="fc" id="L26">        List&lt;Rating&gt; allRatings = ratingRepository.findAll();</span>
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if(allRatings.isEmpty()){</span>
-<span class="nc" id="L28">            logger.info(&quot;Curve point list  is empty&quot;);</span>
+<span class="fc" id="L37">        List&lt;Rating&gt; allRatings = ratingRepository.findAll();</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if(allRatings.isEmpty()){</span>
+<span class="nc" id="L39">            logger.info(&quot;Curve point list  is empty&quot;);</span>
         }
-<span class="fc" id="L30">        return allRatings;</span>
+<span class="fc" id="L41">        return allRatings;</span>
     }
 
+    /**
+     * This methods checks if a {@link com.phildev.pcs.domain.Trade#tradeId} exists with the {@link Rating#orderNumber} in database
+     * @param rating
+     * @return true or false if trade id exists
+     */
     public boolean checkOrderNumberExistInTrade(Rating rating){
         // checking trade id matches orderNumber to add a rating
-<span class="fc" id="L35">        return tradeRepository.existsById(rating.getOrderNumber());</span>
+<span class="fc" id="L51">        return tradeRepository.existsById(rating.getOrderNumber());</span>
     }
 
+    /**
+     * This methods checks if a rating already exists in database with the same agency ratings (moodys, fitch and S and P)
+     * @param rating
+     * @return true or false if rating exists
+     */
     public boolean checkRatingExists(Rating rating){
-<span class="fc" id="L39">        Optional&lt;Rating&gt; ratingFound = ratingRepository.findByOrderNumber(rating.getOrderNumber());</span>
-<span class="fc" id="L40">        return ratingFound.isPresent();</span>
+<span class="fc" id="L60">        Optional&lt;Rating&gt; ratingFound = ratingRepository.findByOrderNumber(rating.getOrderNumber());</span>
+<span class="fc" id="L61">        return ratingFound.isPresent();</span>
     }
 
+    /**
+     * This method saves a {@link Rating} in database
+     * @param rating with its properties {@link Rating#moodysRating} , {@link Rating#fitchRating}, {@link Rating#sandPRating} and {@link Rating#orderNumber} that will be saved in database
+     * @return a rating which was saved successfully in database
+     */
     public Rating save(Rating rating){
-<span class="fc" id="L44">        return ratingRepository.save(rating);</span>
+<span class="fc" id="L70">        return ratingRepository.save(rating);</span>
     }
 
+    /**
+     * This method takes the id of a rating we want to find and the method {@link RatingRepository#findById(Object)} will retrieve the rating or not owing to Optional type
+     * @param id which is the unique rating identifier
+     * @return an optional of rating so it can be empty or return something
+     */
     public Optional&lt;Rating&gt; findById(Integer id){
-<span class="fc" id="L48">        return ratingRepository.findById(id);</span>
+<span class="fc" id="L79">        return ratingRepository.findById(id);</span>
     }
 
+    /**
+     * This method takes the id of a rating we want to find and the method {@link RatingRepository#findById(Object)} will find the rating
+     * @param id which is the unique rating identifier
+     * @return an optional of Rating which can be empty or have a rating
+     */
     public Optional&lt;Rating&gt; findByOrderNumber(Integer id){
-<span class="nc" id="L52">        return ratingRepository.findByOrderNumber(id);</span>
+<span class="nc" id="L88">        return ratingRepository.findByOrderNumber(id);</span>
     }
 
+    /**
+     * This method takes the id matching a trade id we want to delete and the method {@link RatingRepository#deleteById(Object)} will delete the rating
+     * @param id which is the unique rating identifier
+     * @return void
+     */
     public void delete(Integer id){
-<span class="fc" id="L56">        ratingRepository.deleteById(id);</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L97">        ratingRepository.deleteById(id);</span>
+<span class="fc" id="L98">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

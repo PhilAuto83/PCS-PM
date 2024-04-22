@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.phildev.pcs.integration.BidListIT
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 74.99 s -- in com.phildev.pcs.integration.BidListIT
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.24 s -- in com.phildev.pcs.integration.BidListIT
