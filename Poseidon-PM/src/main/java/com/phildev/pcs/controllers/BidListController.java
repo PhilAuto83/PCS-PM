@@ -93,7 +93,7 @@ public class BidListController {
     }
 
     /**
-     * This method is used to save a bid which has been updated abd retrieved by its id
+     * This method is used to save a bid which has been updated and retrieved by its id
      * @param id which is the path variable to retrieve bid by id
      * @param bidList which is the {@link BidList} object updated by user in the form
      * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
@@ -108,7 +108,7 @@ public class BidListController {
             StringBuilder errors = new StringBuilder(" : \n");
             result.getAllErrors().forEach(objectError -> errors.append(objectError.getDefaultMessage()).append("\n"));
             logger.error("The following errors occurred when trying to save a bid {}", errors);
-            return "bidList/update";
+            return "bidList/add";
         }
         bidList.setBidListId(id);
         BidList bidUpdated = bidListService.save(bidList);

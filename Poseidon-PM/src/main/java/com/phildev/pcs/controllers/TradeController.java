@@ -1,6 +1,8 @@
 package com.phildev.pcs.controllers;
 
+import com.phildev.pcs.domain.RuleName;
 import com.phildev.pcs.domain.Trade;
+import com.phildev.pcs.service.RuleNameService;
 import com.phildev.pcs.service.TradeService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -25,6 +27,12 @@ public class TradeController {
     @Autowired
     private TradeService tradeService;
 
+    /**
+     * This method is displaying trade/list view when calling endpoint /trade/list
+     * @param model which is sending user connected and trades to the view to be displayed
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return trade/list view
+     */
     @RequestMapping("/trade/list")
     public String home(Model model, Principal connectedUser)
     {
@@ -37,6 +45,12 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * This method is displaying trade/add view when calling endpoint /trade/add
+     * @param model which is sending user connected and  a single {@link Trade} object to the view to be used in the form
+     * @param connectedUser which is using {@link Principal} to retrieve the connected user and sends it to the model
+     * @return trade/add view
+     */
     @GetMapping("/trade/add")
     public String addUser(Model model, Principal connectedUser) {
         Trade trade = new Trade();
@@ -46,6 +60,14 @@ public class TradeController {
         return "trade/add";
     }
 
+    /**
+     * This method is validating {@link Trade} object and saving it in database through {@link TradeService#save(Trade)}
+     * @param trade which is a {@link Trade} object
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return trade/add if there is an error or redirect to /trade/list endpoint to display new trade list with freshly added trade
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model, Principal connectedUser) {
         model.addAttribute("connectedUser", connectedUser.getName());
@@ -65,6 +87,13 @@ public class TradeController {
         }
     }
 
+    /**
+     * This method is displaying trade/update view with a trade retrieved by its id through {@link TradeService#findById(Integer)}
+     * @param id which is the path variable to retrieve trade by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @param connectedUser which is the user connected retrieved through {@link Principal} object
+     * @return trade/update view
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, Principal connectedUser) {
         model.addAttribute("connectedUser", connectedUser.getName());
@@ -72,6 +101,15 @@ public class TradeController {
         model.addAttribute("trade", trade);
         return "trade/update";
     }
+
+    /**
+     * This method is used to save a trade which has been updated and retrieved by its id
+     * @param id which is the path variable to retrieve trade by id
+     * @param trade which is the {@link Trade} object updated by user in the form
+     * @param result which is a {@link BindingResult} object which has errors if the object validation is not correct
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the trade/add view if there is an error or the trade/list if the update is successful
+     */
 
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
@@ -92,6 +130,12 @@ public class TradeController {
         }
     }
 
+    /**
+     * This method is deleting a trade by its id by using the service {@link TradeService#delete(Integer)}
+     * @param id which is the path variable to retrieve trade by id
+     * @param model  which a {@link Model} object to send infos to the view which will be used by Thymeleaf
+     * @return the trade/list view after calling /trade/list endpoint
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         Trade trade = tradeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
